@@ -26,7 +26,7 @@ class AuthController extends Controller
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
             'telefono' => 'required|string|max:20',
-            'tipoCliente' => 'required|in:particular,empresa', // Ajusta según tus tipos
+            'tipoCliente' => 'required|in:comprador,vendedor,compraventa,admin',
             'localizacion_id' => 'required|exists:localizaciones,id',
         ]);
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
         ]);
 
         Auth::login($user);
-        return redirect()->route('dashboard');
+        return redirect()->route('todos.productos');
     }
 
     // Lógica de Login
@@ -52,7 +52,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('dashboard');
+            return redirect()->route('todos.productos');
         }
 
         return back()->withErrors(['email' => 'Las credenciales no coinciden.']);

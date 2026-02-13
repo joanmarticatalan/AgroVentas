@@ -26,5 +26,6 @@ Route::post('/logout', function () {
 })->name('logout');
 
 Route::get('/infoProducto/{id}',[ProductoController::class,'verinfo'])->name('ver.producto');
-Route::post('/carrito/agregar/{id}', [CarritoController::class, 'add'])->name('add.producto');
-
+Route::post('/carrito/agregar/{id}', [CarritoController::class, 'add'])->name('add.carrito');
+Route::get('/carrito/borrarTodo',[CarritoController::class,'deleteAll'])->name('borrartodo.carrito');
+Route::post('/carrito/borrar/{id}',[CarritoController::class,'deleteOne'])->name('delete.carrito');

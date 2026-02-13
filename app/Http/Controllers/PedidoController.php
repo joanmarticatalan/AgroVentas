@@ -66,7 +66,7 @@ class PedidoController extends Controller
     }
     public function validateOrder()
     {
-        $cart=session()->get('cart');
+        $cart=session()->get('carrito');
         if(!$cart){
             return redirect()->back()->with('error', 'El carrito está vacío');
         }

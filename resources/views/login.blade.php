@@ -23,6 +23,15 @@
             </div>
         </div>
     </header>
+    @if ($errors->any())
+    <div style="background: #ffcccc; color: red; padding: 10px;">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
     <main>
         <form action="" method="post">
             @csrf

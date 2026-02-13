@@ -1,6 +1,6 @@
 <div>
     <h1>Tu Carrito de Compra</h1>
-
+    <a href="/products">volver</a>
     <div>
         <?php if($carro): ?>
             <?php $total = 0; ?>
@@ -27,10 +27,10 @@
                                     @csrf 
                                     <button type="submit">+1</button>
                                 </form>
-                                <!--<form action="/carrito/borrar/<?php echo $obj['id'] ?>" method="post">
+                                <form action="/carrito/borrar/<?php echo $obj['id'] ?>" method="post">
                                     @csrf 
                                     <button type="submit">-1</button>
-                                </form>-->
+                                </form>
                             </td>
                         </tr>
                         <?php $total = $total + $obj['price'] * $obj['quantity']; ?>
@@ -39,7 +39,7 @@
             </table>
 
             <hr>
-            <!--
+            
             <div>
                 <p>
                     <a href="/carrito/borrarTodo">Vaciar todo el carrito</a>
@@ -49,11 +49,12 @@
                     <?php echo "Total: " . $total . "€" ?>
                 </h3>
 
-                <form action="" method="POST">
+                
+                <form action="{{ route('todos.productos') }}" method="POST">
                     @csrf
                     <button type="submit">Confirmar y Pagar</button>
                 </form>
-            </div>-->
+            </div>
 
         <?php else: ?>
             <div>
