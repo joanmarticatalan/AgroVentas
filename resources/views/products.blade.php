@@ -20,7 +20,7 @@
     </header>
     <ul>
         <?php foreach ($products as $prod):?>
-            <li>Producto = <?php echo $prod->nombre?> y su vededor =        
+            <a href="/infoProducto/<?php echo $prod->id ?>"><li><?php echo $prod->nombre?></a>  y su vededor =        
                 <?php foreach ($usuarios as $vendedor):?>
                     <?php if($vendedor->id===$prod->user_id): ?>
                         <?php echo $vendedor->name;?>

@@ -25,3 +25,6 @@ Route::post('/logout', function () {
     return redirect('/');
 })->name('logout');
 
+Route::get('/infoProducto/{id}',[ProductoController::class,'verinfo'])->name('ver.producto');
+Route::post('/carrito/agregar/{id}', [CarritoController::class, 'add'])->name('add.producto');
+

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('nombre', 25);
             $table->string('variedad', 50);
             $table->integer('stock');
+            $table->decimal('precio', 8, 2);
             $table->date('fechaProduccion');   
             $table->foreignId('localizacion_id')->constrained('localizaciones');
             $table->string('imagen', 500);

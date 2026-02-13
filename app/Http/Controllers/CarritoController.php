@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Product;
+use App\Models\Producto;
 
 class CarritoController extends Controller
 {
@@ -17,39 +17,39 @@ class CarritoController extends Controller
 
     public function add(Request $request,$id)
     {
-        $producto=Product::find($id);
-        $carrito= session()->get('cart',[]);
+        $producto=Producto::find($id);
+        $carrito= session()->get('carrito',[]);
 
         if(isset($carrito[$id])){
             $carrito[$id]['quantity']++;
         }else{
             $carrito[$id]=[
                 'id'=>$producto->id,
-                'name'=>$producto->name,
+                'name'=>$producto->nombre,
                 'quantity'=>1,
-                'price'=>$producto->price
+                'price'=>$producto->precio
             ];
         }
-        session()->put('cart',$carrito);
+        session()->put('carrito',$carrito);
         return redirect()->back();
     }
 
     public function deleteOne($id){
-        $carrito=session()->get('cart');
+        $carrito=session()->get('carrito');
         if(isset($carrito[$id])){
             $carrito[$id]['quantity']--;
             if($carrito[$id]['quantity']<=0){
                 unset($carrito[$id]);
             } 
-            session()->put('cart',$carrito);
+            session()->put('carrito',$carrito);
         }
         return redirect()->back();
     }
 
     public function deleteAll()
     {
-        $carrito=session()->get('cart',[]);
-        session()->forget('cart');
+        $carrito=session()->get('carrito',[]);
+        session()->forget('carrito');
         return redirect()->back();
     }
 }

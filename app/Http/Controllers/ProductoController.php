@@ -96,5 +96,12 @@ class ProductoController extends Controller
         $productos= Producto::where('user_id',$id);
         return view('stockproducto',['productos'=>$productos]);
     }
+
+    public function verinfo($id)
+    {
+        $producto= Producto::findOrFail($id);
+        $user=User::findOrFail($producto->user_id);
+        return view('infoproducto',['producto'=>$producto,'user'=>$user]);
+    }
     
 }
