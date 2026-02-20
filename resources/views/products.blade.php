@@ -9,13 +9,14 @@
     <header>
         <a href="/carro">CARRITO</a>
         <a href="">MI PERFIL</a>
-        <a href="todos.pedidos">MIS PEDIDOS</a>
+        <a href="{{ route('pedidos.usuario') }}">MIS PEDIDOS</a>
         <a href="logout">LOG OUT</a>
 <!-- PONER IF PARA SI ERES VENDEDOR-->
         <a href="">STOCK PRODUCTOS</a>
         <a href="">PEDIDOS</a>
+        <a href="{{ route('pg.anadir.producto') }}">AÑADIR PRODUCTO</a>
 <!-- PONER IF PARA SI ERES ADMIN-->
-        <a href="">GESTION USUARIOS</a>
+        <a href="{{ route('gestion.usuarios') }}">GESTION USUARIOS</a>
 
     </header>
     <ul>

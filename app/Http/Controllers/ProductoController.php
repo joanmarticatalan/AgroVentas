@@ -36,6 +36,7 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
 
+        //ACI HE DE VALIDAR LES COSES QUE ENTREN
 
         $imagenPath = null;
     
@@ -78,7 +79,25 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //
+        //MIRAR BE LA VALIDADCIÓ
+        $request->validate([
+            'name' => 'required|max:255',        
+            'price' => 'required|numeric|min:0',
+            'stock'=>'required|numeric|min:1', 
+            'categoria' => 'required|exists:categories,id', 
+        ]);
+
+        $product = Producto::findOrFail($id);
+        //CAMBIAR PER LES QUE TOQUEN
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->stock = $request->stock;
+        $product->category_id = $request->categoria; 
+
+        $product->save();
+
+        return redirect()->route('products')->with('success', 'Producto actualizado');
     }
 
     /**
@@ -102,6 +121,11 @@ class ProductoController extends Controller
         $producto= Producto::findOrFail($id);
         $user=User::findOrFail($producto->user_id);
         return view('infoproducto',['producto'=>$producto,'user'=>$user]);
+    }
+    public function verNuevoProducto()
+    {
+        $localizaciones=Localizacion::all();
+        return view('nuevoproducto',['localizaciones'=>$localizaciones]);
     }
     
 }

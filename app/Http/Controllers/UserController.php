@@ -58,4 +58,10 @@ class UserController extends Controller
     {
         //
     }
+
+    public function gestion()
+    {
+        $usuarios=User::all();
+        return view('gestionusuarios',['usuarios'=>$usuarios]);
+    }
 }
