@@ -16,6 +16,7 @@ Route::get('/', function () {
 Route::get('/products', [ProductoController::class, 'index'])->name('todos.productos');
 Route::get('/infoProducto/{id}', [ProductoController::class, 'verinfo'])->name('ver.producto');
 
+
 // Autenticación
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
@@ -37,12 +38,15 @@ Route::middleware('auth')->group(function () {
 
     // Pedidos del usuario autenticado (sin parámetro ID, se obtiene del Auth)
     Route::get('/mis-pedidos', [PedidoController::class, 'index'])->name('pedidos.usuario');
+    
 
     // Gestión de productos (crear, editar, borrar) - posiblemente restrinjas por roles
     Route::get('/nuevoProducto', [ProductoController::class, 'verNuevoProducto'])->name('pg.anadir.producto');
     Route::post('/anadirProducto', [ProductoController::class, 'store'])->name('subir.producto');
-    Route::put('/productos/{id}/editar', [ProductoController::class, 'update'])->name('editar.producto');
+    Route::get('/productos/{producto}/editar', [ProductoController::class, 'edit'])->name('productos.edit');
+    Route::put('/productos/{producto}/editar', [ProductoController::class, 'update'])->name('editar.producto');
     Route::delete('/products/{id}/borrar', [ProductoController::class, 'destroy'])->name('borrar.producto');
+    Route::get('/misProductos', [ProductoController::class, 'verMisProductos'])->name('mis.productos');
 });
 
 // Rutas de administración de usuarios (solo para admin)
@@ -55,3 +59,4 @@ Route::middleware(['auth', 'admin'])->prefix('usuarios')->name('users.')->group(
     Route::put('/{user}', [UserController::class, 'update'])->name('update');
     Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
 });
+

@@ -17,6 +17,7 @@
                 <th>Fecha Producción</th>
                 <th>Stock Actual</th>
                 <th>Estado</th>
+                <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
@@ -47,6 +48,14 @@
                         @else
                             <span style="color: green;">Disponible</span>
                         @endif
+                    </td>
+                    <td>
+                        <a href="{{ route('productos.edit', $producto->id) }}">Editar producto</a>
+                        <form action="{{ route('borrar.producto', $producto->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este producto?')">Eliminar</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

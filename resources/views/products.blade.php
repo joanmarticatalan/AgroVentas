@@ -20,7 +20,7 @@
         {{-- Opciones para vendedor --}}
         @auth
             @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
-                <a href="">STOCK PRODUCTOS</a>
+                <a href="{{ route('mis.productos') }}">MIS PRODUCTOS</a>
                 <a href="">PEDIDOS</a>
                 <a href="{{ route('pg.anadir.producto') }}">AÑADIR PRODUCTO</a>
             @endif

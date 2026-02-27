@@ -15,7 +15,7 @@ class Producto extends Model
     public function vendedor() {
         return $this->belongsTo(User::class, 'user_id');
     }
-    public function localizacion(): BelongsTo {
+    public function localizacion(){
         return $this->belongsTo(Localizacion::class);
     }
 

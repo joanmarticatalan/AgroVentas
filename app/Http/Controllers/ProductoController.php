@@ -78,7 +78,8 @@ class ProductoController extends Controller
      */
     public function edit(Producto $producto)
     {
-        //
+        $localizaciones = Localizacion::all();
+        return view('editar', compact('producto', 'localizaciones'));
     }
 
     /**
@@ -135,15 +136,15 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        $product = Producto::findOrFail($id);
-        $product->delete();
-        return redirect()->route('products')->with('success', 'Producto eliminado');
-    }
-
-    public function verStock($id)
-    {
-        $productos= Producto::where('user_id',$id);
-        return view('stockproducto',['productos'=>$productos]);
+        // Opcional: eliminar imagen asociada
+        if ($producto->imagen && Storage::disk('public')->exists($producto->imagen)) {
+            Storage::disk('public')->delete($producto->imagen);
+        }
+        
+        $producto = Producto::findOrFail($id);
+        $producto->delete();
+        
+        return redirect()->route('todos.productos')->with('success', 'Producto eliminado correctamente');
     }
 
     public function verinfo($id)
@@ -157,6 +158,10 @@ class ProductoController extends Controller
         $localizaciones=Localizacion::all();
         return view('nuevoproducto',['localizaciones'=>$localizaciones]);
     }
-     
+    public function verMisProductos()
+    {
+        $productos= Producto::where('user_id',auth()->id())->get();
+        return view('misproductos',['productos'=>$productos]);
+    }       
     
 }
