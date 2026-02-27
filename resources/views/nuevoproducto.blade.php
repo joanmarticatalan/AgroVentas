@@ -6,6 +6,23 @@
     <title>Document</title>
 </head>
 <body>
+    <header style="">
+        <div>
+            <img src="" alt="Logo">
+            <div>
+                <ul>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/products">Productos</a></li>
+                    <li><a href="/perfil">Perfil</a></li>
+                </ul>
+            </div>
+            <div><!--cambiar les coses estes-->
+                <a href="/carro">Carrito</a>
+                <a href="/login">Iniciar Sesión</a>
+                <a href="/register">Registrarse</a>
+            </div>
+        </div>
+    </header>
     <form action="{{ route('subir.producto') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
@@ -27,6 +44,11 @@
         <div>
             <label>Fecha de Producción:</label>
             <input type="date" name="fecha" required>
+        </div>
+
+        <div>
+            <label>Precio (€):</label>
+            <input type="number" step="0.01" name="precio" required>
         </div>
 
         <div>

@@ -11,15 +11,15 @@
             <img src="" alt="Logo">
             <div>
                 <ul>
-                    <li><a href="">Inicio</a></li>
-                    <li><a href="">Productos</a></li>
-                    <li><a href="">Perfil</a></li>
+                    <li><a href="/">Inicio</a></li>
+                    <li><a href="/products">Productos</a></li>
+                    <li><a href="/perfil">Perfil</a></li>
                 </ul>
             </div>
             <div>
-                <a href="">Carrito</a>
+                <a href="/carro">Carrito</a>
                 <a href="/login">Iniciar Sesión</a>
-                <a href="/newuser">Registrarse</a>
+                <a href="/register">Registrarse</a>
             </div>
         </div>
     </header>
@@ -32,8 +32,8 @@
             <h3>Que vas a hacer hoy?</h3>
         </div>
         <div>
-            <div><a href="">Comprar</a></div>
-            <div><a href="">Vender</a></div>
+            <div><a href="/products">Comprar</a></div>
+            <div><a href="/products">Vender</a></div>
         </div>
     </main>
     <footer>

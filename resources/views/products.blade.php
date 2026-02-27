@@ -1,34 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Listado de Productos</title>
 </head>
 <body>
     <header>
-        <a href="/carro">CARRITO</a>
-        <a href="">MI PERFIL</a>
+        <a href="{{ route('carrito.all') }}">CARRITO</a>
+        <a href="{{ route('perfil.editar') }}">MI PERFIL</a>
         <a href="{{ route('pedidos.usuario') }}">MIS PEDIDOS</a>
-        <a href="logout">LOG OUT</a>
-<!-- PONER IF PARA SI ERES VENDEDOR-->
-        <a href="">STOCK PRODUCTOS</a>
-        <a href="">PEDIDOS</a>
-        <a href="{{ route('pg.anadir.producto') }}">AÑADIR PRODUCTO</a>
-<!-- PONER IF PARA SI ERES ADMIN-->
-        <a href="{{ route('gestion.usuarios') }}">GESTION USUARIOS</a>
+        
+        {{-- Logout con POST --}}
+        <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+            @csrf
+            <button type="submit">LOG OUT</button>
+        </form>
 
+        {{-- Opciones para vendedor --}}
+        @auth
+            @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
+                <a href="">STOCK PRODUCTOS</a>
+                <a href="">PEDIDOS</a>
+                <a href="{{ route('pg.anadir.producto') }}">AÑADIR PRODUCTO</a>
+            @endif
+
+            {{-- Opciones para admin --}}
+            @if(auth()->user()->tipoCliente === 'admin')
+                <a href="{{ route('users.index') }}">GESTION USUARIOS</a>
+            @endif
+        @endauth
     </header>
+
     <ul>
-        <?php foreach ($products as $prod):?>
-            <a href="/infoProducto/<?php echo $prod->id ?>"><li><?php echo $prod->nombre?></a>  y su vededor =        
-                <?php foreach ($usuarios as $vendedor):?>
-                    <?php if($vendedor->id===$prod->user_id): ?>
-                        <?php echo $vendedor->name;?>
-                    <?php endif?>
-                <?php endforeach?>
-             </li>
-        <?php endforeach?>
-     </ul>
+        @foreach($products as $prod)
+            <li>
+                <a href="{{ route('ver.producto', $prod->id) }}">
+                    {{ $prod->nombre }}
+                </a>
+                y su vendedor = {{ $prod->vendedor->name ?? 'Desconocido' }}
+            </li>
+        @endforeach
+    </ul>
 </body>
 </html>

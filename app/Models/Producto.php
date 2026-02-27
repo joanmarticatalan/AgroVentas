@@ -10,7 +10,7 @@ class Producto extends Model
     /** @use HasFactory<\Database\Factories\ProductoFactory> */
     use HasFactory;
 
-    protected $fillable = ['user_id', 'nombre', 'variedad', 'fechaProduccion', 'localizacion_id', 'imagen'];
+    protected $fillable = ['user_id', 'nombre', 'variedad','stock','precio', 'fechaProduccion', 'localizacion_id', 'imagen'];
 
     public function vendedor() {
         return $this->belongsTo(User::class, 'user_id');

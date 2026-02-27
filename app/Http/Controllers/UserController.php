@@ -2,66 +2,92 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Localizacion;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
     public function index()
-    { 
-        return User::all();
+    {
+        $usuarios = User::with('localizacion')->get();
+        return view('gestionusuarios', compact('usuarios'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $localizaciones = Localizacion::all();
+        return view('usuarios.crear', compact('localizaciones'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'            => 'required|string|max:255',
+            'email'           => 'required|email|unique:users',
+            'password'        => 'required|string|min:8|confirmed',
+            'telefono'        => 'required|string|max:20',
+            'tipoCliente'     => 'required|in:comprador,vendedor,compraventa,admin',
+            'localizacion_id' => 'nullable|exists:localizaciones,id',
+        ]);
+
+        User::create([
+            'name'            => $request->name,
+            'email'           => $request->email,
+            'password'        => Hash::make($request->password),
+            'telefono'        => $request->telefono,
+            'tipoCliente'     => $request->tipoCliente,
+            'localizacion_id' => $request->localizacion_id,
+        ]);
+
+        return redirect()->route('users.index')
+                         ->with('success', 'Usuario creado correctamente.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Producto $producto)
+    public function show(User $user)
     {
-        //
+        return view('usuarios.ver', compact('user'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Producto $producto)
+    public function edit(User $user)
     {
-        //
+        $localizaciones = Localizacion::all();
+        return view('usuarios.editar', compact('user', 'localizaciones'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Producto $producto)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name'            => 'required|string|max:255',
+            'email'           => [
+                'required',
+                'email',
+                Rule::unique('users')->ignore($user->id),
+            ],
+            'telefono'        => 'required|string|max:20',
+            'tipoCliente'     => 'required|in:comprador,vendedor,compraventa,admin',
+            'localizacion_id' => 'nullable|exists:localizaciones,id',
+        ]);
+
+        $data = $request->only('name', 'email', 'telefono', 'tipoCliente', 'localizacion_id');
+
+        if ($request->filled('password')) {
+            $request->validate(['password' => 'string|min:8|confirmed']);
+            $data['password'] = Hash::make($request->password);
+        }
+
+        $user->update($data);
+
+        return redirect()->route('users.index')
+                         ->with('success', 'Usuario actualizado.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Producto $producto)
+    public function destroy(User $user)
     {
-        //
-    }
-
-    public function gestion()
-    {
-        $usuarios=User::all();
-        return view('gestionusuarios',['usuarios'=>$usuarios]);
+        $user->delete();
+        return redirect()->route('users.index')
+                         ->with('success', 'Usuario eliminado.');
     }
 }

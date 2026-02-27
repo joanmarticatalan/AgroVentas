@@ -33,29 +33,36 @@ class ProductoController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+        public function store(Request $request)
     {
-
-        //ACI HE DE VALIDAR LES COSES QUE ENTREN
-
-        $imagenPath = null;
-    
-        if ($request->hasFile('imagen')) {
-            // Guarda la imagen en storage/app/public/productos
-            $imagenPath = $request->file('imagen')->store('productos', 'public');
-        }
-
-        Producto::create([
-            'user_id' => Auth::id(),
-            'nombre' => $request->nombre,
-            'variedad' => $request->variedad,
-            'stock' => $request->stock,
-            'fechaProduccion'=> $request->fecha,
-            'localizacion_id' => $request->localizacion_id,
-            'imagen' => $imagenPath // Guardamos la ruta del archivo
+        // Validar los datos del formulario
+        $validated = $request->validate([
+            'nombre'           => 'required|string|max:25',
+            'variedad'         => 'required|string|max:50',
+            'stock'            => 'required|integer|min:0',
+            'precio'           => 'required|numeric|min:0',
+            'fecha'            => 'required|date',          
+            'localizacion_id'  => 'required|exists:localizaciones,id',
+            'imagen'           => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
+
         
-        return redirect()->back()->with('success', 'Producto creado');
+        $imagenPath = $request->file('imagen')->store('productos', 'public');
+
+        
+        Producto::create([
+            'user_id'          => auth()->id(),
+            'nombre'           => $validated['nombre'],
+            'variedad'         => $validated['variedad'],
+            'stock'            => $validated['stock'],
+            'precio'           => $validated['precio'],
+            'fechaProduccion'  => $validated['fecha'],
+            'localizacion_id'  => $validated['localizacion_id'],
+            'imagen'           => $imagenPath,
+        ]);
+
+        return redirect()->route('todos.productos')
+            ->with('success', 'Producto creado correctamente.');
     }
 
     /**
@@ -79,26 +86,49 @@ class ProductoController extends Controller
      */
     public function update(Request $request, Producto $producto)
     {
-        //MIRAR BE LA VALIDADCIÓ
-        $request->validate([
-            'name' => 'required|max:255',        
-            'price' => 'required|numeric|min:0',
-            'stock'=>'required|numeric|min:1', 
-            'categoria' => 'required|exists:categories,id', 
+        
+        if ($producto->user_id !== auth()->id()) {
+            abort(403, 'No tienes permiso para modificar este producto.');
+        }
+
+        
+        $validated = $request->validate([
+            'nombre'           => 'required|string|max:25',
+            'variedad'         => 'required|string|max:50',
+            'stock'            => 'required|integer|min:0',
+            'precio'           => 'required|numeric|min:0',
+            'fecha'            => 'required|date',
+            'localizacion_id'  => 'required|exists:localizaciones,id',
+            'imagen'           => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
-        $product = Producto::findOrFail($id);
-        //CAMBIAR PER LES QUE TOQUEN
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->price = $request->price;
-        $product->stock = $request->stock;
-        $product->category_id = $request->categoria; 
+        
+        $data = [
+            'nombre'           => $validated['nombre'],
+            'variedad'         => $validated['variedad'],
+            'stock'            => $validated['stock'],
+            'precio'           => $validated['precio'],
+            'fechaProduccion'  => $validated['fecha'],
+            'localizacion_id'  => $validated['localizacion_id'],
+        ];
 
-        $product->save();
+        
+        if ($request->hasFile('imagen')) {
+            
+            if ($producto->imagen && Storage::disk('public')->exists($producto->imagen)) {
+                Storage::disk('public')->delete($producto->imagen);
+            }
+            
+            $data['imagen'] = $request->file('imagen')->store('productos', 'public');
+        }
 
-        return redirect()->route('products')->with('success', 'Producto actualizado');
+       
+        $producto->update($data);
+
+        return redirect()->route('todos.productos')
+            ->with('success', 'Producto actualizado correctamente.');
     }
+
 
     /**
      * Remove the specified resource from storage.
@@ -127,5 +157,6 @@ class ProductoController extends Controller
         $localizaciones=Localizacion::all();
         return view('nuevoproducto',['localizaciones'=>$localizaciones]);
     }
+     
     
 }

@@ -19,7 +19,7 @@
             <div>
                 <a href="">Carrito</a>
                 <a href="/login">Iniciar Sesión</a>
-                <a href="/newuser">Registrarse</a>
+                <a href="/register">Registrarse</a>
             </div>
         </div>
     </header>
