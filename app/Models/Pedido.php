@@ -19,7 +19,7 @@ class Pedido extends Model
     }
 
     public function productos() {
-        return $this->belongsToMany(Producto::class, 'pedido_producto')
+        return $this->belongsToMany(Producto::class, 'lineas')
                 ->using(Linea::class) 
                 ->withPivot('cantidad', 'precio_unitario')
                 ->withTimestamps();

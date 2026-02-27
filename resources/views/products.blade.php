@@ -21,7 +21,7 @@
         @auth
             @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
                 <a href="{{ route('mis.productos') }}">MIS PRODUCTOS</a>
-                <a href="">PEDIDOS</a>
+                <a href="{{ route('pedidos.vendedor') }}">PEDIDOS</a>
                 <a href="{{ route('pg.anadir.producto') }}">AÑADIR PRODUCTO</a>
             @endif
 

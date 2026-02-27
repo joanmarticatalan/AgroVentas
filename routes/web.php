@@ -38,6 +38,9 @@ Route::middleware('auth')->group(function () {
 
     // Pedidos del usuario autenticado (sin parámetro ID, se obtiene del Auth)
     Route::get('/mis-pedidos', [PedidoController::class, 'index'])->name('pedidos.usuario');
+
+    //Pedidos del vendedor
+    Route::get('/pedidosVendedor', [PedidoController::class, 'pedidosVendedor'])->name('pedidos.vendedor');
     
 
     // Gestión de productos (crear, editar, borrar) - posiblemente restrinjas por roles

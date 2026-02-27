@@ -3,7 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pedido;
+use App\Models\Producto;
+use App\Models\Linea;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+
 
 class PedidoController extends Controller
 {
@@ -107,6 +114,19 @@ class PedidoController extends Controller
             DB::rollBack();
             return redirect()->back()->with('error','Pedido cancelado!');
         }
+    }
+
+    public function pedidosVendedor()
+    {
+        $user=Auth::user();
+        
+        $productosIds = Producto::where('user_id', $user->id)->pluck('id');
+    
+        $pedidos = Pedido::with('cliente')->whereHas('productos', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
+        })->get();
+
+        return view('pedidosVendedor',['pedidos'=>$pedidos]);
     }
 
 }
