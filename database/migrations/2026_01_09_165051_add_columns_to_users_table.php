@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('localizacion_id')->nullable()->constrained('localizaciones');
-            $table->string('telefono', 14);
+            $table->string('telefono', 20);
             $table->enum('tipoCliente', ['comprador', 'vendedor', 'compraventa', 'admin'])->default('comprador');
         });
     }
