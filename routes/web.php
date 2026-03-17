@@ -22,7 +22,7 @@ Route::get('/register', [AuthController::class, 'showRegister'])->name('register
 Route::post('/register', [AuthController::class, 'register']);
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); // Crea este método en AuthController
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 
 // Carrito (puede ser público o con auth, según tu lógica)
 Route::get('/carro', [CarritoController::class, 'all'])->name('carrito.all');
@@ -54,7 +54,7 @@ Route::middleware('auth')->group(function () {
 
 // Rutas de administración de usuarios (solo para admin)
 Route::middleware(['auth', 'admin'])->prefix('usuarios')->name('users.')->group(function () {
-    Route::get('/', [UserController::class, 'index'])->name('index');       // Lista (antes /gestionUsuario)
+    Route::get('/', [UserController::class, 'index'])->name('index');       
     Route::get('/crear', [UserController::class, 'create'])->name('create');
     Route::post('/', [UserController::class, 'store'])->name('store');
     Route::get('/{user}', [UserController::class, 'show'])->name('show');

@@ -14,7 +14,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
         $localizaciones = Localizacion::all();
-        return view('perfil.editar', compact('user', 'localizaciones'));
+        return view('perfil', compact('user', 'localizaciones'));
     }
 
     public function update(Request $request)

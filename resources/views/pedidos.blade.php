@@ -6,6 +6,9 @@
     <title>Document</title>
 </head>
 <body>
+    mis pedidos
+    <a href="{{ route('todos.productos') }}">Volver</a>
+
     <table border="1">
     <thead>
         <tr>
@@ -13,7 +16,6 @@
             <th>Usuario</th>
             <th>Fecha</th>
             <th>Tipo de Envío</th>
-            <th>Localización</th>
             <th>Productos (Cant. x Nombre)</th>
             <th>Precio Total</th>
         </tr>
@@ -22,10 +24,9 @@
         @foreach($pedidos as $pedido)
             <tr>
                 <td>{{ $pedido->id }}</td>
-                <td>{{ $usuario }}</td>
+                <td>{{ $usuario->name }}</td>
                 <td>{{ $pedido->fecha }}</td>
                 <td>{{ $pedido->tipoEnvio }}</td>
-                <td>{{ $pedido->localizacion->nombre ?? 'Sin ubicación' }}</td>
                 <td>
                     <ul>
                         @foreach($pedido->productos as $producto)

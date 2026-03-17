@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 
 class Pedido extends Model
@@ -15,7 +16,7 @@ class Pedido extends Model
         return $this->belongsTo(User::class, 'user_id');
     }
     public function localizacion(): BelongsTo {
-        return $this->belongsTo(Localizacion::class);
+        return $this->belongsTo(Localizacion::class,'localizacion_id');
     }
 
     public function productos() {

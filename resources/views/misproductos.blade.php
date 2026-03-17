@@ -6,7 +6,9 @@
     <title>Document</title>
 </head>
 <body>
-        
+    MIS PRODUCTOS
+    <a href="{{ route('pg.anadir.producto') }}">Crear nuevo producto</a>
+    <a href="{{ route('todos.productos') }}">Volver</a>
     <table border="1">
         <thead>
             <tr>

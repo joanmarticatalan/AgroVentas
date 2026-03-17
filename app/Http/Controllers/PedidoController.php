@@ -17,11 +17,12 @@ class PedidoController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index($id)
+    public function index()
     {
+        $id = Auth::id();
         $user=User::find($id);
-        $pedidos=Pedido::where('user_id',$id);
-        return view('pedidos',['pedidos'=>$pedidos,'usuario'=>$usuario]);
+        $pedidos=Pedido::where('user_id',$id)->get();
+        return view('pedidos',['pedidos'=>$pedidos,'usuario'=>$user]);
     }
 
     /**
