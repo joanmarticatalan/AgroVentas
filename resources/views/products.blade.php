@@ -10,6 +10,7 @@
         <a href="{{ route('carrito.all') }}">CARRITO</a>
         <a href="{{ route('perfil.editar') }}">MI PERFIL</a>
         <a href="{{ route('pedidos.usuario') }}">MIS PEDIDOS</a>
+        <a href="{{ route('todos.productos') }}">PRODUCTOS</a>
         
         {{-- Logout con POST --}}
         <form method="POST" action="{{ route('logout') }}" style="display:inline;">
