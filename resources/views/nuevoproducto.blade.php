@@ -46,7 +46,7 @@
         </div>
 
         <div>
-            <label>Stock:</label>
+            <label>Stock (kg):</label>
             <input type="number" name="stock" min="0" required>
         </div>
 
@@ -56,7 +56,7 @@
         </div>
 
         <div>
-            <label>Precio (€):</label>
+            <label>Precio (€/kg):</label>
             <input type="number" step="0.01" name="precio" required>
         </div>
 

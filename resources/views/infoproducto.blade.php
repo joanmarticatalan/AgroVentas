@@ -43,7 +43,7 @@
         </div>
         <div>
             <span >Precio</span>
-            <p ><?php echo $producto->precio ?>€</p>
+            <p ><?php echo $producto->precio ?> €/kg</p>
         </div>
         <div>
             <span >Vendedor</span>

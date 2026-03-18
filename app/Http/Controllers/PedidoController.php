@@ -91,9 +91,12 @@ class PedidoController extends Controller
         try{
             $order= new Order();
             $order->user_id= Auth::id();
-            $order->state="confirmed";
             $order->date=Carbon::now();
+            $order->tipoEnvio=$request->input('tipoEnvio');
+            $order->localizacion=$request->input('localizacion');
             $order->total=$total;
+            $order->state="confirmed";
+            
             $order->save();
 
             

@@ -35,7 +35,7 @@
                 <thead>
                     <tr>
                         <th>Nombre</th>
-                        <th>Precio/u</th>
+                        <th>Precio/kg</th>
                         <th>Cantidad</th>
                         <th>Acciones</th>
                     </tr>
@@ -44,7 +44,7 @@
                     <?php foreach($carro as $obj): ?>
                         <tr>
                             <td><strong>{{$obj['name']}}</strong></td>
-                            <td>{{$obj['price']}}€</td>
+                            <td>{{$obj['price']}} €/kg</td>
                             <td>
                                 {{$obj['quantity']}}
                             </td>
