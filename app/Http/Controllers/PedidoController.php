@@ -2,15 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Linea;
+use App\Models\Localizacion;
 use App\Models\Pedido;
 use App\Models\Producto;
-use App\Models\Linea;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class PedidoController extends Controller
 {
@@ -20,9 +21,10 @@ class PedidoController extends Controller
     public function index()
     {
         $id = Auth::id();
-        $user=User::find($id);
-        $pedidos=Pedido::where('user_id',$id)->get();
-        return view('pedidos',['pedidos'=>$pedidos,'usuario'=>$user]);
+        $user = User::find($id);
+        $pedidos = Pedido::where('user_id', $id)->get();
+
+        return view('pedidos', ['pedidos' => $pedidos, 'usuario' => $user]);
     }
 
     /**
@@ -72,65 +74,155 @@ class PedidoController extends Controller
     {
         //
     }
-    public function validateOrder()
-    {
-        $cart=session()->get('carrito');
-        if(!$cart){
-            return redirect()->back()->with('error', 'El carrito está vacío');
-        }
-        $total=0;
-        $state="pending";
-        foreach($cart as $line){
-            $lineproduct=Product::find($line['id']);
-            if($lineproduct->stock < $line['quantity']){
-                return redirect()->back()->with('error', "No hay suficiente stock de: " . $lineproduct->name);
-            }
-            $total=$total+$line['price']*$line['quantity'];
-        }
-        DB::beginTransaction();
-        try{
-            $order= new Order();
-            $order->user_id= Auth::id();
-            $order->date=Carbon::now();
-            $order->tipoEnvio=$request->input('tipoEnvio');
-            $order->localizacion=$request->input('localizacion');
-            $order->total=$total;
-            $order->state="confirmed";
-            
-            $order->save();
 
-            
-            foreach($cart as $line){
-                $lineproduct=Product::find($line['id']);
-                $lineproduct->stock=$lineproduct->stock-$line['quantity'];
-                $lineproduct->save();
-                $actualLine= new Line();
-                $actualLine->order_id=$order->id;
-                $actualLine->product_id=$line['id'];
-                $actualLine->amount=$line['quantity'];
-                $actualLine->unitPrice=$line['price'];
-                $actualLine->save();
+    public function validateOrder(Request $request)
+    {
+        $cart = session()->get('carrito');
+
+        if (! is_array($cart) || $cart === []) {
+            return redirect()->route('carrito.all')->with('error', 'El carrito está vacío');
+        }
+
+        $validated = $request->validate([
+            'tipoEnvio' => ['required', Rule::in(['EnvioCasa', 'A recoger'])],
+            'direccion_opcion' => ['required', Rule::in(['actual', 'nueva'])],
+            'localizacion_id' => ['nullable', 'integer', 'exists:localizaciones,id'],
+            'nueva_nombreCalle' => ['nullable', 'string', 'max:50', 'required_if:direccion_opcion,nueva'],
+            'nueva_numero' => ['nullable', 'string', 'max:5', 'required_if:direccion_opcion,nueva'],
+            'nueva_puerta' => ['nullable', 'string', 'max:10'],
+            'nueva_codigoPostal' => ['nullable', 'regex:/^\d{5}$/', 'required_if:direccion_opcion,nueva'],
+            'nueva_provincia' => ['nullable', 'string', 'max:50', 'required_if:direccion_opcion,nueva'],
+        ]);
+
+        $products = Producto::query()
+            ->whereIn('id', collect($cart)->pluck('id')->all())
+            ->get()
+            ->keyBy('id');
+
+        if ($products->count() !== count($cart)) {
+            return redirect()->back()->with('error', 'Uno o más productos de tu carrito ya no están disponibles.');
+        }
+
+        foreach ($cart as $line) {
+            $producto = $products->get($line['id']);
+
+            if ($producto->stock < $line['quantity']) {
+                return redirect()->back()->with('error', 'No hay suficiente stock de: '.$producto->nombre);
             }
-            DB::commit();
-            session()->forget('cart');
-            return redirect()->back()->with('success','Compra realizada!');
-        }catch (\Exception $e){
-            DB::rollBack();
-            return redirect()->back()->with('error','Pedido cancelado!');
+        }
+
+        $user = Auth::user();
+
+        if ($validated['direccion_opcion'] === 'actual') {
+            if (! $user->localizacion_id || (int) $validated['localizacion_id'] !== (int) $user->localizacion_id) {
+                return redirect()->back()->with('error', 'Debes usar una dirección válida para completar el pedido.');
+            }
+        }
+
+        try {
+            DB::transaction(function () use ($cart, $products, $validated, $user): void {
+                $localizacionId = $validated['direccion_opcion'] === 'actual'
+                    ? $user->localizacion_id
+                    : Localizacion::create([
+                        'provincia' => $validated['nueva_provincia'],
+                        'codigoPostal' => $validated['nueva_codigoPostal'],
+                        'nombreCalle' => $validated['nueva_nombreCalle'],
+                        'numero' => $validated['nueva_numero'],
+                        'puerta' => $validated['nueva_puerta'],
+                    ])->id;
+
+                $porVendedor = [];
+
+                foreach ($cart as $line) {
+                    $producto = $products->get($line['id']);
+                    $porVendedor[$producto->user_id][] = [
+                        'producto' => $producto,
+                        'cantidad' => (int) $line['quantity'],
+                    ];
+                }
+
+                // Se mantiene el agrupado por vendedor para generar un pedido por proveedor.
+                foreach ($porVendedor as $lineas) {
+                    $total = collect($lineas)->sum(function (array $linea): float {
+                        return (float) $linea['producto']->precio * $linea['cantidad'];
+                    });
+
+                    $pedido = new Pedido;
+                    $pedido->user_id = Auth::id();
+                    $pedido->fecha = Carbon::now()->toDateString();
+                    $pedido->tipoEnvio = $validated['tipoEnvio'];
+                    $pedido->localizacion_id = $localizacionId;
+                    $pedido->precio_total = $total;
+                    $pedido->save();
+
+                    foreach ($lineas as $linea) {
+                        /** @var Producto $producto */
+                        $producto = $linea['producto'];
+                        $producto->decrement('stock', $linea['cantidad']);
+
+                        $actualLinea = new Linea;
+                        $actualLinea->pedido_id = $pedido->id;
+                        $actualLinea->producto_id = $producto->id;
+                        $actualLinea->cantidad = $linea['cantidad'];
+                        $actualLinea->precio_unitario = $producto->precio;
+                        $actualLinea->save();
+                    }
+                }
+            });
+
+            session()->forget('carrito');
+
+            return redirect()->route('pedidos.usuario')->with('success', '¡Compra realizada con éxito!');
+        } catch (\Throwable $e) {
+            return redirect()->back()->with('error', 'Error al procesar el pedido: '.$e->getMessage());
         }
     }
 
     public function pedidosVendedor()
     {
-        $user=Auth::user();
-        
+        $user = Auth::user();
+
         $productosIds = Producto::where('user_id', $user->id)->pluck('id');
-    
+
         $pedidos = Pedido::with('cliente')->whereHas('productos', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->get();
 
-        return view('pedidosVendedor',['pedidos'=>$pedidos]);
+        return view('pedidosVendedor', ['pedidos' => $pedidos]);
     }
 
+    public function checkout()
+    {
+        $cart = session()->get('carrito');
+
+        if (! is_array($cart) || $cart === []) {
+            return redirect()->route('carrito.all')->with('error', 'El carrito está vacío');
+        }
+
+        $user = Auth::user();
+        $localizacion = $user->localizacion;
+        $products = Producto::query()
+            ->whereIn('id', collect($cart)->pluck('id')->all())
+            ->get(['id', 'user_id'])
+            ->keyBy('id');
+
+        $sellerCount = collect($cart)
+            ->map(fn (array $line) => $products->get($line['id'])?->user_id)
+            ->filter()
+            ->unique()
+            ->count();
+
+        $orderTotal = round(collect($cart)->sum(function (array $line): float {
+            return (float) $line['price'] * (int) $line['quantity'];
+        }), 2);
+
+        return view('checkout', [
+            'cart' => $cart,
+            'user' => $user,
+            'localizacion' => $localizacion,
+            'sellerCount' => $sellerCount,
+            'orderTotal' => $orderTotal,
+            'defaultAddressOption' => $localizacion ? 'actual' : 'nueva',
+        ]);
+    }
 }

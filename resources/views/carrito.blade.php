@@ -600,8 +600,7 @@
                                 <span class="total-value">{{ number_format($total, 2) }} <span>€</span></span>
                             </div>
 
-                            <form action="{{ route('todos.productos') }}" method="POST" style="margin:0;">
-                                @csrf
+                            <form action="{{ route('checkout') }}" method="GET" style="margin:0;">
                                 <button type="submit" class="btn-checkout">
                                     Confirmar y pagar
                                 </button>

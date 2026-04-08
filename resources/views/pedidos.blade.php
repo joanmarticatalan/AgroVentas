@@ -32,6 +32,11 @@
             @endif
         @endauth
     </header>
+    @if(session('success'))
+        <div style="padding: 12px; margin: 16px 0; border: 1px solid #198754; background: #d1e7dd; color: #0f5132;">
+            {{ session('success') }}
+        </div>
+    @endif
     <h1>Pedidos del vendedor
 
     <table border="1">

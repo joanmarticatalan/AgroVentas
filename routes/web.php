@@ -42,6 +42,9 @@ Route::middleware('auth')->group(function () {
     //Pedidos del vendedor
     Route::get('/pedidosVendedor', [PedidoController::class, 'pedidosVendedor'])->name('pedidos.vendedor');
     
+    // Checkout
+    Route::get('/checkout', [PedidoController::class, 'checkout'])->name('checkout');
+    Route::post('/checkout', [PedidoController::class, 'validateOrder'])->name('checkout.confirm');
 
     // Gestión de productos (crear, editar, borrar) - posiblemente restrinjas por roles
     Route::get('/nuevoProducto', [ProductoController::class, 'verNuevoProducto'])->name('pg.anadir.producto');
