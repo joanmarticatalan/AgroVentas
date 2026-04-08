@@ -3,23 +3,144 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
-use App\Models\User;
 use App\Models\Localizacion;
-use Illuminate\Http\Request;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class ProductoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products=Producto::all();
-        $localizaciones=Localizacion::all();
-        //$usuarios=User::where('tipoCliente','vendedor');
-        $usuarios=User::all();
-        return view('products', ['products' => $products,'usuarios'=>$usuarios,'localizaciones'=>$localizaciones]);
+        $filters = [
+            'q' => $this->normalizeQueryString($request->query('q')),
+            'localizacion_id' => $this->normalizeQueryString($request->query('localizacion_id')),
+            'precio_min' => $this->normalizeQueryString($request->query('precio_min')),
+            'precio_max' => $this->normalizeQueryString($request->query('precio_max')),
+            'disponibilidad' => $this->normalizeAvailability($request->query('disponibilidad')),
+            'fecha_desde' => $this->normalizeQueryString($request->query('fecha_desde')),
+            'fecha_hasta' => $this->normalizeQueryString($request->query('fecha_hasta')),
+            'sort' => $this->normalizeSort($request->query('sort')),
+            'invalid_ranges' => [],
+        ];
+
+        $precioMin = $this->normalizeDecimal($filters['precio_min']);
+        $precioMax = $this->normalizeDecimal($filters['precio_max']);
+        $fechaDesde = $this->normalizeDate($filters['fecha_desde']);
+        $fechaHasta = $this->normalizeDate($filters['fecha_hasta']);
+
+        $hasInvalidPriceRange = $precioMin !== null && $precioMax !== null && $precioMin > $precioMax;
+        $hasInvalidDateRange = $fechaDesde !== null && $fechaHasta !== null && $fechaDesde->gt($fechaHasta);
+
+        if ($hasInvalidPriceRange) {
+            $filters['invalid_ranges'][] = 'precio';
+            $precioMin = null;
+            $precioMax = null;
+        }
+
+        if ($hasInvalidDateRange) {
+            $filters['invalid_ranges'][] = 'fecha';
+            $fechaDesde = null;
+            $fechaHasta = null;
+        }
+
+        $productsQuery = Producto::query()
+            ->with(['vendedor', 'localizacion'])
+            ->when($filters['q'], function ($query, $search) {
+                $query->where(function ($subquery) use ($search) {
+                    $subquery->where('nombre', 'like', '%' . $search . '%')
+                        ->orWhere('variedad', 'like', '%' . $search . '%');
+                });
+            })
+            ->when($filters['localizacion_id'], function ($query, $localizacionId) {
+                $query->where('localizacion_id', $localizacionId);
+            })
+            ->when($filters['disponibilidad'] === 'available', function ($query) {
+                $query->where('stock', '>', 0);
+            })
+            ->when($precioMin !== null, function ($query) use ($precioMin) {
+                $query->where('precio', '>=', $precioMin);
+            })
+            ->when($precioMax !== null, function ($query) use ($precioMax) {
+                $query->where('precio', '<=', $precioMax);
+            })
+            ->when($fechaDesde !== null, function ($query) use ($fechaDesde) {
+                $query->whereDate('fechaProduccion', '>=', $fechaDesde->toDateString());
+            })
+            ->when($fechaHasta !== null, function ($query) use ($fechaHasta) {
+                $query->whereDate('fechaProduccion', '<=', $fechaHasta->toDateString());
+            });
+
+        $this->applySorting($productsQuery, $filters['sort']);
+
+        $products = $productsQuery->get();
+
+        $localizaciones = Localizacion::all();
+
+        return view('products', [
+            'products' => $products,
+            'localizaciones' => $localizaciones,
+            'filters' => $filters,
+        ]);
+    }
+
+    private function normalizeQueryString(mixed $value): ?string
+    {
+        if (! is_string($value)) {
+            return null;
+        }
+
+        $trimmedValue = trim($value);
+
+        return $trimmedValue === '' ? null : $trimmedValue;
+    }
+
+    private function normalizeAvailability(mixed $value): string
+    {
+        return $value === 'available' ? 'available' : 'all';
+    }
+
+    private function normalizeSort(mixed $value): string
+    {
+        return in_array($value, ['recent', 'price_asc', 'price_desc', 'name_asc'], true)
+            ? $value
+            : 'recent';
+    }
+
+    private function normalizeDecimal(?string $value): ?float
+    {
+        if ($value === null || ! is_numeric($value)) {
+            return null;
+        }
+
+        $decimalValue = (float) $value;
+
+        return $decimalValue >= 0 ? $decimalValue : null;
+    }
+
+    private function normalizeDate(?string $value): ?Carbon
+    {
+        if ($value === null) {
+            return null;
+        }
+
+        try {
+            return Carbon::parse($value)->startOfDay();
+        } catch (\Throwable) {
+            return null;
+        }
+    }
+
+    private function applySorting($query, string $sort): void
+    {
+        match ($sort) {
+            'price_asc' => $query->orderBy('precio'),
+            'price_desc' => $query->orderByDesc('precio'),
+            'name_asc' => $query->orderBy('nombre'),
+            default => $query->orderByDesc('created_at'),
+        };
     }
 
     /**
