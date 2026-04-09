@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Producto;
+use App\Models\User;
 use App\Models\Localizacion;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductoController extends Controller
 {
@@ -257,14 +259,14 @@ class ProductoController extends Controller
      */
     public function destroy($id)
     {
-        // Opcional: eliminar imagen asociada
+        $producto = Producto::findOrFail($id);
+
         if ($producto->imagen && Storage::disk('public')->exists($producto->imagen)) {
             Storage::disk('public')->delete($producto->imagen);
         }
-        
-        $producto = Producto::findOrFail($id);
+
         $producto->delete();
-        
+
         return redirect()->route('todos.productos')->with('success', 'Producto eliminado correctamente');
     }
 
