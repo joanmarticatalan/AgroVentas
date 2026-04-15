@@ -22,7 +22,7 @@ class PedidoController extends Controller
     {
         $id = Auth::id();
         $user = User::find($id);
-        $pedidos = Pedido::where('user_id', $id)->get();
+        $pedidos = Pedido::with('productos')->where('user_id', $id)->get();
 
         return view('pedidos', ['pedidos' => $pedidos, 'usuario' => $user]);
     }
@@ -151,6 +151,7 @@ class PedidoController extends Controller
                     $pedido->user_id = Auth::id();
                     $pedido->fecha = Carbon::now()->toDateString();
                     $pedido->tipoEnvio = $validated['tipoEnvio'];
+                    $pedido->estado = Pedido::ESTADO_EN_CURSO;
                     $pedido->localizacion_id = $localizacionId;
                     $pedido->precio_total = $total;
                     $pedido->save();
@@ -182,13 +183,39 @@ class PedidoController extends Controller
     {
         $user = Auth::user();
 
-        $productosIds = Producto::where('user_id', $user->id)->pluck('id');
-
-        $pedidos = Pedido::with('cliente')->whereHas('productos', function ($query) use ($user) {
+        $pedidos = Pedido::with(['cliente', 'productos'])->whereHas('productos', function ($query) use ($user) {
             $query->where('user_id', $user->id);
         })->get();
 
         return view('pedidosVendedor', ['pedidos' => $pedidos]);
+    }
+
+    public function updateEstado(Request $request, Pedido $pedido)
+    {
+        $validated = $request->validate([
+            'estado' => ['required', Rule::in([Pedido::ESTADO_ENVIADO, Pedido::ESTADO_LISTO_RECOGER])],
+        ]);
+
+        $sellerId = Auth::id();
+        $belongsToSeller = $pedido->productos()->where('productos.user_id', $sellerId)->exists();
+
+        if (! $belongsToSeller) {
+            abort(403);
+        }
+
+        if (! $pedido->canTransitionTo($validated['estado'])) {
+            return redirect()
+                ->route('pedidos.vendedor')
+                ->with('error', 'Este pedido ya no se puede actualizar con ese estado.');
+        }
+
+        $pedido->update([
+            'estado' => $validated['estado'],
+        ]);
+
+        return redirect()
+            ->route('pedidos.vendedor')
+            ->with('success', 'Estado del pedido actualizado correctamente.');
     }
 
     public function checkout()

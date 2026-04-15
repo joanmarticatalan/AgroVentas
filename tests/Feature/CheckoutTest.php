@@ -123,6 +123,7 @@ class CheckoutTest extends TestCase
             'user_id' => $buyer->id,
             'localizacion_id' => $buyerLocation->id,
             'tipoEnvio' => 'EnvioCasa',
+            'estado' => 'en_curso',
             'precio_total' => 13.50,
         ]);
     }

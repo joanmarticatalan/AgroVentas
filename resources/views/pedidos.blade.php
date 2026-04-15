@@ -37,6 +37,11 @@
             {{ session('success') }}
         </div>
     @endif
+    @if(session('error'))
+        <div style="padding: 12px; margin: 16px 0; border: 1px solid #842029; background: #f8d7da; color: #842029;">
+            {{ session('error') }}
+        </div>
+    @endif
     <h1>Pedidos del vendedor
 
     <table border="1">
@@ -46,6 +51,7 @@
             <th>Usuario</th>
             <th>Fecha</th>
             <th>Tipo de Envío</th>
+            <th>Estado</th>
             <th>Productos (Cant. x Nombre)</th>
             <th>Precio Total</th>
         </tr>
@@ -57,6 +63,7 @@
                 <td>{{ $usuario->name }}</td>
                 <td>{{ $pedido->fecha }}</td>
                 <td>{{ $pedido->tipoEnvio }}</td>
+                <td>{{ $pedido->estado }}</td>
                 <td>
                     <ul>
                         @foreach($pedido->productos as $producto)

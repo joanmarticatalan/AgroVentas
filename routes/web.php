@@ -41,6 +41,7 @@ Route::middleware('auth')->group(function () {
 
     //Pedidos del vendedor
     Route::get('/pedidosVendedor', [PedidoController::class, 'pedidosVendedor'])->name('pedidos.vendedor');
+    Route::patch('/pedidos/{pedido}/estado', [PedidoController::class, 'updateEstado'])->name('pedidos.estado.update');
     
     // Checkout
     Route::get('/checkout', [PedidoController::class, 'checkout'])->name('checkout');
@@ -65,4 +66,3 @@ Route::middleware(['auth', 'admin'])->prefix('usuarios')->name('users.')->group(
     Route::put('/{user}', [UserController::class, 'update'])->name('update');
     Route::delete('/{user}', [UserController::class, 'destroy'])->name('destroy');
 });
-

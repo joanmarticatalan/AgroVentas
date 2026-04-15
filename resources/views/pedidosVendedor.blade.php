@@ -6,6 +6,16 @@
     <title>Document</title>
 </head>
 <body>
+    @if(session('success'))
+        <div style="padding: 12px; margin: 16px 0; border: 1px solid #198754; background: #d1e7dd; color: #0f5132;">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if(session('error'))
+        <div style="padding: 12px; margin: 16px 0; border: 1px solid #842029; background: #f8d7da; color: #842029;">
+            {{ session('error') }}
+        </div>
+    @endif
     <header>
         <a href="{{ route('carrito.all') }}">CARRITO</a>
         <a href="{{ route('perfil.editar') }}">MI PERFIL</a>
@@ -36,12 +46,26 @@
     <ul>
         @foreach($pedidos as $pedido)
             <li>
-                Pedido #{{ $pedido->id }} - Cliente: {{ $pedido->cliente->name ?? 'Desconocido' }} - Total: {{ $pedido->total }} 
+                Pedido #{{ $pedido->id }} - Cliente: {{ $pedido->cliente->name ?? 'Desconocido' }} - Estado: {{ $pedido->estado }} - Total: {{ $pedido->precio_total }}
                 <ul>
-                    @foreach($pedido->productos as $line)
-                        <li>{{ $line->name }} - Cantidad: {{ $line->pivot->cantidad }}</li>
+                    @foreach($pedido->productos as $producto)
+                        <li>{{ $producto->nombre }} - Cantidad: {{ $producto->pivot->cantidad }}</li>
                     @endforeach
                 </ul>
+
+                @if($pedido->estado === \App\Models\Pedido::ESTADO_EN_CURSO)
+                    <form method="POST" action="{{ route('pedidos.estado.update', $pedido) }}">
+                        @csrf
+                        @method('PATCH')
+                        @if($pedido->tipoEnvio === 'EnvioCasa')
+                            <input type="hidden" name="estado" value="{{ \App\Models\Pedido::ESTADO_ENVIADO }}">
+                            <button type="submit">Marcar como enviado</button>
+                        @elseif($pedido->tipoEnvio === 'A recoger')
+                            <input type="hidden" name="estado" value="{{ \App\Models\Pedido::ESTADO_LISTO_RECOGER }}">
+                            <button type="submit">Marcar como listo para recoger</button>
+                        @endif
+                    </form>
+                @endif
             </li>
         @endforeach
     </ul>

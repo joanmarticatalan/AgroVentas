@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Pedido;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class PedidoFactory extends Factory
         return [
             'fecha' => fake()->dateTimeBetween('-1 month', 'now'),
             'tipoEnvio' => fake()->randomElement(['A recoger', 'EnvioCasa']),
+            'estado' => Pedido::ESTADO_EN_CURSO,
             'precio_total' => 0, // Se actualizará en el Seeder tras sumar las líneas
             // user_id y localizacion_id se pasan desde el Seeder
         ];
