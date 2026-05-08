@@ -386,7 +386,7 @@
                 <a href="/products" class="nav-link">Productos</a>
             </nav>
             <div style="display:flex; align-items:center; gap:1rem;">
-                <a href="/carro" class="nav-link">🛒 Carrito</a>
+                <a href="/carro" class="nav-link">Carrito</a>
                 <a href="/login" class="nav-link">Iniciar sesión</a>
                 <a href="/register" class="btn-nav">Registrarse</a>
             </div>
@@ -398,7 +398,7 @@
 
         {{-- Panel izquierdo decorativo --}}
         <div class="login-deco">
-            <div class="deco-tag">🌿 Bienvenido de nuevo</div>
+            <div class="deco-tag">Bienvenido de nuevo</div>
             <h2 class="deco-title">Tu campo,<br>tu <span>mercado</span></h2>
             <p class="deco-text">
                 Accede a tu cuenta y gestiona tus compras y ventas de productos agrícolas directamente desde el campo.

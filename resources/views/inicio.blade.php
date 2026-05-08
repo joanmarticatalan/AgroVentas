@@ -309,7 +309,7 @@
             </nav>
 
             <div style="display: flex; align-items: center; gap: 1rem;">
-                <a href="/carro" class="nav-link">🛒 Carrito</a>
+                <a href="/carro" class="nav-link">Carrito</a>
                 @auth
                     <a href="{{ route('perfil.editar') }}" class="nav-link">Mi perfil</a>
                     <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
@@ -334,7 +334,7 @@
             <div style="max-width: 1280px; margin: 0 auto; padding: 4rem 2rem; position: relative; z-index: 1;">
                 <div style="max-width: 640px;">
 
-                    <div class="hero-tag animate-1">🌿 Plataforma agrícola valenciana</div>
+                    <div class="hero-tag animate-1">Plataforma agrícola valenciana</div>
 
                     <h1 class="hero-title animate-2">
                         Del huerto<br>a <span>tu mesa</span>
@@ -346,10 +346,10 @@
 
                     <div class="animate-4" style="display: flex; gap: 1rem; flex-wrap: wrap;">
                         <a href="/products" class="cta-btn cta-comprar">
-                            🛒 Quiero comprar
+                            Quiero comprar
                         </a>
                         <a href="/products" class="cta-btn cta-vender">
-                            📦 Quiero vender
+                            Quiero vender
                         </a>
                     </div>
 
@@ -389,19 +389,19 @@
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
 
                     <div class="feature-card">
-                        <div class="feature-icon">🌱</div>
+                        <div class="feature-icon">Fresco</div>
                         <div class="feature-title">Producto fresco</div>
                         <p class="feature-text">Conectamos directamente al agricultor con el comprador. El producto llega en su mejor momento.</p>
                     </div>
 
                     <div class="feature-card">
-                        <div class="feature-icon">🤝</div>
+                        <div class="feature-icon">Directo</div>
                         <div class="feature-title">Trato directo</div>
                         <p class="feature-text">Sin complicaciones. Habla directamente con quien cultiva y elige lo que necesitas.</p>
                     </div>
 
                     <div class="feature-card">
-                        <div class="feature-icon">📍</div>
+                        <div class="feature-icon">Local</div>
                         <div class="feature-title">De tu zona</div>
                         <p class="feature-text">Apoya a los agricultores de tu comarca. Consume local y contribuye a la economía de tu región.</p>
                     </div>

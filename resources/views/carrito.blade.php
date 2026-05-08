@@ -522,7 +522,7 @@
             </nav>
 
             <div style="display:flex; align-items:center; gap:1rem;">
-                <a href="{{ route('carrito.all') }}" class="nav-link">🛒 Carrito</a>
+                <a href="{{ route('carrito.all') }}" class="nav-link">Carrito</a>
                 @auth
                     <a href="{{ route('perfil.editar') }}" class="nav-link">Mi perfil</a>
                     <form method="POST" action="{{ route('logout') }}" style="margin:0;">
@@ -620,11 +620,11 @@
 
                 {{-- Carrito vacío --}}
                 <div class="empty-cart">
-                    <div class="empty-icon">🛒</div>
+                    <div class="empty-icon">AV</div>
                     <h2>Tu carrito está vacío</h2>
                     <p>Aún no has añadido ningún producto. ¡Explora nuestra tienda!</p>
                     <a href="{{ route('todos.productos') }}" class="btn-go-shop">
-                        🌿 Ver productos
+                        Ver productos
                     </a>
                 </div>
 

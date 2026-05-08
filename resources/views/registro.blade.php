@@ -439,7 +439,7 @@
                 <a href="/products" class="nav-link">Productos</a>
             </nav>
             <div style="display:flex; align-items:center; gap:1rem;">
-                <a href="/carro" class="nav-link">🛒 Carrito</a>
+                <a href="/carro" class="nav-link">Carrito</a>
                 <a href="/login" class="nav-link">Iniciar sesión</a>
                 <a href="/register" class="btn-nav">Registrarse</a>
             </div>
@@ -448,7 +448,7 @@
 
     {{-- HERO STRIP --}}
     <div class="page-hero">
-        <div class="page-hero-tag">🌱 Únete a la comunidad</div>
+        <div class="page-hero-tag">Únete a la comunidad</div>
         <h1>Crea tu <span>cuenta</span></h1>
         <p>Empieza a comprar y vender productos del campo en minutos</p>
     </div>
@@ -533,13 +533,13 @@
                             <select id="tipoCliente" name="tipoCliente" class="form-select" required>
                                 <option value="">Selecciona una opción</option>
                                 <option value="comprador" {{ old('tipoCliente') == 'comprador' ? 'selected' : '' }}>
-                                    🛒 Comprador — Quiero comprar productos del campo
+                                    Comprador - Quiero comprar productos del campo
                                 </option>
                                 <option value="vendedor" {{ old('tipoCliente') == 'vendedor' ? 'selected' : '' }}>
-                                    📦 Vendedor — Quiero vender mis productos
+                                    Vendedor - Quiero vender mis productos
                                 </option>
                                 <option value="compraventa" {{ old('tipoCliente') == 'compraventa' ? 'selected' : '' }}>
-                                    🔄 Compra-Venta — Quiero comprar y vender
+                                    Compra-Venta - Quiero comprar y vender
                                 </option>
                             </select>
                             @error('tipoCliente') <span class="form-error">{{ $message }}</span> @enderror
