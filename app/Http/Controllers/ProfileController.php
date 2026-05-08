@@ -21,7 +21,7 @@ class ProfileController extends Controller
     {
         $user = Auth::user();
 
-        $validated = $request->validate([
+        $rules = [
             'name'            => 'required|string|max:255',
             'email'           => [
                 'required',
@@ -30,8 +30,13 @@ class ProfileController extends Controller
             ],
             'telefono'        => 'required|string|max:20',
             'localizacion_id' => 'nullable|exists:localizaciones,id',
-            'tipoCliente'     => 'sometimes|in:comprador,vendedor,compraventa,admin',
-        ]);
+        ];
+
+        if ($user->tipoCliente === 'admin') {
+            $rules['tipoCliente'] = 'sometimes|in:comprador,vendedor,compraventa,admin';
+        }
+
+        $validated = $request->validate($rules);
 
         if ($request->filled('password')) {
             $request->validate(['password' => 'string|min:8|confirmed']);

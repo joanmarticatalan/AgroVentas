@@ -2,29 +2,45 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Pedido;
 use App\Models\User;
+use App\Models\Producto;
 use App\Models\Localizacion;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(): View
     {
-        $usuarios = User::with('localizacion')->get();
-        return view('gestionusuarios', compact('usuarios'));
+        $usuarios = User::with('localizacion')
+            ->latest()
+            ->get();
+
+        $resumen = [
+            'usuarios' => User::count(),
+            'admins' => User::where('tipoCliente', 'admin')->count(),
+            'vendedores' => User::whereIn('tipoCliente', ['vendedor', 'compraventa'])->count(),
+            'productos' => Producto::count(),
+            'pedidos' => Pedido::count(),
+        ];
+
+        return view('gestionusuarios', compact('usuarios', 'resumen'));
     }
 
-    public function create()
+    public function create(): View
     {
-        $localizaciones = Localizacion::all();
+        $localizaciones = Localizacion::orderBy('provincia')->get();
+
         return view('usuarios.crear', compact('localizaciones'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'name'            => 'required|string|max:255',
             'email'           => 'required|email|unique:users',
             'password'        => 'required|string|min:8|confirmed',
@@ -34,32 +50,35 @@ class UserController extends Controller
         ]);
 
         User::create([
-            'name'            => $request->name,
-            'email'           => $request->email,
-            'password'        => Hash::make($request->password),
-            'telefono'        => $request->telefono,
-            'tipoCliente'     => $request->tipoCliente,
-            'localizacion_id' => $request->localizacion_id,
+            'name'            => $validated['name'],
+            'email'           => $validated['email'],
+            'password'        => Hash::make($validated['password']),
+            'telefono'        => $validated['telefono'],
+            'tipoCliente'     => $validated['tipoCliente'],
+            'localizacion_id' => $validated['localizacion_id'] ?? null,
         ]);
 
         return redirect()->route('users.index')
                          ->with('success', 'Usuario creado correctamente.');
     }
 
-    public function show(User $user)
+    public function show(User $user): View
     {
+        $user->load('localizacion');
+
         return view('usuarios.ver', compact('user'));
     }
 
-    public function edit(User $user)
+    public function edit(User $user): View
     {
-        $localizaciones = Localizacion::all();
+        $localizaciones = Localizacion::orderBy('provincia')->get();
+
         return view('usuarios.editar', compact('user', 'localizaciones'));
     }
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $user): RedirectResponse
     {
-        $request->validate([
+        $validated = $request->validate([
             'name'            => 'required|string|max:255',
             'email'           => [
                 'required',
@@ -71,7 +90,13 @@ class UserController extends Controller
             'localizacion_id' => 'nullable|exists:localizaciones,id',
         ]);
 
-        $data = $request->only('name', 'email', 'telefono', 'tipoCliente', 'localizacion_id');
+        $data = [
+            'name' => $validated['name'],
+            'email' => $validated['email'],
+            'telefono' => $validated['telefono'],
+            'tipoCliente' => $validated['tipoCliente'],
+            'localizacion_id' => $validated['localizacion_id'] ?? null,
+        ];
 
         if ($request->filled('password')) {
             $request->validate(['password' => 'string|min:8|confirmed']);
@@ -84,9 +109,15 @@ class UserController extends Controller
                          ->with('success', 'Usuario actualizado.');
     }
 
-    public function destroy(User $user)
+    public function destroy(User $user): RedirectResponse
     {
+        if ((int) $user->id === (int) auth()->id()) {
+            return redirect()->route('users.index')
+                ->with('error', 'No puedes eliminar tu propio usuario administrador.');
+        }
+
         $user->delete();
+
         return redirect()->route('users.index')
                          ->with('success', 'Usuario eliminado.');
     }
