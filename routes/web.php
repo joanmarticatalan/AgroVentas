@@ -24,7 +24,7 @@ Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout'); 
 
-// Carrito (puede ser público o con auth, según tu lógica)
+// Carrito (puede ser público o con auth)
 Route::get('/carro', [CarritoController::class, 'all'])->name('carrito.all');
 Route::post('/carrito/agregar/{id}', [CarritoController::class, 'add'])->name('add.carrito');
 Route::get('/carrito/borrarTodo', [CarritoController::class, 'deleteAll'])->name('borrartodo.carrito');
