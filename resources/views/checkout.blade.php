@@ -419,6 +419,48 @@
 
         .notice-text { font-size: 0.92rem; color: var(--agro-brown); line-height: 1.5; }
 
+        .feedback-stack {
+            max-width: 1000px;
+            margin: 0 auto 1.5rem;
+            display: grid;
+            gap: 1rem;
+            animation: fadeUp 0.5s ease both;
+        }
+
+        .feedback-box {
+            border-radius: 14px;
+            padding: 1rem 1.2rem;
+            border: 1px solid transparent;
+        }
+
+        .feedback-box p,
+        .feedback-box li {
+            line-height: 1.5;
+        }
+
+        .feedback-box ul {
+            margin: 0.6rem 0 0;
+            padding-left: 1.2rem;
+        }
+
+        .feedback-error {
+            background: #fff1f2;
+            border-color: #fecdd3;
+            color: #9f1239;
+        }
+
+        .feedback-success {
+            background: #ecfdf3;
+            border-color: #a7f3d0;
+            color: #166534;
+        }
+
+        .field-error {
+            color: #b91c1c;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
         footer {
             background-color: var(--agro-primary);
             color: #fff;
@@ -458,10 +500,10 @@
         }
     </style>
 </head>
-<body>
+<body class="site-shell">
 
     {{-- NAVBAR --}}
-    <header class="navbar">
+    <header class="site-nav navbar">
         <div class="nav-inner">
             <a href="/" class="nav-brand">Agro<span>Ventas</span></a>
             <nav style="display:flex; align-items:center; gap:2rem;">
@@ -505,6 +547,34 @@
     </div>
 
     <main>
+        @php($selectedShippingOption = old('tipoEnvio', 'EnvioCasa'))
+
+        @if(session('error') || session('success') || $errors->any())
+            <div class="feedback-stack">
+                @if(session('error'))
+                    <div class="feedback-box feedback-error">
+                        <p>{{ session('error') }}</p>
+                    </div>
+                @endif
+
+                @if(session('success'))
+                    <div class="feedback-box feedback-success">
+                        <p>{{ session('success') }}</p>
+                    </div>
+                @endif
+
+                @if($errors->any())
+                    <div class="feedback-box feedback-error">
+                        <p>Revisa los campos marcados para completar el pedido.</p>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+            </div>
+        @endif
 
         <form action="{{ route('checkout.confirm') }}" method="POST" class="checkout-form">
             @csrf
@@ -521,20 +591,23 @@
                     <div class="block-body">
                         <div class="envio-options">
                             <div class="envio-option">
-                                <input type="radio" id="envio-casa" name="tipoEnvio" value="EnvioCasa" checked>
+                                <input type="radio" id="envio-casa" name="tipoEnvio" value="EnvioCasa" {{ $selectedShippingOption === 'EnvioCasa' ? 'checked' : '' }}>
                                 <label for="envio-casa" class="envio-label">
                                     <span class="envio-name">Envío a domicilio</span>
                                     <span class="envio-desc">Recibe tu pedido en la dirección que indiques</span>
                                 </label>
                             </div>
                             <div class="envio-option">
-                                <input type="radio" id="envio-recoger" name="tipoEnvio" value="A recoger">
+                                <input type="radio" id="envio-recoger" name="tipoEnvio" value="A recoger" {{ $selectedShippingOption === 'A recoger' ? 'checked' : '' }}>
                                 <label for="envio-recoger" class="envio-label">
                                     <span class="envio-name">Recogida en punto</span>
                                     <span class="envio-desc">Recoge directamente en el punto de venta del vendedor</span>
                                 </label>
                             </div>
                         </div>
+                        @error('tipoEnvio')
+                            <p class="field-error">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
 
@@ -552,6 +625,12 @@
                         @php($selectedAddressOption = old('direccion_opcion', $defaultAddressOption))
 
                         <input type="hidden" name="localizacion_id" value="{{ $localizacion->id ?? '' }}">
+                        @error('direccion_opcion')
+                            <p class="field-error" style="margin-bottom: 1rem;">{{ $message }}</p>
+                        @enderror
+                        @error('localizacion_id')
+                            <p class="field-error" style="margin-bottom: 1rem;">{{ $message }}</p>
+                        @enderror
 
                         <div class="envio-options" style="margin-bottom: 1.5rem;">
                             <div class="envio-option">
@@ -591,30 +670,35 @@
                                 <input type="text" name="nueva_nombreCalle" class="form-input"
                                        value="{{ old('nueva_nombreCalle', $localizacion->nombreCalle ?? '') }}"
                                        placeholder="Calle Mayor" maxlength="50">
+                                @error('nueva_nombreCalle') <span class="field-error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Número</label>
                                 <input type="text" name="nueva_numero" class="form-input"
                                        value="{{ old('nueva_numero', $localizacion->numero ?? '') }}"
                                        placeholder="12" maxlength="5">
+                                @error('nueva_numero') <span class="field-error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Puerta <span style="font-weight:400; color:var(--agro-muted);">(opcional)</span></label>
                                 <input type="text" name="nueva_puerta" class="form-input"
                                        value="{{ old('nueva_puerta', $localizacion->puerta ?? '') }}"
                                        placeholder="2A" maxlength="10">
+                                @error('nueva_puerta') <span class="field-error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Código Postal</label>
                                 <input type="text" name="nueva_codigoPostal" class="form-input"
                                        value="{{ old('nueva_codigoPostal', $localizacion->codigoPostal ?? '') }}"
                                        placeholder="46001" maxlength="5">
+                                @error('nueva_codigoPostal') <span class="field-error">{{ $message }}</span> @enderror
                             </div>
                             <div class="form-group">
                                 <label class="form-label">Provincia</label>
                                 <input type="text" name="nueva_provincia" class="form-input"
                                        value="{{ old('nueva_provincia', $localizacion->provincia ?? '') }}"
                                        placeholder="Valencia" maxlength="50">
+                                @error('nueva_provincia') <span class="field-error">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>
@@ -689,7 +773,7 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer>
+    <footer class="site-footer">
         <div class="footer-inner">
             <div>
                 <div class="footer-brand">Agro<span>Ventas</span></div>

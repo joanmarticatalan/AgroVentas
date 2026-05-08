@@ -14,6 +14,7 @@ class Pedido extends Model
     public const ESTADO_EN_CURSO = 'en_curso';
     public const ESTADO_ENVIADO = 'enviado';
     public const ESTADO_LISTO_RECOGER = 'listo_recoger';
+    public const ESTADO_FINALIZADO = 'finalizado';
 
     protected $fillable = ['user_id', 'fecha', 'tipoEnvio', 'estado', 'localizacion_id', 'precio_total'];
 
@@ -33,13 +34,13 @@ class Pedido extends Model
 
     public function canTransitionTo(string $estado): bool
     {
-        if ($this->estado !== self::ESTADO_EN_CURSO) {
-            return false;
-        }
-
-        return match ($this->tipoEnvio) {
-            'EnvioCasa' => $estado === self::ESTADO_ENVIADO,
-            'A recoger' => $estado === self::ESTADO_LISTO_RECOGER,
+        return match ($this->estado) {
+            self::ESTADO_EN_CURSO => match ($this->tipoEnvio) {
+                'EnvioCasa' => $estado === self::ESTADO_ENVIADO,
+                'A recoger' => $estado === self::ESTADO_LISTO_RECOGER,
+                default => false,
+            },
+            self::ESTADO_ENVIADO, self::ESTADO_LISTO_RECOGER => $estado === self::ESTADO_FINALIZADO,
             default => false,
         };
     }

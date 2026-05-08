@@ -258,6 +258,95 @@ class CheckoutTest extends TestCase
         ]);
     }
 
+    public function test_checkout_shows_stock_error_message_on_the_page_after_redirect(): void
+    {
+        $buyerLocation = Localizacion::factory()->create();
+        $sellerLocation = Localizacion::factory()->create();
+        $buyer = User::factory()->create([
+            'localizacion_id' => $buyerLocation->id,
+        ]);
+        $seller = User::factory()->create([
+            'localizacion_id' => $sellerLocation->id,
+        ]);
+        $product = Producto::factory()->create([
+            'user_id' => $seller->id,
+            'localizacion_id' => $sellerLocation->id,
+            'stock' => 1,
+            'precio' => 5.25,
+        ]);
+
+        $this->actingAs($buyer);
+        session()->put('carrito', [
+            $product->id => [
+                'id' => $product->id,
+                'name' => $product->nombre,
+                'price' => 5.25,
+                'quantity' => 2,
+            ],
+        ]);
+
+        $response = $this->followingRedirects()->from(route('checkout'))->post(route('checkout.confirm'), [
+            'tipoEnvio' => 'A recoger',
+            'direccion_opcion' => 'actual',
+            'localizacion_id' => $buyerLocation->id,
+        ]);
+
+        $response->assertOk();
+        $response->assertSee('No hay suficiente stock de: '.$product->nombre);
+        $response->assertSee('value="A recoger" checked', false);
+    }
+
+    public function test_checkout_shows_validation_errors_when_new_address_is_incomplete(): void
+    {
+        $buyerLocation = Localizacion::factory()->create();
+        $sellerLocation = Localizacion::factory()->create();
+        $buyer = User::factory()->create([
+            'localizacion_id' => $buyerLocation->id,
+        ]);
+        $seller = User::factory()->create([
+            'localizacion_id' => $sellerLocation->id,
+        ]);
+        $product = Producto::factory()->create([
+            'user_id' => $seller->id,
+            'localizacion_id' => $sellerLocation->id,
+            'stock' => 5,
+        ]);
+
+        $this->actingAs($buyer);
+        session()->put('carrito', [
+            $product->id => [
+                'id' => $product->id,
+                'name' => $product->nombre,
+                'price' => (float) $product->precio,
+                'quantity' => 1,
+            ],
+        ]);
+
+        $response = $this->followingRedirects()->from(route('checkout'))->post(route('checkout.confirm'), [
+            'tipoEnvio' => 'A recoger',
+            'direccion_opcion' => 'nueva',
+            'localizacion_id' => $buyerLocation->id,
+            'nueva_nombreCalle' => '',
+            'nueva_numero' => '',
+            'nueva_codigoPostal' => '12',
+            'nueva_provincia' => '',
+        ]);
+
+        $response->assertOk();
+        $response->assertSeeText('Revisa los campos marcados para completar el pedido.');
+        $response->assertSeeText('El campo calle es obligatorio.');
+        $response->assertSeeText('El campo número es obligatorio.');
+        $response->assertSeeText('El campo código postal debe tener exactamente 5 dígitos.');
+        $response->assertSeeText('El campo provincia es obligatorio.');
+        $response->assertSee('value="A recoger" checked', false);
+        $response->assertSeeInOrder([
+            'id="direccion-nueva"',
+            'name="direccion_opcion"',
+            'value="nueva"',
+            'checked',
+        ], false);
+    }
+
     public function test_checkout_page_receives_prepared_summary_data(): void
     {
         $buyerLocation = Localizacion::factory()->create();

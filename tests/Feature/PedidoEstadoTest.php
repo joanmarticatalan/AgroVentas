@@ -66,6 +66,49 @@ class PedidoEstadoTest extends TestCase
         $secondResponse->assertSessionHas('error');
     }
 
+    public function test_seller_can_finalize_order_after_it_has_been_sent(): void
+    {
+        $buyerLocation = Localizacion::factory()->create();
+        $sellerLocation = Localizacion::factory()->create();
+
+        $buyer = User::factory()->create([
+            'tipoCliente' => 'comprador',
+            'localizacion_id' => $buyerLocation->id,
+        ]);
+        $seller = User::factory()->create([
+            'tipoCliente' => 'vendedor',
+            'localizacion_id' => $sellerLocation->id,
+        ]);
+
+        $product = Producto::factory()->create([
+            'user_id' => $seller->id,
+            'localizacion_id' => $sellerLocation->id,
+        ]);
+
+        $pedido = Pedido::factory()->create([
+            'user_id' => $buyer->id,
+            'localizacion_id' => $buyerLocation->id,
+            'tipoEnvio' => 'EnvioCasa',
+            'estado' => Pedido::ESTADO_ENVIADO,
+        ]);
+
+        Linea::factory()->create([
+            'pedido_id' => $pedido->id,
+            'producto_id' => $product->id,
+        ]);
+
+        $response = $this->actingAs($seller)->patch(route('pedidos.estado.update', $pedido), [
+            'estado' => Pedido::ESTADO_FINALIZADO,
+        ]);
+
+        $response->assertRedirect(route('pedidos.vendedor'));
+
+        $this->assertDatabaseHas('pedidos', [
+            'id' => $pedido->id,
+            'estado' => Pedido::ESTADO_FINALIZADO,
+        ]);
+    }
+
     public function test_seller_cannot_update_order_that_does_not_belong_to_them(): void
     {
         $buyerLocation = Localizacion::factory()->create();

@@ -1,64 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis pedidos - AgroVentas</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="min-h-screen bg-agro-bg text-slate-900">
+@extends('layouts.agro-shell')
+
+@section('title', 'Mis pedidos - AgroVentas')
+@section('body_class', 'text-slate-900')
+@section('content')
     @php
         $totalPedidos = $pedidos->count();
-        $pedidosActivos = $pedidos->where('estado', \App\Models\Pedido::ESTADO_EN_CURSO)->count();
+        $pedidosActivos = $pedidos->whereIn('estado', [
+            \App\Models\Pedido::ESTADO_EN_CURSO,
+            \App\Models\Pedido::ESTADO_ENVIADO,
+            \App\Models\Pedido::ESTADO_LISTO_RECOGER,
+        ])->count();
         $importeAcumulado = $pedidos->sum('precio_total');
         $estados = [
             \App\Models\Pedido::ESTADO_EN_CURSO => ['label' => 'En curso', 'classes' => 'bg-amber-100 text-amber-800 ring-amber-200'],
             \App\Models\Pedido::ESTADO_ENVIADO => ['label' => 'Enviado', 'classes' => 'bg-emerald-100 text-emerald-800 ring-emerald-200'],
             \App\Models\Pedido::ESTADO_LISTO_RECOGER => ['label' => 'Listo para recoger', 'classes' => 'bg-sky-100 text-sky-800 ring-sky-200'],
+            \App\Models\Pedido::ESTADO_FINALIZADO => ['label' => 'Finalizado', 'classes' => 'bg-slate-200 text-slate-800 ring-slate-300'],
         ];
     @endphp
-
-    <header class="bg-agro-primary shadow-md">
-        <div class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex items-center justify-between gap-4">
-                <a href="{{ route('inicio') }}" class="text-2xl font-bold tracking-wide text-white">AgroVentas</a>
-                <a href="{{ route('carrito.all') }}" class="text-base font-medium text-white transition-colors hover:text-agro-accent lg:hidden">
-                    Carrito
-                </a>
-            </div>
-
-            <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium lg:text-base">
-                <a href="{{ route('inicio') }}" class="text-white transition-colors hover:text-agro-accent">Inicio</a>
-                <a href="{{ route('todos.productos') }}" class="text-white transition-colors hover:text-agro-accent">Productos</a>
-                @auth
-                    <a href="{{ route('pedidos.usuario') }}" class="text-agro-accent">Mis pedidos</a>
-                    @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
-                        <a href="{{ route('mis.productos') }}" class="text-white transition-colors hover:text-agro-accent">Mis productos</a>
-                        <a href="{{ route('pedidos.vendedor') }}" class="text-white transition-colors hover:text-agro-accent">Pedidos</a>
-                        <a href="{{ route('pg.anadir.producto') }}" class="text-white transition-colors hover:text-agro-accent">Añadir producto</a>
-                    @endif
-                    @if(auth()->user()->tipoCliente === 'admin')
-                        <a href="{{ route('users.index') }}" class="text-white transition-colors hover:text-agro-accent">Gestión usuarios</a>
-                    @endif
-                @endauth
-            </nav>
-
-            <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ route('carrito.all') }}" class="hidden text-white transition-colors hover:text-agro-accent lg:inline-flex">Carrito</a>
-                @auth
-                    <a href="{{ route('perfil.editar') }}" class="inline-flex items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-agro-accent hover:text-agro-accent">
-                        Mi perfil
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="inline-flex items-center rounded-full bg-agro-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600">
-                            Salir
-                        </button>
-                    </form>
-                @endauth
-            </div>
-        </div>
-    </header>
 
     <main class="pb-16">
         <section class="relative overflow-hidden border-b border-agro-primary/10 bg-gradient-to-br from-white via-[#f4efe4] to-[#e7f0df]">
@@ -87,7 +46,7 @@
                     <article class="rounded-[1.75rem] border border-agro-primary/10 bg-white px-6 py-5 shadow-sm">
                         <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Pedidos activos</p>
                         <p class="mt-3 text-3xl font-black text-agro-primary">{{ $pedidosActivos }}</p>
-                        <p class="mt-2 text-sm text-slate-500">Pendientes de completar o recibir.</p>
+                        <p class="mt-2 text-sm text-slate-500">Pedidos que siguen en preparación, envío o recogida.</p>
                     </article>
                     <article class="rounded-[1.75rem] border border-agro-primary/10 bg-white px-6 py-5 shadow-sm">
                         <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Importe acumulado</p>
@@ -210,27 +169,4 @@
             @endif
         </section>
     </main>
-
-    <footer class="mt-auto bg-agro-primary text-white">
-        <div class="mx-auto grid max-w-7xl gap-8 px-6 py-10 md:grid-cols-3">
-            <div class="flex flex-col gap-3">
-                <span class="text-2xl font-bold">AgroVentas</span>
-                <p class="text-base text-green-200">Pedidos claros, productos frescos y gestión sencilla en cada compra.</p>
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <span class="text-lg font-semibold text-agro-accent">Accesos</span>
-                <a href="{{ route('todos.productos') }}" class="text-green-200 transition-colors hover:text-white">Explorar productos</a>
-                <a href="{{ route('carrito.all') }}" class="text-green-200 transition-colors hover:text-white">Ver carrito</a>
-                <a href="{{ route('perfil.editar') }}" class="text-green-200 transition-colors hover:text-white">Editar perfil</a>
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <span class="text-lg font-semibold text-agro-accent">Contacto</span>
-                <a href="mailto:contacto@agroventas.es" class="text-green-200 transition-colors hover:text-white">contacto@agroventas.es</a>
-                <span class="text-green-200">Seguimiento sencillo para compradores y vendedores.</span>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+@endsection

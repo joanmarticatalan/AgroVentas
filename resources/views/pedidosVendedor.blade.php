@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos recibidos - AgroVentas</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="min-h-screen bg-agro-bg text-slate-900">
+@extends('layouts.agro-shell')
+
+@section('title', 'Pedidos recibidos - AgroVentas')
+@section('body_class', 'text-slate-900')
+@section('content')
     @php
         $totalPedidos = $pedidos->count();
         $pendientes = $pedidos->where('estado', \App\Models\Pedido::ESTADO_EN_CURSO)->count();
@@ -15,50 +11,9 @@
             \App\Models\Pedido::ESTADO_EN_CURSO => ['label' => 'En curso', 'classes' => 'bg-amber-100 text-amber-800 ring-amber-200'],
             \App\Models\Pedido::ESTADO_ENVIADO => ['label' => 'Enviado', 'classes' => 'bg-emerald-100 text-emerald-800 ring-emerald-200'],
             \App\Models\Pedido::ESTADO_LISTO_RECOGER => ['label' => 'Listo para recoger', 'classes' => 'bg-sky-100 text-sky-800 ring-sky-200'],
+            \App\Models\Pedido::ESTADO_FINALIZADO => ['label' => 'Finalizado', 'classes' => 'bg-slate-200 text-slate-800 ring-slate-300'],
         ];
     @endphp
-
-    <header class="bg-agro-primary shadow-md">
-        <div class="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-4 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex items-center justify-between gap-4">
-                <a href="{{ route('inicio') }}" class="text-2xl font-bold tracking-wide text-white">AgroVentas</a>
-                <a href="{{ route('carrito.all') }}" class="text-base font-medium text-white transition-colors hover:text-agro-accent lg:hidden">
-                    Carrito
-                </a>
-            </div>
-
-            <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium lg:text-base">
-                <a href="{{ route('inicio') }}" class="text-white transition-colors hover:text-agro-accent">Inicio</a>
-                <a href="{{ route('todos.productos') }}" class="text-white transition-colors hover:text-agro-accent">Productos</a>
-                @auth
-                    <a href="{{ route('pedidos.usuario') }}" class="text-white transition-colors hover:text-agro-accent">Mis pedidos</a>
-                    @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
-                        <a href="{{ route('mis.productos') }}" class="text-white transition-colors hover:text-agro-accent">Mis productos</a>
-                        <a href="{{ route('pedidos.vendedor') }}" class="text-agro-accent">Pedidos</a>
-                        <a href="{{ route('pg.anadir.producto') }}" class="text-white transition-colors hover:text-agro-accent">Añadir producto</a>
-                    @endif
-                    @if(auth()->user()->tipoCliente === 'admin')
-                        <a href="{{ route('users.index') }}" class="text-white transition-colors hover:text-agro-accent">Gestión usuarios</a>
-                    @endif
-                @endauth
-            </nav>
-
-            <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ route('carrito.all') }}" class="hidden text-white transition-colors hover:text-agro-accent lg:inline-flex">Carrito</a>
-                @auth
-                    <a href="{{ route('perfil.editar') }}" class="inline-flex items-center rounded-full border border-white/20 px-4 py-2 text-sm font-semibold text-white transition hover:border-agro-accent hover:text-agro-accent">
-                        Mi perfil
-                    </a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="inline-flex items-center rounded-full bg-agro-accent px-4 py-2 text-sm font-semibold text-white transition hover:bg-orange-600">
-                            Salir
-                        </button>
-                    </form>
-                @endauth
-            </div>
-        </div>
-    </header>
 
     <main class="pb-16">
         <section class="relative overflow-hidden border-b border-agro-primary/10 bg-gradient-to-br from-agro-primary via-agro-primary to-agro-secondary text-white">
@@ -140,8 +95,16 @@
                         @php
                             $estadoConfig = $estados[$pedido->estado] ?? ['label' => ucfirst(str_replace('_', ' ', (string) $pedido->estado)), 'classes' => 'bg-slate-100 text-slate-700 ring-slate-200'];
                             $esEnvio = $pedido->tipoEnvio === 'EnvioCasa';
-                            $accionLabel = $esEnvio ? 'Marcar como enviado' : 'Marcar como listo para recoger';
-                            $accionEstado = $esEnvio ? \App\Models\Pedido::ESTADO_ENVIADO : \App\Models\Pedido::ESTADO_LISTO_RECOGER;
+                            $accionLabel = match ($pedido->estado) {
+                                \App\Models\Pedido::ESTADO_EN_CURSO => $esEnvio ? 'Marcar como enviado' : 'Marcar como listo para recoger',
+                                \App\Models\Pedido::ESTADO_ENVIADO, \App\Models\Pedido::ESTADO_LISTO_RECOGER => 'Finalizar pedido',
+                                default => null,
+                            };
+                            $accionEstado = match ($pedido->estado) {
+                                \App\Models\Pedido::ESTADO_EN_CURSO => $esEnvio ? \App\Models\Pedido::ESTADO_ENVIADO : \App\Models\Pedido::ESTADO_LISTO_RECOGER,
+                                \App\Models\Pedido::ESTADO_ENVIADO, \App\Models\Pedido::ESTADO_LISTO_RECOGER => \App\Models\Pedido::ESTADO_FINALIZADO,
+                                default => null,
+                            };
                         @endphp
                         <article class="overflow-hidden rounded-[2rem] border border-agro-primary/10 bg-white shadow-sm shadow-agro-primary/5 transition hover:-translate-y-1 hover:shadow-xl hover:shadow-agro-primary/10">
                             <div class="border-b border-agro-primary/10 bg-gradient-to-r from-white to-[#f4efe4] px-6 py-5">
@@ -192,10 +155,16 @@
                                     <p class="text-sm font-semibold uppercase tracking-[0.2em] text-agro-brown">Siguiente paso</p>
                                     <div class="mt-4 space-y-4">
                                         <p class="text-sm leading-7 text-slate-600">
-                                            {{ $esEnvio ? 'Confirma cuando el pedido haya salido hacia el cliente para reflejarlo como enviado.' : 'Actualiza el pedido cuando esté preparado para que el cliente pase a recogerlo.' }}
+                                            @if($pedido->estado === \App\Models\Pedido::ESTADO_EN_CURSO)
+                                                {{ $esEnvio ? 'Confirma cuando el pedido haya salido hacia el cliente para reflejarlo como enviado.' : 'Actualiza el pedido cuando esté preparado para que el cliente pase a recogerlo.' }}
+                                            @elseif(in_array($pedido->estado, [\App\Models\Pedido::ESTADO_ENVIADO, \App\Models\Pedido::ESTADO_LISTO_RECOGER], true))
+                                                Marca el pedido como finalizado cuando la entrega o la recogida ya se haya completado.
+                                            @else
+                                                Este pedido ya se ha cerrado y no admite más cambios de estado.
+                                            @endif
                                         </p>
 
-                                        @if($pedido->estado === \App\Models\Pedido::ESTADO_EN_CURSO)
+                                        @if($accionLabel && $accionEstado)
                                             <form method="POST" action="{{ route('pedidos.estado.update', $pedido) }}" class="space-y-3">
                                                 @csrf
                                                 @method('PATCH')
@@ -222,27 +191,4 @@
             @endif
         </section>
     </main>
-
-    <footer class="mt-auto bg-agro-primary text-white">
-        <div class="mx-auto grid max-w-7xl gap-8 px-6 py-10 md:grid-cols-3">
-            <div class="flex flex-col gap-3">
-                <span class="text-2xl font-bold">AgroVentas</span>
-                <p class="text-base text-green-200">Una vista de pedidos más limpia para gestionar ventas sin fricción.</p>
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <span class="text-lg font-semibold text-agro-accent">Accesos</span>
-                <a href="{{ route('mis.productos') }}" class="text-green-200 transition-colors hover:text-white">Mis productos</a>
-                <a href="{{ route('pg.anadir.producto') }}" class="text-green-200 transition-colors hover:text-white">Añadir producto</a>
-                <a href="{{ route('pedidos.usuario') }}" class="text-green-200 transition-colors hover:text-white">Vista comprador</a>
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <span class="text-lg font-semibold text-agro-accent">Operativa</span>
-                <span class="text-green-200">Pedidos en curso, enviados y listos para recoger con lectura inmediata.</span>
-                <a href="mailto:contacto@agroventas.es" class="text-green-200 transition-colors hover:text-white">contacto@agroventas.es</a>
-            </div>
-        </div>
-    </footer>
-</body>
-</html>
+@endsection

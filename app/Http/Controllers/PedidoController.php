@@ -92,6 +92,26 @@ class PedidoController extends Controller
             'nueva_puerta' => ['nullable', 'string', 'max:10'],
             'nueva_codigoPostal' => ['nullable', 'regex:/^\d{5}$/', 'required_if:direccion_opcion,nueva'],
             'nueva_provincia' => ['nullable', 'string', 'max:50', 'required_if:direccion_opcion,nueva'],
+        ], [
+            'tipoEnvio.required' => 'Debes elegir un tipo de entrega.',
+            'tipoEnvio.in' => 'El tipo de entrega seleccionado no es válido.',
+            'direccion_opcion.required' => 'Debes elegir una opción de dirección.',
+            'direccion_opcion.in' => 'La opción de dirección seleccionada no es válida.',
+            'localizacion_id.exists' => 'Debes usar una dirección guardada válida.',
+            'nueva_nombreCalle.required_if' => 'El campo calle es obligatorio.',
+            'nueva_numero.required_if' => 'El campo número es obligatorio.',
+            'nueva_codigoPostal.required_if' => 'El campo código postal es obligatorio.',
+            'nueva_codigoPostal.regex' => 'El campo código postal debe tener exactamente 5 dígitos.',
+            'nueva_provincia.required_if' => 'El campo provincia es obligatorio.',
+        ], [
+            'tipoEnvio' => 'tipo de entrega',
+            'direccion_opcion' => 'opción de dirección',
+            'localizacion_id' => 'dirección guardada',
+            'nueva_nombreCalle' => 'calle',
+            'nueva_numero' => 'número',
+            'nueva_puerta' => 'puerta',
+            'nueva_codigoPostal' => 'código postal',
+            'nueva_provincia' => 'provincia',
         ]);
 
         $products = Producto::query()
@@ -100,14 +120,14 @@ class PedidoController extends Controller
             ->keyBy('id');
 
         if ($products->count() !== count($cart)) {
-            return redirect()->back()->with('error', 'Uno o más productos de tu carrito ya no están disponibles.');
+            return redirect()->back()->withInput()->with('error', 'Uno o más productos de tu carrito ya no están disponibles.');
         }
 
         foreach ($cart as $line) {
             $producto = $products->get($line['id']);
 
             if ($producto->stock < $line['quantity']) {
-                return redirect()->back()->with('error', 'No hay suficiente stock de: '.$producto->nombre);
+                return redirect()->back()->withInput()->with('error', 'No hay suficiente stock de: '.$producto->nombre);
             }
         }
 
@@ -115,7 +135,7 @@ class PedidoController extends Controller
 
         if ($validated['direccion_opcion'] === 'actual') {
             if (! $user->localizacion_id || (int) $validated['localizacion_id'] !== (int) $user->localizacion_id) {
-                return redirect()->back()->with('error', 'Debes usar una dirección válida para completar el pedido.');
+                return redirect()->back()->withInput()->with('error', 'Debes usar una dirección válida para completar el pedido.');
             }
         }
 
@@ -175,7 +195,7 @@ class PedidoController extends Controller
 
             return redirect()->route('pedidos.usuario')->with('success', '¡Compra realizada con éxito!');
         } catch (\Throwable $e) {
-            return redirect()->back()->with('error', 'Error al procesar el pedido: '.$e->getMessage());
+            return redirect()->back()->withInput()->with('error', 'Error al procesar el pedido: '.$e->getMessage());
         }
     }
 
@@ -193,7 +213,7 @@ class PedidoController extends Controller
     public function updateEstado(Request $request, Pedido $pedido)
     {
         $validated = $request->validate([
-            'estado' => ['required', Rule::in([Pedido::ESTADO_ENVIADO, Pedido::ESTADO_LISTO_RECOGER])],
+            'estado' => ['required', Rule::in([Pedido::ESTADO_ENVIADO, Pedido::ESTADO_LISTO_RECOGER, Pedido::ESTADO_FINALIZADO])],
         ]);
 
         $sellerId = Auth::id();

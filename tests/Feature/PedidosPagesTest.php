@@ -95,4 +95,42 @@ class PedidosPagesTest extends TestCase
         $response->assertSee('Marcar como enviado');
         $response->assertSee('Calabaza');
     }
+
+    public function test_seller_orders_page_shows_finalize_button_for_sent_orders(): void
+    {
+        $buyerLocation = Localizacion::factory()->create();
+        $sellerLocation = Localizacion::factory()->create();
+        $buyer = User::factory()->create([
+            'tipoCliente' => 'comprador',
+            'localizacion_id' => $buyerLocation->id,
+        ]);
+        $seller = User::factory()->create([
+            'tipoCliente' => 'vendedor',
+            'localizacion_id' => $sellerLocation->id,
+        ]);
+        $product = Producto::factory()->create([
+            'user_id' => $seller->id,
+            'localizacion_id' => $sellerLocation->id,
+            'nombre' => 'Calabaza',
+        ]);
+        $pedido = Pedido::factory()->create([
+            'user_id' => $buyer->id,
+            'localizacion_id' => $buyerLocation->id,
+            'tipoEnvio' => 'EnvioCasa',
+            'estado' => Pedido::ESTADO_ENVIADO,
+            'precio_total' => 68.90,
+        ]);
+
+        Linea::factory()->create([
+            'pedido_id' => $pedido->id,
+            'producto_id' => $product->id,
+            'cantidad' => 2,
+            'precio_unitario' => 34.45,
+        ]);
+
+        $response = $this->actingAs($seller)->get(route('pedidos.vendedor'));
+
+        $response->assertOk();
+        $response->assertSee('Finalizar pedido');
+    }
 }
