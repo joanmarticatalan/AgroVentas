@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&display=swap');
 @import 'tailwindcss';
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
@@ -6,7 +7,7 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    --font-sans: 'Source Sans 3', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
     --color-agro-primary: #2D6A2D;
     --color-agro-secondary: #5A9E3A;
@@ -15,4 +16,166 @@
     --color-agro-bg: #F5F0E8;
     --color-agro-text: #1A1A1A;
     --color-agro-muted: #555555;
+}
+
+@layer base {
+    body {
+        font-family: 'Source Sans 3', sans-serif;
+        background-color: var(--color-agro-bg);
+        color: var(--color-agro-text);
+    }
+}
+
+@layer components {
+    .site-shell {
+        min-height: 100vh;
+        position: relative;
+        isolation: isolate;
+    }
+
+    .site-shell::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+        opacity: 0.45;
+        pointer-events: none;
+        z-index: -1;
+    }
+
+    .font-display {
+        font-family: 'Playfair Display', serif;
+    }
+
+    .site-nav {
+        background: var(--color-agro-primary);
+        box-shadow: 0 2px 20px rgba(0, 0, 0, 0.15);
+        position: sticky;
+        top: 0;
+        z-index: 40;
+    }
+
+    .site-brand {
+        font-family: 'Playfair Display', serif;
+        letter-spacing: -0.02em;
+    }
+
+    .site-brand-accent {
+        color: var(--color-agro-accent);
+    }
+
+    .site-link {
+        color: rgba(255, 255, 255, 0.84);
+        font-weight: 600;
+        text-decoration: none;
+        transition: color 0.2s ease;
+    }
+
+    .site-link:hover,
+    .site-link-active {
+        color: #fff;
+    }
+
+    .site-link-active {
+        position: relative;
+    }
+
+    .site-link-active::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -0.35rem;
+        height: 2px;
+        background: var(--color-agro-accent);
+        border-radius: 999px;
+    }
+
+    .site-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.9rem;
+        font-weight: 700;
+        transition: background-color 0.2s ease, color 0.2s ease, transform 0.15s ease;
+    }
+
+    .site-button:hover {
+        transform: translateY(-1px);
+    }
+
+    .site-button-primary {
+        background: var(--color-agro-accent);
+        color: #fff;
+    }
+
+    .site-button-primary:hover {
+        background: #c06820;
+    }
+
+    .site-button-ghost {
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+    }
+
+    .site-button-ghost:hover {
+        border-color: var(--color-agro-accent);
+        color: var(--color-agro-accent);
+    }
+
+    .site-hero {
+        position: relative;
+        overflow: hidden;
+        border-bottom: 1px solid rgba(45, 106, 45, 0.1);
+        background:
+            radial-gradient(circle at top right, rgba(217, 123, 42, 0.18), transparent 32%),
+            linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(244, 239, 228, 0.95) 48%, rgba(231, 240, 223, 0.92));
+    }
+
+    .site-hero-dark {
+        background:
+            radial-gradient(circle at top right, rgba(217, 123, 42, 0.22), transparent 34%),
+            linear-gradient(135deg, rgba(45, 106, 45, 0.98), rgba(45, 106, 45, 0.96) 50%, rgba(90, 158, 58, 0.96));
+        color: #fff;
+    }
+
+    .site-kicker {
+        display: inline-flex;
+        border-radius: 999px;
+        border: 1px solid rgba(45, 106, 45, 0.15);
+        background: rgba(255, 255, 255, 0.76);
+        padding: 0.38rem 1rem;
+        font-size: 0.78rem;
+        font-weight: 700;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--color-agro-brown);
+    }
+
+    .site-hero-dark .site-kicker {
+        border-color: rgba(255, 255, 255, 0.16);
+        background: rgba(255, 255, 255, 0.08);
+        color: rgba(255, 255, 255, 0.82);
+    }
+
+    .site-card {
+        border-radius: 1.75rem;
+        border: 1px solid rgba(45, 106, 45, 0.08);
+        background: rgba(255, 255, 255, 0.94);
+        box-shadow: 0 18px 60px rgba(45, 106, 45, 0.08);
+    }
+
+    .site-footer {
+        background: var(--color-agro-primary);
+        color: #fff;
+    }
+
+    .site-footer-link {
+        color: rgba(220, 252, 231, 0.78);
+        transition: color 0.2s ease;
+    }
+
+    .site-footer-link:hover {
+        color: #fff;
+    }
 }

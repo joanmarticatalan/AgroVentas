@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Productos - AgroVentas</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-agro-bg text-slate-900 min-h-screen flex flex-col">
+@extends('layouts.agro-shell')
+
+@section('title', 'Productos - AgroVentas')
+@section('body_class', 'flex flex-col text-slate-900')
+
+@section('content')
     @php
         $hasActiveFilters = collect($filters)->except('invalid_ranges')->contains(function ($value, $key) {
             if ($key === 'disponibilidad') {
@@ -20,51 +17,6 @@
             return filled($value);
         });
     @endphp
-
-    <header class="bg-agro-primary shadow-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex items-center justify-between gap-4">
-                <a href="{{ route('inicio') }}" class="text-white text-2xl font-bold tracking-wide">AgroVentas</a>
-                <a href="{{ route('carrito.all') }}" class="lg:hidden text-white text-base font-medium hover:text-agro-accent transition-colors">
-                    Carrito
-                </a>
-            </div>
-
-            <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium lg:text-base">
-                <a href="{{ route('inicio') }}" class="text-white hover:text-agro-accent transition-colors">Inicio</a>
-                <a href="{{ route('todos.productos') }}" class="text-agro-accent">Productos</a>
-                @auth
-                    <a href="{{ route('pedidos.usuario') }}" class="text-white hover:text-agro-accent transition-colors">Mis pedidos</a>
-                    @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
-                        <a href="{{ route('mis.productos') }}" class="text-white hover:text-agro-accent transition-colors">Mis productos</a>
-                        <a href="{{ route('pedidos.vendedor') }}" class="text-white hover:text-agro-accent transition-colors">Pedidos</a>
-                        <a href="{{ route('pg.anadir.producto') }}" class="text-white hover:text-agro-accent transition-colors">Añadir producto</a>
-                    @endif
-                    @if(auth()->user()->tipoCliente === 'admin')
-                        <a href="{{ route('users.index') }}" class="text-white hover:text-agro-accent transition-colors">Gestión usuarios</a>
-                    @endif
-                @endauth
-            </nav>
-
-            <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ route('carrito.all') }}" class="hidden lg:inline-flex text-white hover:text-agro-accent transition-colors">Carrito</a>
-                @auth
-                    <a href="{{ route('perfil.editar') }}" class="text-white hover:text-agro-accent transition-colors">Mi perfil</a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="bg-agro-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-xl transition-colors">
-                            Salir
-                        </button>
-                    </form>
-                @else
-                    <a href="{{ route('login') }}" class="text-white hover:text-agro-accent transition-colors">Entrar</a>
-                    <a href="{{ route('register') }}" class="bg-agro-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-xl transition-colors">
-                        Crear cuenta
-                    </a>
-                @endauth
-            </div>
-        </div>
-    </header>
 
     <main class="flex-1">
         <section class="max-w-7xl mx-auto px-6 py-8 lg:py-9">
@@ -329,9 +281,7 @@
                             </article>
                         @endforeach
                     </div>
-                @endif
-            </section>
+            @endif
         </section>
     </main>
-</body>
-</html>
+@endsection

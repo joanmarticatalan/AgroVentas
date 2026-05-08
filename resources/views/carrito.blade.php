@@ -499,10 +499,10 @@
         }
     </style>
 </head>
-<body>
+<body class="site-shell">
 
     {{-- NAVBAR --}}
-    <header class="navbar">
+    <header class="site-nav navbar">
         <div class="nav-inner">
             <a href="/" class="nav-brand">Agro<span>Ventas</span></a>
 
@@ -634,7 +634,7 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer>
+    <footer class="site-footer">
         <div class="footer-inner">
             <div>
                 <div class="footer-brand">Agro<span>Ventas</span></div>

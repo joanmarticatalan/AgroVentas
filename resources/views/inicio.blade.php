@@ -283,10 +283,10 @@
         .animate-5 { animation: fadeUp 0.7s 0.6s ease both; }
     </style>
 </head>
-<body style="background-color: var(--agro-bg); color: var(--agro-text);">
+<body class="site-shell" style="background-color: var(--agro-bg); color: var(--agro-text);">
 
     {{-- NAVBAR --}}
-    <header class="navbar">
+    <header class="site-nav navbar">
         <div style="max-width: 1280px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;">
 
             <a href="/" style="font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.01em;">
@@ -427,7 +427,7 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer class="footer">
+    <footer class="site-footer footer">
         <div style="max-width: 1280px; margin: 0 auto; padding: 3.5rem 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
 
             <div>
