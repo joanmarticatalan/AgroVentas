@@ -7,49 +7,81 @@ use App\Models\Producto;
 
 class CarritoController extends Controller
 {
-
-
     public function all()
     {
-        $cart=session()->get('carrito');
-        return view('carrito',['carro'=>$cart]);
+        $carrito = collect(session()->get('carrito', []))
+            ->map(fn (array $linea): array => $this->normalizarLineaCarrito($linea))
+            ->all();
+
+        return view('carrito', ['carro' => $carrito]);
     }
 
-    public function add(Request $request,$id)
+    public function add(Request $request, $id)
     {
-        $producto=Producto::find($id);
-        $carrito= session()->get('carrito',[]);
+        $producto = Producto::findOrFail($id);
+        $datos = $request->validate([
+            'cantidad' => ['required', 'integer', 'min:1'],
+        ]);
 
-        if(isset($carrito[$id])){
-            $carrito[$id]['quantity']++;
-        }else{
-            $carrito[$id]=[
-                'id'=>$producto->id,
-                'name'=>$producto->nombre,
-                'quantity'=>1,
-                'price'=>$producto->precio
-            ];
+        $carrito = session()->get('carrito', []);
+        $lineaActual = $this->normalizarLineaCarrito($carrito[$id] ?? null, $producto);
+        $cantidadTotal = $lineaActual['cantidad'] + (int) $datos['cantidad'];
+
+        if ($cantidadTotal > (int) $producto->stock) {
+            return redirect()
+                ->back()
+                ->withErrors([
+                    'cantidad' => 'La cantidad solicitada supera el stock disponible.',
+                ])
+                ->withInput();
         }
-        session()->put('carrito',$carrito);
+
+        $carrito[$id] = [
+            'id' => $producto->id,
+            'nombre' => $producto->nombre,
+            'cantidad' => $cantidadTotal,
+            'precio' => (float) $producto->precio,
+        ];
+
+        session()->put('carrito', $carrito);
+
         return redirect()->back();
     }
 
-    public function deleteOne($id){
-        $carrito=session()->get('carrito');
-        if(isset($carrito[$id])){
-            $carrito[$id]['quantity']--;
-            if($carrito[$id]['quantity']<=0){
+    public function deleteOne($id)
+    {
+        $carrito = session()->get('carrito', []);
+
+        if (isset($carrito[$id])) {
+            $linea = $this->normalizarLineaCarrito($carrito[$id]);
+            $linea['cantidad']--;
+
+            if ($linea['cantidad'] <= 0) {
                 unset($carrito[$id]);
-            } 
-            session()->put('carrito',$carrito);
+            } else {
+                $carrito[$id] = $linea;
+            }
+
+            session()->put('carrito', $carrito);
         }
+
         return redirect()->back();
     }
 
     public function deleteAll()
     {
-        $carrito=session()->get('carrito',[]);
         session()->forget('carrito');
+
         return redirect()->back();
+    }
+
+    private function normalizarLineaCarrito(?array $linea, ?Producto $producto = null): array
+    {
+        return [
+            'id' => $linea['id'] ?? $producto?->id,
+            'nombre' => $linea['nombre'] ?? $linea['name'] ?? $producto?->nombre,
+            'cantidad' => (int) ($linea['cantidad'] ?? $linea['quantity'] ?? 0),
+            'precio' => (float) ($linea['precio'] ?? $linea['price'] ?? $producto?->precio ?? 0),
+        ];
     }
 }

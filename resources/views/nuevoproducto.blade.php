@@ -1,4 +1,4 @@
-@extends('layouts.agro-shell')
+@extends('layouts.estructura-agro')
 
 @section('title', 'Nuevo producto - AgroVentas')
 @section('body_class', 'flex flex-col text-agro-text')

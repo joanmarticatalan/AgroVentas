@@ -1,4 +1,4 @@
-@extends('layouts.agro-shell')
+@extends('layouts.estructura-agro')
 
 @section('title', 'Mis pedidos - AgroVentas')
 @section('body_class', 'text-slate-900')

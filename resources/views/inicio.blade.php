@@ -23,7 +23,7 @@
             background-color: var(--agro-bg);
         }
 
-        .font-display {
+        .fuente-destacada {
             font-family: 'Playfair Display', serif;
         }
 
@@ -39,7 +39,7 @@
         }
 
         /* Navbar */
-        .navbar {
+        .barra-navegacion {
             background-color: var(--agro-primary);
             position: sticky;
             top: 0;
@@ -47,7 +47,7 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
 
-        .nav-link {
+        .navegacion-enlace {
             color: rgba(255,255,255,0.85);
             font-size: 1.05rem;
             font-weight: 600;
@@ -57,7 +57,7 @@
             position: relative;
         }
 
-        .nav-link::after {
+        .navegacion-enlace::after {
             content: '';
             position: absolute;
             bottom: -3px;
@@ -68,8 +68,8 @@
             transition: width 0.25s;
         }
 
-        .nav-link:hover { color: #fff; }
-        .nav-link:hover::after { width: 100%; }
+        .navegacion-enlace:hover { color: #fff; }
+        .navegacion-enlace:hover::after { width: 100%; }
 
         .btn-primary {
             background-color: var(--agro-accent);
@@ -90,7 +90,7 @@
         }
 
         /* Hero */
-        .hero {
+        .portada {
             min-height: 88vh;
             display: flex;
             align-items: center;
@@ -100,7 +100,7 @@
         }
 
         /* Decorative circle */
-        .hero-circle {
+        .portada-circulo {
             position: absolute;
             width: 600px;
             height: 600px;
@@ -112,7 +112,7 @@
             pointer-events: none;
         }
 
-        .hero-decoration {
+        .portada-decoracion {
             position: absolute;
             right: 8%;
             top: 50%;
@@ -124,7 +124,7 @@
             pointer-events: none;
         }
 
-        .hero-decoration::before {
+        .portada-decoracion::before {
             content: '';
             position: absolute;
             inset: 20px;
@@ -132,7 +132,7 @@
             border-radius: 50%;
         }
 
-        .hero-tag {
+        .portada-etiqueta {
             display: inline-block;
             background: rgba(45,106,45,0.1);
             color: var(--agro-primary);
@@ -146,7 +146,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .hero-title {
+        .portada-titulo {
             font-family: 'Playfair Display', serif;
             font-size: clamp(3.5rem, 8vw, 7rem);
             font-weight: 900;
@@ -155,12 +155,12 @@
             letter-spacing: -0.02em;
         }
 
-        .hero-title span {
+        .portada-titulo span {
             color: var(--agro-accent);
             font-style: italic;
         }
 
-        .hero-subtitle {
+        .portada-subtitulo {
             font-size: 1.35rem;
             color: var(--agro-muted);
             max-width: 480px;
@@ -169,7 +169,7 @@
         }
 
         /* CTA buttons */
-        .cta-btn {
+        .boton-cta {
             display: inline-flex;
             align-items: center;
             gap: 0.6rem;
@@ -183,34 +183,34 @@
             cursor: pointer;
         }
 
-        .cta-btn:hover {
+        .boton-cta:hover {
             transform: translateY(-3px);
             box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
-        .cta-comprar {
+        .boton-comprar {
             background-color: var(--agro-primary);
             color: #fff;
         }
 
-        .cta-vender {
+        .boton-vender {
             background-color: transparent;
             color: var(--agro-primary);
             border: 2px solid var(--agro-primary);
         }
 
-        .cta-vender:hover {
+        .boton-vender:hover {
             background-color: var(--agro-primary);
             color: #fff;
         }
 
         /* Stats strip */
-        .stats-strip {
+        .franja-estadisticas {
             background-color: var(--agro-primary);
             color: #fff;
         }
 
-        .stat-number {
+        .estadistica-numero {
             font-family: 'Playfair Display', serif;
             font-size: 2.5rem;
             font-weight: 700;
@@ -218,14 +218,14 @@
             line-height: 1;
         }
 
-        .stat-label {
+        .estadistica-etiqueta {
             font-size: 0.95rem;
             color: rgba(255,255,255,0.75);
             margin-top: 0.3rem;
         }
 
         /* Features */
-        .feature-card {
+        .caracteristica-tarjeta {
             background: #fff;
             border-radius: 16px;
             padding: 2rem;
@@ -233,12 +233,12 @@
             transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .feature-card:hover {
+        .caracteristica-tarjeta:hover {
             transform: translateY(-4px);
             box-shadow: 0 12px 32px rgba(0,0,0,0.08);
         }
 
-        .feature-icon {
+        .caracteristica-icono {
             width: 52px;
             height: 52px;
             background: rgba(45,106,45,0.1);
@@ -250,7 +250,7 @@
             margin-bottom: 1rem;
         }
 
-        .feature-title {
+        .caracteristica-titulo {
             font-family: 'Playfair Display', serif;
             font-size: 1.35rem;
             font-weight: 700;
@@ -258,14 +258,14 @@
             margin-bottom: 0.5rem;
         }
 
-        .feature-text {
+        .caracteristica-texto {
             color: var(--agro-muted);
             font-size: 1.05rem;
             line-height: 1.6;
         }
 
         /* Footer */
-        .footer {
+        .pie-pagina {
             background-color: var(--agro-primary);
             color: #fff;
         }
@@ -276,79 +276,42 @@
             to   { opacity: 1; transform: translateY(0); }
         }
 
-        .animate-1 { animation: fadeUp 0.7s ease both; }
-        .animate-2 { animation: fadeUp 0.7s 0.15s ease both; }
-        .animate-3 { animation: fadeUp 0.7s 0.3s ease both; }
-        .animate-4 { animation: fadeUp 0.7s 0.45s ease both; }
-        .animate-5 { animation: fadeUp 0.7s 0.6s ease both; }
+        .animacion-1 { animation: fadeUp 0.7s ease both; }
+        .animacion-2 { animation: fadeUp 0.7s 0.15s ease both; }
+        .animacion-3 { animation: fadeUp 0.7s 0.3s ease both; }
+        .animacion-4 { animation: fadeUp 0.7s 0.45s ease both; }
+        .animacion-5 { animation: fadeUp 0.7s 0.6s ease both; }
     </style>
 </head>
-<body class="site-shell" style="background-color: var(--agro-bg); color: var(--agro-text);">
+<body class="sitio-contenedor" style="background-color: var(--agro-bg); color: var(--agro-text);">
 
     {{-- NAVBAR --}}
-    <header class="site-nav navbar">
-        <div style="max-width: 1280px; margin: 0 auto; padding: 1rem 2rem; display: flex; align-items: center; justify-content: space-between;">
-
-            <a href="/" style="font-family: 'Playfair Display', serif; font-size: 1.6rem; font-weight: 700; color: #fff; text-decoration: none; letter-spacing: -0.01em;">
-                Agro<span style="color: var(--agro-accent);">Ventas</span>
-            </a>
-
-            <nav style="display: flex; align-items: center; gap: 2.5rem;">
-                <a href="/" class="nav-link">Inicio</a>
-                <a href="/products" class="nav-link">Productos</a>
-                @auth
-                    <a href="{{ route('pedidos.usuario') }}" class="nav-link">Mis pedidos</a>
-                    @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
-                        <a href="{{ route('mis.productos') }}" class="nav-link">Mis productos</a>
-                        <a href="{{ route('pg.anadir.producto') }}" class="nav-link">Vender</a>
-                    @endif
-                    @if(auth()->user()->tipoCliente === 'admin')
-                        <a href="{{ route('users.index') }}" class="nav-link">Usuarios</a>
-                    @endif
-                @endauth
-            </nav>
-
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <a href="/carro" class="nav-link">Carrito</a>
-                @auth
-                    <a href="{{ route('perfil.editar') }}" class="nav-link">Mi perfil</a>
-                    <form method="POST" action="{{ route('logout') }}" style="margin: 0;">
-                        @csrf
-                        <button type="submit" class="btn-primary">Salir</button>
-                    </form>
-                @else
-                    <a href="/login" class="nav-link">Iniciar sesión</a>
-                    <a href="/register" class="btn-primary">Registrarse</a>
-                @endauth
-            </div>
-
-        </div>
-    </header>
+    @include('partials.cabecera-sitio')
 
     {{-- HERO --}}
     <main>
-        <section class="hero">
-            <div class="hero-circle"></div>
-            <div class="hero-decoration"></div>
+        <section class="portada">
+            <div class="portada-circulo"></div>
+            <div class="portada-decoracion"></div>
 
             <div style="max-width: 1280px; margin: 0 auto; padding: 4rem 2rem; position: relative; z-index: 1;">
                 <div style="max-width: 640px;">
 
-                    <div class="hero-tag animate-1">Plataforma agrícola valenciana</div>
+                    <div class="portada-etiqueta animacion-1">Plataforma agrícola valenciana</div>
 
-                    <h1 class="hero-title animate-2">
+                    <h1 class="portada-titulo animacion-2">
                         Del huerto<br>a <span>tu mesa</span>
                     </h1>
 
-                    <p class="hero-subtitle animate-3">
+                    <p class="portada-subtitulo animacion-3">
                         Compra y vende productos del campo directamente entre agricultores y consumidores. Sin intermediarios, con total confianza.
                     </p>
 
-                    <div class="animate-4" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                        <a href="/products" class="cta-btn cta-comprar">
+                    <div class="animacion-4" style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="/products" class="boton-cta boton-comprar">
                             Quiero comprar
                         </a>
-                        <a href="/products" class="cta-btn cta-vender">
+                        <a href="/products" class="boton-cta boton-vender">
                             Quiero vender
                         </a>
                     </div>
@@ -358,19 +321,19 @@
         </section>
 
         {{-- STATS STRIP --}}
-        <section class="stats-strip">
+        <section class="franja-estadisticas">
             <div style="max-width: 1280px; margin: 0 auto; padding: 2.5rem 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: center;">
                 <div>
-                    <div class="stat-number">100%</div>
-                    <div class="stat-label">Productos de origen local</div>
+                    <div class="estadistica-numero">100%</div>
+                    <div class="estadistica-etiqueta">Productos de origen local</div>
                 </div>
                 <div style="border-left: 1px solid rgba(255,255,255,0.15); border-right: 1px solid rgba(255,255,255,0.15);">
-                    <div class="stat-number">0</div>
-                    <div class="stat-label">Intermediarios</div>
+                    <div class="estadistica-numero">0</div>
+                    <div class="estadistica-etiqueta">Intermediarios</div>
                 </div>
                 <div>
-                    <div class="stat-number">24h</div>
-                    <div class="stat-label">Gestión de pedidos</div>
+                    <div class="estadistica-numero">24h</div>
+                    <div class="estadistica-etiqueta">Gestión de pedidos</div>
                 </div>
             </div>
         </section>
@@ -380,7 +343,7 @@
             <div style="max-width: 1280px; margin: 0 auto;">
 
                 <div style="text-align: center; margin-bottom: 3.5rem;">
-                    <h2 class="font-display" style="font-size: 2.8rem; font-weight: 700; color: var(--agro-primary); letter-spacing: -0.02em;">
+                    <h2 class="fuente-destacada" style="font-size: 2.8rem; font-weight: 700; color: var(--agro-primary); letter-spacing: -0.02em;">
                         ¿Por qué AgroVentas?
                     </h2>
                     <p style="color: var(--agro-muted); font-size: 1.15rem; margin-top: 0.75rem;">Simple, directo y pensado para el campo.</p>
@@ -388,22 +351,22 @@
 
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
 
-                    <div class="feature-card">
-                        <div class="feature-icon">Fresco</div>
-                        <div class="feature-title">Producto fresco</div>
-                        <p class="feature-text">Conectamos directamente al agricultor con el comprador. El producto llega en su mejor momento.</p>
+                    <div class="caracteristica-tarjeta">
+                        <div class="caracteristica-icono">Fresco</div>
+                        <div class="caracteristica-titulo">Producto fresco</div>
+                        <p class="caracteristica-texto">Conectamos directamente al agricultor con el comprador. El producto llega en su mejor momento.</p>
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">Directo</div>
-                        <div class="feature-title">Trato directo</div>
-                        <p class="feature-text">Sin complicaciones. Habla directamente con quien cultiva y elige lo que necesitas.</p>
+                    <div class="caracteristica-tarjeta">
+                        <div class="caracteristica-icono">Directo</div>
+                        <div class="caracteristica-titulo">Trato directo</div>
+                        <p class="caracteristica-texto">Sin complicaciones. Habla directamente con quien cultiva y elige lo que necesitas.</p>
                     </div>
 
-                    <div class="feature-card">
-                        <div class="feature-icon">Local</div>
-                        <div class="feature-title">De tu zona</div>
-                        <p class="feature-text">Apoya a los agricultores de tu comarca. Consume local y contribuye a la economía de tu región.</p>
+                    <div class="caracteristica-tarjeta">
+                        <div class="caracteristica-icono">Local</div>
+                        <div class="caracteristica-titulo">De tu zona</div>
+                        <p class="caracteristica-texto">Apoya a los agricultores de tu comarca. Consume local y contribuye a la economía de tu región.</p>
                     </div>
 
                 </div>
@@ -413,13 +376,13 @@
         {{-- CTA FINAL --}}
         <section style="background: #fff; padding: 5rem 2rem; text-align: center; border-top: 1px solid rgba(0,0,0,0.06);">
             <div style="max-width: 600px; margin: 0 auto;">
-                <h2 class="font-display" style="font-size: 2.5rem; font-weight: 700; color: var(--agro-primary); margin-bottom: 1rem;">
+                <h2 class="fuente-destacada" style="font-size: 2.5rem; font-weight: 700; color: var(--agro-primary); margin-bottom: 1rem;">
                     Empieza hoy mismo
                 </h2>
                 <p style="color: var(--agro-muted); font-size: 1.15rem; margin-bottom: 2rem;">
                     Registrarte es gratis y solo lleva un momento.
                 </p>
-                <a href="/register" class="cta-btn cta-comprar" style="font-size: 1.3rem; padding: 1.2rem 3rem;">
+                <a href="/register" class="boton-cta boton-comprar" style="font-size: 1.3rem; padding: 1.2rem 3rem;">
                     Crear cuenta gratis
                 </a>
             </div>
@@ -427,7 +390,7 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer class="site-footer footer">
+    <pie-pagina class="sitio-pie pie-pagina">
         <div style="max-width: 1280px; margin: 0 auto; padding: 3.5rem 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
 
             <div>
@@ -454,7 +417,7 @@
         <div style="border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.25rem; color: rgba(255,255,255,0.45); font-size: 0.9rem;">
             © {{ date('Y') }} AgroVentas. Todos los derechos reservados.
         </div>
-    </footer>
+    </pie-pagina>
 
 </body>
 </html>

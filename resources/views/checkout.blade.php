@@ -39,7 +39,7 @@
             opacity: 0.5;
         }
 
-        .navbar {
+        .barra-navegacion {
             background-color: var(--agro-primary);
             position: sticky;
             top: 0;
@@ -47,7 +47,7 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
 
-        .nav-inner {
+        .navegacion-interior {
             max-width: 1280px;
             margin: 0 auto;
             padding: 1rem 2rem;
@@ -56,7 +56,7 @@
             justify-content: space-between;
         }
 
-        .nav-brand {
+        .navegacion-marca {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             font-weight: 700;
@@ -64,9 +64,9 @@
             text-decoration: none;
         }
 
-        .nav-brand span { color: var(--agro-accent); }
+        .navegacion-marca span { color: var(--agro-accent); }
 
-        .nav-link {
+        .navegacion-enlace {
             color: rgba(255,255,255,0.85);
             font-size: 1.05rem;
             font-weight: 600;
@@ -75,7 +75,7 @@
             transition: color 0.2s;
         }
 
-        .nav-link::after {
+        .navegacion-enlace::after {
             content: '';
             position: absolute;
             bottom: -3px; left: 0;
@@ -84,10 +84,10 @@
             transition: width 0.25s;
         }
 
-        .nav-link:hover { color: #fff; }
-        .nav-link:hover::after { width: 100%; }
+        .navegacion-enlace:hover { color: #fff; }
+        .navegacion-enlace:hover::after { width: 100%; }
 
-        .btn-nav {
+        .boton-navegacion {
             background-color: var(--agro-accent);
             color: #fff;
             font-family: 'Source Sans 3', sans-serif;
@@ -101,16 +101,16 @@
             transition: background 0.2s, transform 0.15s;
         }
 
-        .btn-nav:hover { background-color: #c06820; transform: translateY(-1px); }
+        .boton-navegacion:hover { background-color: #c06820; transform: translateY(-1px); }
 
-        .checkout-progress {
+        .compra-progreso {
             background: #fff;
             border-bottom: 1px solid rgba(0,0,0,0.06);
             position: relative;
             z-index: 1;
         }
 
-        .progress-inner {
+        .progreso-interior {
             max-width: 1000px;
             margin: 0 auto;
             padding: 1.2rem 2rem;
@@ -118,14 +118,14 @@
             align-items: center;
         }
 
-        .progress-step {
+        .progreso-paso {
             display: flex;
             align-items: center;
             gap: 0.6rem;
             flex: 1;
         }
 
-        .step-circle {
+        .paso-circulo {
             width: 32px;
             height: 32px;
             border-radius: 50%;
@@ -137,16 +137,16 @@
             flex-shrink: 0;
         }
 
-        .step-active .step-circle { background-color: var(--agro-primary); color: #fff; }
-        .step-done .step-circle { background-color: var(--agro-secondary); color: #fff; }
-        .step-pending .step-circle { background-color: #e8e0d4; color: var(--agro-muted); }
+        .paso-activo .paso-circulo { background-color: var(--agro-primary); color: #fff; }
+        .paso-hecho .paso-circulo { background-color: var(--agro-secondary); color: #fff; }
+        .paso-pendiente .paso-circulo { background-color: #e8e0d4; color: var(--agro-muted); }
 
-        .step-label { font-size: 0.9rem; font-weight: 600; }
-        .step-active .step-label { color: var(--agro-primary); }
-        .step-done .step-label { color: var(--agro-secondary); }
-        .step-pending .step-label { color: var(--agro-muted); }
+        .paso-etiqueta { font-size: 0.9rem; font-weight: 600; }
+        .paso-activo .paso-etiqueta { color: var(--agro-primary); }
+        .paso-hecho .paso-etiqueta { color: var(--agro-secondary); }
+        .paso-pendiente .paso-etiqueta { color: var(--agro-muted); }
 
-        .step-divider {
+        .paso-divisor {
             flex: 1;
             height: 1px;
             background: #e0dbd0;
@@ -160,7 +160,7 @@
             padding: 2.5rem 2rem 5rem;
         }
 
-        .checkout-form {
+        .formulario-compra {
             max-width: 1000px;
             margin: 0 auto;
             display: grid;
@@ -170,20 +170,20 @@
             animation: fadeUp 0.5s ease both;
         }
 
-        .form-sections {
+        .secciones-formulario {
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
         }
 
-        .form-block {
+        .bloque-formulario {
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
             border: 1px solid rgba(0,0,0,0.05);
         }
 
-        .block-header {
+        .bloque-encabezado {
             padding: 1.3rem 1.8rem;
             border-bottom: 1px solid #f0ece4;
             display: flex;
@@ -191,7 +191,7 @@
             gap: 0.8rem;
         }
 
-        .block-number {
+        .bloque-numero {
             width: 30px;
             height: 30px;
             border-radius: 50%;
@@ -205,30 +205,30 @@
             flex-shrink: 0;
         }
 
-        .block-title {
+        .bloque-titulo {
             font-family: 'Playfair Display', serif;
             font-size: 1.25rem;
             font-weight: 700;
             color: var(--agro-primary);
         }
 
-        .block-body { padding: 1.8rem; }
+        .bloque-cuerpo { padding: 1.8rem; }
 
-        .envio-options {
+        .opciones-envio {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
-        .envio-option { position: relative; }
+        .opcion-envio { position: relative; }
 
-        .envio-option input[type="radio"] {
+        .opcion-envio input[type="radio"] {
             position: absolute;
             opacity: 0;
             width: 0;
         }
 
-        .envio-label {
+        .etiqueta-envio {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -242,27 +242,27 @@
             background: var(--agro-bg);
         }
 
-        .envio-label:hover { border-color: var(--agro-secondary); }
+        .etiqueta-envio:hover { border-color: var(--agro-secondary); }
 
-        .envio-option input[type="radio"]:checked + .envio-label {
+        .opcion-envio input[type="radio"]:checked + .etiqueta-envio {
             border-color: var(--agro-primary);
             background: rgba(45,106,45,0.05);
         }
 
-        .envio-name { font-weight: 700; font-size: 1rem; color: var(--agro-text); }
-        .envio-desc { font-size: 0.85rem; color: var(--agro-muted); line-height: 1.4; }
+        .nombre-envio { font-weight: 700; font-size: 1rem; color: var(--agro-text); }
+        .descripcion-envio { font-size: 0.85rem; color: var(--agro-muted); line-height: 1.4; }
 
-        .form-grid {
+        .rejilla-formulario {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
         }
 
-        .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
-        .form-group.span-2 { grid-column: span 2; }
-        .form-label { font-weight: 600; font-size: 0.95rem; color: var(--agro-text); }
+        .grupo-formulario { display: flex; flex-direction: column; gap: 0.4rem; }
+        .grupo-formulario.ocupa-dos { grid-column: span 2; }
+        .etiqueta-formulario { font-weight: 600; font-size: 0.95rem; color: var(--agro-text); }
 
-        .form-input {
+        .campo-formulario {
             font-family: 'Source Sans 3', sans-serif;
             font-size: 1.05rem;
             padding: 0.8rem 1rem;
@@ -275,13 +275,13 @@
             width: 100%;
         }
 
-        .form-input:focus {
+        .campo-formulario:focus {
             border-color: var(--agro-primary);
             box-shadow: 0 0 0 3px rgba(45,106,45,0.1);
             background: #fff;
         }
 
-        .pago-info {
+        .pago-informacion {
             background: rgba(45,106,45,0.05);
             border: 1.5px dashed rgba(45,106,45,0.2);
             border-radius: 12px;
@@ -291,7 +291,7 @@
             gap: 1rem;
         }
 
-        .pago-icon {
+        .pago-icono {
             width: 40px;
             height: 40px;
             border-radius: 50%;
@@ -302,9 +302,9 @@
             flex-shrink: 0;
         }
 
-        .pago-icon svg { width: 20px; height: 20px; fill: #fff; }
+        .pago-icono svg { width: 20px; height: 20px; fill: #fff; }
 
-        .pago-text h4 {
+        .pago-texto h4 {
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
             font-weight: 700;
@@ -312,9 +312,9 @@
             margin-bottom: 0.3rem;
         }
 
-        .pago-text p { color: var(--agro-muted); font-size: 0.95rem; line-height: 1.5; }
+        .pago-texto p { color: var(--agro-muted); font-size: 0.95rem; line-height: 1.5; }
 
-        .order-summary {
+        .resumen-pedido {
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
@@ -323,21 +323,21 @@
             top: 90px;
         }
 
-        .summary-header {
+        .resumen-encabezado {
             background-color: var(--agro-primary);
             padding: 1.3rem 1.8rem;
         }
 
-        .summary-header h2 {
+        .resumen-encabezado h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.25rem;
             font-weight: 700;
             color: #fff;
         }
 
-        .summary-body { padding: 1.5rem; }
+        .resumen-cuerpo { padding: 1.5rem; }
 
-        .summary-item {
+        .resumen-item {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
@@ -346,28 +346,28 @@
             gap: 0.5rem;
         }
 
-        .summary-item:last-of-type { border-bottom: none; }
-        .summary-item-name { font-size: 0.95rem; color: var(--agro-text); font-weight: 600; flex: 1; }
-        .summary-item-qty { font-size: 0.85rem; color: var(--agro-muted); }
-        .summary-item-price { font-size: 0.95rem; font-weight: 600; color: var(--agro-text); white-space: nowrap; }
+        .resumen-item:last-of-type { border-bottom: none; }
+        .resumen-item-nombre { font-size: 0.95rem; color: var(--agro-text); font-weight: 600; flex: 1; }
+        .resumen-item-cantidad { font-size: 0.85rem; color: var(--agro-muted); }
+        .resumen-item-precio { font-size: 0.95rem; font-weight: 600; color: var(--agro-text); white-space: nowrap; }
 
-        .summary-divider { border: none; border-top: 2px solid #e8e0d4; margin: 1rem 0; }
+        .resumen-divisor { border: none; border-top: 2px solid #e8e0d4; margin: 1rem 0; }
 
-        .summary-total {
+        .resumen-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 1.5rem;
         }
 
-        .total-label {
+        .total-etiqueta {
             font-family: 'Playfair Display', serif;
             font-size: 1.15rem;
             font-weight: 700;
             color: var(--agro-primary);
         }
 
-        .total-value {
+        .total-valor {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 900;
@@ -375,9 +375,9 @@
             line-height: 1;
         }
 
-        .total-value small { font-size: 1rem; color: var(--agro-accent); font-weight: 600; }
+        .total-valor small { font-size: 1rem; color: var(--agro-accent); font-weight: 600; }
 
-        .btn-confirm {
+        .boton-confirmar {
             width: 100%;
             font-family: 'Source Sans 3', sans-serif;
             font-size: 1.15rem;
@@ -391,13 +391,13 @@
             transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
         }
 
-        .btn-confirm:hover {
+        .boton-confirmar:hover {
             background-color: #c06820;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(217,123,42,0.3);
         }
 
-        .back-link {
+        .enlace-volver {
             display: block;
             text-align: center;
             margin-top: 0.8rem;
@@ -407,9 +407,9 @@
             transition: color 0.2s;
         }
 
-        .back-link:hover { color: var(--agro-primary); }
+        .enlace-volver:hover { color: var(--agro-primary); }
 
-        .multi-order-notice {
+        .aviso-multipedido {
             background: rgba(217,123,42,0.08);
             border: 1px solid rgba(217,123,42,0.25);
             border-radius: 10px;
@@ -417,9 +417,9 @@
             margin-bottom: 1.2rem;
         }
 
-        .notice-text { font-size: 0.92rem; color: var(--agro-brown); line-height: 1.5; }
+        .aviso-texto { font-size: 0.92rem; color: var(--agro-brown); line-height: 1.5; }
 
-        .feedback-stack {
+        .pila-mensajes {
             max-width: 1000px;
             margin: 0 auto 1.5rem;
             display: grid;
@@ -427,35 +427,35 @@
             animation: fadeUp 0.5s ease both;
         }
 
-        .feedback-box {
+        .caja-mensaje {
             border-radius: 14px;
             padding: 1rem 1.2rem;
             border: 1px solid transparent;
         }
 
-        .feedback-box p,
-        .feedback-box li {
+        .caja-mensaje p,
+        .caja-mensaje li {
             line-height: 1.5;
         }
 
-        .feedback-box ul {
+        .caja-mensaje ul {
             margin: 0.6rem 0 0;
             padding-left: 1.2rem;
         }
 
-        .feedback-error {
+        .mensaje-error {
             background: #fff1f2;
             border-color: #fecdd3;
             color: #9f1239;
         }
 
-        .feedback-success {
+        .mensaje-exito {
             background: #ecfdf3;
             border-color: #a7f3d0;
             color: #166534;
         }
 
-        .field-error {
+        .error-campo {
             color: #b91c1c;
             font-size: 0.88rem;
             font-weight: 600;
@@ -468,7 +468,7 @@
             z-index: 1;
         }
 
-        .footer-inner {
+        .pie-interior {
             max-width: 1280px;
             margin: 0 auto;
             padding: 3rem 2rem;
@@ -477,12 +477,12 @@
             gap: 2rem;
         }
 
-        .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
-        .footer-brand span { color: var(--agro-accent); }
-        .footer-col-title { font-weight: 600; color: var(--agro-accent); margin-bottom: 0.6rem; display: block; }
-        .footer-link { display: block; color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.95rem; margin-bottom: 0.4rem; transition: color 0.2s; }
-        .footer-link:hover { color: #fff; }
-        .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.1rem; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
+        .pie-marca { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .pie-marca span { color: var(--agro-accent); }
+        .pie-columna-titulo { font-weight: 600; color: var(--agro-accent); margin-bottom: 0.6rem; display: block; }
+        .pie-enlace { display: block; color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.95rem; margin-bottom: 0.4rem; transition: color 0.2s; }
+        .pie-enlace:hover { color: #fff; }
+        .pie-inferior { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.1rem; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
 
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -490,58 +490,37 @@
         }
 
         @media (max-width: 768px) {
-            .checkout-form { grid-template-columns: 1fr; }
-            .order-summary { position: static; }
-            .envio-options { grid-template-columns: 1fr; }
-            .form-grid { grid-template-columns: 1fr; }
-            .form-group.span-2 { grid-column: span 1; }
-            .footer-inner { grid-template-columns: 1fr; }
-            .step-label { font-size: 0.75rem; }
+            .formulario-compra { grid-template-columns: 1fr; }
+            .resumen-pedido { position: static; }
+            .opciones-envio { grid-template-columns: 1fr; }
+            .rejilla-formulario { grid-template-columns: 1fr; }
+            .grupo-formulario.ocupa-dos { grid-column: span 1; }
+            .pie-interior { grid-template-columns: 1fr; }
+            .paso-etiqueta { font-size: 0.75rem; }
         }
     </style>
 </head>
-<body class="site-shell">
+<body class="sitio-contenedor">
 
     {{-- NAVBAR --}}
-    <header class="site-nav navbar">
-        <div class="nav-inner">
-            <a href="/" class="nav-brand">Agro<span>Ventas</span></a>
-            <nav style="display:flex; align-items:center; gap:2rem;">
-                <a href="/" class="nav-link">Inicio</a>
-                <a href="{{ route('todos.productos') }}" class="nav-link">Productos</a>
-                @auth
-                    <a href="{{ route('pedidos.usuario') }}" class="nav-link">Mis pedidos</a>
-                @endauth
-            </nav>
-            <div style="display:flex; align-items:center; gap:1rem;">
-                <a href="{{ route('carrito.all') }}" class="nav-link">Carrito</a>
-                @auth
-                    <a href="{{ route('perfil.editar') }}" class="nav-link">Mi perfil</a>
-                    <form method="POST" action="{{ route('logout') }}" style="margin:0;">
-                        @csrf
-                        <button type="submit" class="btn-nav">Salir</button>
-                    </form>
-                @endauth
-            </div>
-        </div>
-    </header>
+    @include('partials.cabecera-sitio')
 
     {{-- BARRA DE PROGRESO --}}
-    <div class="checkout-progress">
-        <div class="progress-inner">
-            <div class="progress-step step-done">
-                <div class="step-circle">1</div>
-                <span class="step-label">Carrito</span>
+    <div class="compra-progreso">
+        <div class="progreso-interior">
+            <div class="progreso-paso paso-hecho">
+                <div class="paso-circulo">1</div>
+                <span class="paso-etiqueta">Carrito</span>
             </div>
-            <div class="step-divider"></div>
-            <div class="progress-step step-active">
-                <div class="step-circle">2</div>
-                <span class="step-label">Confirmar pedido</span>
+            <div class="paso-divisor"></div>
+            <div class="progreso-paso paso-activo">
+                <div class="paso-circulo">2</div>
+                <span class="paso-etiqueta">Confirmar pedido</span>
             </div>
-            <div class="step-divider"></div>
-            <div class="progress-step step-pending">
-                <div class="step-circle">3</div>
-                <span class="step-label">Pedido realizado</span>
+            <div class="paso-divisor"></div>
+            <div class="progreso-paso paso-pendiente">
+                <div class="paso-circulo">3</div>
+                <span class="paso-etiqueta">Pedido realizado</span>
             </div>
         </div>
     </div>
@@ -550,21 +529,21 @@
         @php($selectedShippingOption = old('tipoEnvio', 'EnvioCasa'))
 
         @if(session('error') || session('success') || $errors->any())
-            <div class="feedback-stack">
+            <div class="pila-mensajes">
                 @if(session('error'))
-                    <div class="feedback-box feedback-error">
+                    <div class="caja-mensaje mensaje-error">
                         <p>{{ session('error') }}</p>
                     </div>
                 @endif
 
                 @if(session('success'))
-                    <div class="feedback-box feedback-success">
+                    <div class="caja-mensaje mensaje-exito">
                         <p>{{ session('success') }}</p>
                     </div>
                 @endif
 
                 @if($errors->any())
-                    <div class="feedback-box feedback-error">
+                    <div class="caja-mensaje mensaje-error">
                         <p>Revisa los campos marcados para completar el pedido.</p>
                         <ul>
                             @foreach($errors->all() as $error)
@@ -576,48 +555,48 @@
             </div>
         @endif
 
-        <form action="{{ route('checkout.confirm') }}" method="POST" class="checkout-form">
+        <form action="{{ route('checkout.confirm') }}" method="POST" class="formulario-compra">
             @csrf
 
             {{-- COLUMNA IZQUIERDA --}}
-            <div class="form-sections">
+            <div class="secciones-formulario">
 
                 {{-- 1. Tipo de envío --}}
-                <div class="form-block">
-                    <div class="block-header">
-                        <div class="block-number">1</div>
-                        <div class="block-title">Tipo de entrega</div>
+                <div class="bloque-formulario">
+                    <div class="bloque-encabezado">
+                        <div class="bloque-numero">1</div>
+                        <div class="bloque-titulo">Tipo de entrega</div>
                     </div>
-                    <div class="block-body">
-                        <div class="envio-options">
-                            <div class="envio-option">
+                    <div class="bloque-cuerpo">
+                        <div class="opciones-envio">
+                            <div class="opcion-envio">
                                 <input type="radio" id="envio-casa" name="tipoEnvio" value="EnvioCasa" {{ $selectedShippingOption === 'EnvioCasa' ? 'checked' : '' }}>
-                                <label for="envio-casa" class="envio-label">
-                                    <span class="envio-name">Envío a domicilio</span>
-                                    <span class="envio-desc">Recibe tu pedido en la dirección que indiques</span>
+                                <label for="envio-casa" class="etiqueta-envio">
+                                    <span class="nombre-envio">Envío a domicilio</span>
+                                    <span class="descripcion-envio">Recibe tu pedido en la dirección que indiques</span>
                                 </label>
                             </div>
-                            <div class="envio-option">
+                            <div class="opcion-envio">
                                 <input type="radio" id="envio-recoger" name="tipoEnvio" value="A recoger" {{ $selectedShippingOption === 'A recoger' ? 'checked' : '' }}>
-                                <label for="envio-recoger" class="envio-label">
-                                    <span class="envio-name">Recogida en punto</span>
-                                    <span class="envio-desc">Recoge directamente en el punto de venta del vendedor</span>
+                                <label for="envio-recoger" class="etiqueta-envio">
+                                    <span class="nombre-envio">Recogida en punto</span>
+                                    <span class="descripcion-envio">Recoge directamente en el punto de venta del vendedor</span>
                                 </label>
                             </div>
                         </div>
                         @error('tipoEnvio')
-                            <p class="field-error">{{ $message }}</p>
+                            <p class="error-campo">{{ $message }}</p>
                         @enderror
                     </div>
                 </div>
 
                 {{-- 2. Dirección --}}
-                <div class="form-block">
-                    <div class="block-header">
-                        <div class="block-number">2</div>
-                        <div class="block-title">Dirección de entrega</div>
+                <div class="bloque-formulario">
+                    <div class="bloque-encabezado">
+                        <div class="bloque-numero">2</div>
+                        <div class="bloque-titulo">Dirección de entrega</div>
                     </div>
-                    <div class="block-body">
+                    <div class="bloque-cuerpo">
                         <p style="color:var(--agro-muted); font-size:0.95rem; margin-bottom:1.3rem;">
                             Elige si quieres reutilizar tu dirección guardada o indicar una nueva para este pedido.
                         </p>
@@ -626,14 +605,14 @@
 
                         <input type="hidden" name="localizacion_id" value="{{ $localizacion->id ?? '' }}">
                         @error('direccion_opcion')
-                            <p class="field-error" style="margin-bottom: 1rem;">{{ $message }}</p>
+                            <p class="error-campo" style="margin-bottom: 1rem;">{{ $message }}</p>
                         @enderror
                         @error('localizacion_id')
-                            <p class="field-error" style="margin-bottom: 1rem;">{{ $message }}</p>
+                            <p class="error-campo" style="margin-bottom: 1rem;">{{ $message }}</p>
                         @enderror
 
-                        <div class="envio-options" style="margin-bottom: 1.5rem;">
-                            <div class="envio-option">
+                        <div class="opciones-envio" style="margin-bottom: 1.5rem;">
+                            <div class="opcion-envio">
                                 <input
                                     type="radio"
                                     id="direccion-actual"
@@ -642,14 +621,14 @@
                                     {{ $selectedAddressOption === 'actual' ? 'checked' : '' }}
                                     {{ $localizacion ? '' : 'disabled' }}
                                 >
-                                <label for="direccion-actual" class="envio-label">
-                                    <span class="envio-name">Usar dirección actual</span>
-                                    <span class="envio-desc">
+                                <label for="direccion-actual" class="etiqueta-envio">
+                                    <span class="nombre-envio">Usar dirección actual</span>
+                                    <span class="descripcion-envio">
                                         {{ $localizacion ? trim(($localizacion->nombreCalle ?? '') . ' ' . ($localizacion->numero ?? '') . ', ' . ($localizacion->provincia ?? ''), ' ,') : 'No tienes una dirección guardada.' }}
                                     </span>
                                 </label>
                             </div>
-                            <div class="envio-option">
+                            <div class="opcion-envio">
                                 <input
                                     type="radio"
                                     id="direccion-nueva"
@@ -657,67 +636,67 @@
                                     value="nueva"
                                     {{ $selectedAddressOption === 'nueva' ? 'checked' : '' }}
                                 >
-                                <label for="direccion-nueva" class="envio-label">
-                                    <span class="envio-name">Usar una dirección nueva</span>
-                                    <span class="envio-desc">Solo se guardará una nueva localización si eliges esta opción.</span>
+                                <label for="direccion-nueva" class="etiqueta-envio">
+                                    <span class="nombre-envio">Usar una dirección nueva</span>
+                                    <span class="descripcion-envio">Solo se guardará una nueva localización si eliges esta opción.</span>
                                 </label>
                             </div>
                         </div>
 
-                        <div class="form-grid">
-                            <div class="form-group span-2">
-                                <label class="form-label">Calle</label>
-                                <input type="text" name="nueva_nombreCalle" class="form-input"
+                        <div class="rejilla-formulario">
+                            <div class="grupo-formulario ocupa-dos">
+                                <label class="etiqueta-formulario">Calle</label>
+                                <input type="text" name="nueva_nombreCalle" class="campo-formulario"
                                        value="{{ old('nueva_nombreCalle', $localizacion->nombreCalle ?? '') }}"
                                        placeholder="Calle Mayor" maxlength="50">
-                                @error('nueva_nombreCalle') <span class="field-error">{{ $message }}</span> @enderror
+                                @error('nueva_nombreCalle') <span class="error-campo">{{ $message }}</span> @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Número</label>
-                                <input type="text" name="nueva_numero" class="form-input"
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Número</label>
+                                <input type="text" name="nueva_numero" class="campo-formulario"
                                        value="{{ old('nueva_numero', $localizacion->numero ?? '') }}"
                                        placeholder="12" maxlength="5">
-                                @error('nueva_numero') <span class="field-error">{{ $message }}</span> @enderror
+                                @error('nueva_numero') <span class="error-campo">{{ $message }}</span> @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Puerta <span style="font-weight:400; color:var(--agro-muted);">(opcional)</span></label>
-                                <input type="text" name="nueva_puerta" class="form-input"
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Puerta <span style="font-weight:400; color:var(--agro-muted);">(opcional)</span></label>
+                                <input type="text" name="nueva_puerta" class="campo-formulario"
                                        value="{{ old('nueva_puerta', $localizacion->puerta ?? '') }}"
                                        placeholder="2A" maxlength="10">
-                                @error('nueva_puerta') <span class="field-error">{{ $message }}</span> @enderror
+                                @error('nueva_puerta') <span class="error-campo">{{ $message }}</span> @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Código Postal</label>
-                                <input type="text" name="nueva_codigoPostal" class="form-input"
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Código Postal</label>
+                                <input type="text" name="nueva_codigoPostal" class="campo-formulario"
                                        value="{{ old('nueva_codigoPostal', $localizacion->codigoPostal ?? '') }}"
                                        placeholder="46001" maxlength="5">
-                                @error('nueva_codigoPostal') <span class="field-error">{{ $message }}</span> @enderror
+                                @error('nueva_codigoPostal') <span class="error-campo">{{ $message }}</span> @enderror
                             </div>
-                            <div class="form-group">
-                                <label class="form-label">Provincia</label>
-                                <input type="text" name="nueva_provincia" class="form-input"
+                            <div class="grupo-formulario">
+                                <label class="etiqueta-formulario">Provincia</label>
+                                <input type="text" name="nueva_provincia" class="campo-formulario"
                                        value="{{ old('nueva_provincia', $localizacion->provincia ?? '') }}"
                                        placeholder="Valencia" maxlength="50">
-                                @error('nueva_provincia') <span class="field-error">{{ $message }}</span> @enderror
+                                @error('nueva_provincia') <span class="error-campo">{{ $message }}</span> @enderror
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {{-- 3. Pago --}}
-                <div class="form-block">
-                    <div class="block-header">
-                        <div class="block-number">3</div>
-                        <div class="block-title">Pago</div>
+                <div class="bloque-formulario">
+                    <div class="bloque-encabezado">
+                        <div class="bloque-numero">3</div>
+                        <div class="bloque-titulo">Pago</div>
                     </div>
-                    <div class="block-body">
-                        <div class="pago-info">
-                            <div class="pago-icon">
+                    <div class="bloque-cuerpo">
+                        <div class="pago-informacion">
+                            <div class="pago-icono">
                                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                     <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 4l5 2.18V11c0 3.5-2.33 6.79-5 7.93-2.67-1.14-5-4.43-5-7.93V7.18L12 5z"/>
                                 </svg>
                             </div>
-                            <div class="pago-text">
+                            <div class="pago-texto">
                                 <h4>Pago contra entrega</h4>
                                 <p>El pago se realizará en el momento de recibir tu pedido. No necesitas introducir datos bancarios.</p>
                             </div>
@@ -728,42 +707,42 @@
             </div>
 
             {{-- COLUMNA DERECHA: resumen + botón dentro del form --}}
-            <div class="order-summary">
-                <div class="summary-header">
+            <div class="resumen-pedido">
+                <div class="resumen-encabezado">
                     <h2>Resumen del pedido</h2>
                 </div>
-                <div class="summary-body">
+                <div class="resumen-cuerpo">
                     @if($sellerCount > 1)
-                        <div class="multi-order-notice">
-                            <span class="notice-text">
+                        <div class="aviso-multipedido">
+                            <span class="aviso-texto">
                                 Tu pedido incluye productos de <strong>{{ $sellerCount }} vendedores distintos</strong>. Los tiempos de entrega pueden variar según cada vendedor.
                             </span>
                         </div>
                     @endif
 
                     @foreach($cart as $line)
-                        @php($subtotal = $line['price'] * $line['quantity'])
-                        <div class="summary-item">
+                        @php($subtotal = ($line['precio'] ?? $line['price']) * ($line['cantidad'] ?? $line['quantity']))
+                        <div class="resumen-item">
                             <div>
-                                <div class="summary-item-name">{{ $line['name'] }}</div>
-                                <div class="summary-item-qty">x {{ $line['quantity'] }} kg</div>
+                                <div class="resumen-item-nombre">{{ $line['nombre'] ?? $line['name'] }}</div>
+                                <div class="resumen-item-cantidad">x {{ $line['cantidad'] ?? $line['quantity'] }} kg</div>
                             </div>
-                            <div class="summary-item-price">{{ number_format($subtotal, 2) }} €</div>
+                            <div class="resumen-item-precio">{{ number_format($subtotal, 2) }} €</div>
                         </div>
                     @endforeach
 
-                    <hr class="summary-divider">
+                    <hr class="resumen-divisor">
 
-                    <div class="summary-total">
-                        <span class="total-label">Total</span>
-                        <span class="total-value">{{ number_format($orderTotal, 2) }} <small>€</small></span>
+                    <div class="resumen-total">
+                        <span class="total-etiqueta">Total</span>
+                        <span class="total-valor">{{ number_format($orderTotal, 2) }} <small>€</small></span>
                     </div>
 
-                    <button type="submit" class="btn-confirm">
+                    <button type="submit" class="boton-confirmar">
                         Confirmar y pagar
                     </button>
 
-                    <a href="{{ route('carrito.all') }}" class="back-link">Volver al carrito</a>
+                    <a href="{{ route('carrito.all') }}" class="enlace-volver">Volver al carrito</a>
 
                 </div>
             </div>
@@ -773,25 +752,25 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer class="site-footer">
-        <div class="footer-inner">
+    <footer class="sitio-pie">
+        <div class="pie-interior">
             <div>
-                <div class="footer-brand">Agro<span>Ventas</span></div>
+                <div class="pie-marca">Agro<span>Ventas</span></div>
                 <p style="color:rgba(255,255,255,0.55); font-size:0.95rem;">Del huerto a casa.</p>
             </div>
             <div>
-                <span class="footer-col-title">Información</span>
-                <a href="mailto:contacto@agroventas.es" class="footer-link">contacto@agroventas.es</a>
-                <a href="/aviso-legal" class="footer-link">Aviso legal</a>
-                <a href="/privacidad" class="footer-link">Política de privacidad</a>
+                <span class="pie-columna-titulo">Información</span>
+                <a href="mailto:contacto@agroventas.es" class="pie-enlace">contacto@agroventas.es</a>
+                <a href="/aviso-legal" class="pie-enlace">Aviso legal</a>
+                <a href="/privacidad" class="pie-enlace">Política de privacidad</a>
             </div>
             <div>
-                <span class="footer-col-title">Síguenos</span>
-                <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
-                <a href="https://github.com" target="_blank" class="footer-link">GitHub</a>
+                <span class="pie-columna-titulo">Síguenos</span>
+                <a href="https://linkedin.com" target="_blank" class="pie-enlace">LinkedIn</a>
+                <a href="https://github.com" target="_blank" class="pie-enlace">GitHub</a>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="pie-inferior">
             © {{ date('Y') }} AgroVentas. Todos los derechos reservados.
         </div>
     </footer>

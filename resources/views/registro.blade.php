@@ -428,23 +428,10 @@
         }
     </style>
 </head>
-<body class="site-shell">
+<body class="sitio-contenedor">
 
     {{-- NAVBAR --}}
-    <header class="site-nav navbar">
-        <div class="nav-inner">
-            <a href="/" class="nav-brand">Agro<span>Ventas</span></a>
-            <nav style="display:flex; align-items:center; gap:2rem;">
-                <a href="/" class="nav-link">Inicio</a>
-                <a href="/products" class="nav-link">Productos</a>
-            </nav>
-            <div style="display:flex; align-items:center; gap:1rem;">
-                <a href="/carro" class="nav-link">Carrito</a>
-                <a href="/login" class="nav-link">Iniciar sesión</a>
-                <a href="/register" class="btn-nav">Registrarse</a>
-            </div>
-        </div>
-    </header>
+    @include('partials.cabecera-sitio')
 
     {{-- HERO STRIP --}}
     <div class="page-hero">
@@ -633,7 +620,7 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer class="site-footer">
+    <footer class="sitio-pie">
         <div class="footer-inner">
             <div>
                 <div class="footer-brand">Agro<span>Ventas</span></div>

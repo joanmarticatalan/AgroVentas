@@ -40,7 +40,7 @@
         }
 
         /* Navbar */
-        .navbar {
+        .barra-navegacion {
             background-color: var(--agro-primary);
             position: sticky;
             top: 0;
@@ -48,7 +48,7 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
 
-        .nav-inner {
+        .navegacion-interior {
             max-width: 1280px;
             margin: 0 auto;
             padding: 1rem 2rem;
@@ -57,7 +57,7 @@
             justify-content: space-between;
         }
 
-        .nav-brand {
+        .navegacion-marca {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             font-weight: 700;
@@ -65,9 +65,9 @@
             text-decoration: none;
         }
 
-        .nav-brand span { color: var(--agro-accent); }
+        .navegacion-marca span { color: var(--agro-accent); }
 
-        .nav-link {
+        .navegacion-enlace {
             color: rgba(255,255,255,0.85);
             font-size: 1.05rem;
             font-weight: 600;
@@ -76,7 +76,7 @@
             transition: color 0.2s;
         }
 
-        .nav-link::after {
+        .navegacion-enlace::after {
             content: '';
             position: absolute;
             bottom: -3px; left: 0;
@@ -85,10 +85,10 @@
             transition: width 0.25s;
         }
 
-        .nav-link:hover { color: #fff; }
-        .nav-link:hover::after { width: 100%; }
+        .navegacion-enlace:hover { color: #fff; }
+        .navegacion-enlace:hover::after { width: 100%; }
 
-        .btn-nav {
+        .boton-navegacion {
             background-color: var(--agro-accent);
             color: #fff;
             font-family: 'Source Sans 3', sans-serif;
@@ -102,7 +102,7 @@
             cursor: pointer;
         }
 
-        .btn-nav:hover {
+        .boton-navegacion:hover {
             background-color: #c06820;
             transform: translateY(-1px);
         }
@@ -115,18 +115,18 @@
             padding: 3rem 2rem 5rem;
         }
 
-        .page-inner {
+        .pagina-interior {
             max-width: 1000px;
             margin: 0 auto;
         }
 
         /* Page header */
-        .page-header {
+        .pagina-encabezado {
             margin-bottom: 2.5rem;
             animation: fadeUp 0.5s ease both;
         }
 
-        .page-header h1 {
+        .pagina-encabezado h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.8rem;
             font-weight: 900;
@@ -135,12 +135,12 @@
             line-height: 1;
         }
 
-        .page-header h1 span {
+        .pagina-encabezado h1 span {
             color: var(--agro-accent);
             font-style: italic;
         }
 
-        .back-link {
+        .enlace-volver {
             display: inline-flex;
             align-items: center;
             gap: 0.4rem;
@@ -151,10 +151,10 @@
             transition: color 0.2s;
         }
 
-        .back-link:hover { color: var(--agro-primary); }
+        .enlace-volver:hover { color: var(--agro-primary); }
 
         /* Layout dos columnas */
-        .cart-layout {
+        .carrito-distribucion {
             display: grid;
             grid-template-columns: 1fr 320px;
             gap: 2rem;
@@ -162,14 +162,14 @@
         }
 
         /* Lista de productos */
-        .cart-items {
+        .carrito-articulos {
             display: flex;
             flex-direction: column;
             gap: 1rem;
             animation: fadeUp 0.5s 0.1s ease both;
         }
 
-        .cart-item {
+        .carrito-articulo {
             background: #fff;
             border-radius: 14px;
             padding: 1.5rem;
@@ -181,11 +181,11 @@
             transition: box-shadow 0.2s;
         }
 
-        .cart-item:hover {
+        .carrito-articulo:hover {
             box-shadow: 0 4px 20px rgba(0,0,0,0.07);
         }
 
-        .item-name {
+        .articulo-nombre {
             font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
             font-weight: 700;
@@ -193,18 +193,18 @@
             margin-bottom: 0.25rem;
         }
 
-        .item-price {
+        .articulo-precio {
             color: var(--agro-muted);
             font-size: 1rem;
         }
 
-        .item-price strong {
+        .articulo-precio strong {
             color: var(--agro-accent);
             font-size: 1.1rem;
         }
 
         /* Cantidad con botones */
-        .quantity-control {
+        .control-cantidad {
             display: flex;
             align-items: center;
             gap: 0.5rem;
@@ -213,7 +213,7 @@
             padding: 0.4rem 0.6rem;
         }
 
-        .qty-btn {
+        .boton-cantidad {
             width: 36px;
             height: 36px;
             border-radius: 8px;
@@ -228,23 +228,23 @@
             line-height: 1;
         }
 
-        .qty-btn:hover { transform: scale(1.1); }
+        .boton-cantidad:hover { transform: scale(1.1); }
 
-        .qty-btn-plus {
+        .boton-cantidad-mas {
             background-color: var(--agro-primary);
             color: #fff;
         }
 
-        .qty-btn-plus:hover { background-color: var(--agro-secondary); }
+        .boton-cantidad-mas:hover { background-color: var(--agro-secondary); }
 
-        .qty-btn-minus {
+        .boton-cantidad-menos {
             background-color: #e8e0d4;
             color: var(--agro-text);
         }
 
-        .qty-btn-minus:hover { background-color: #d6cfc3; }
+        .boton-cantidad-menos:hover { background-color: #d6cfc3; }
 
-        .qty-number {
+        .cantidad-numero {
             font-size: 1.15rem;
             font-weight: 700;
             min-width: 28px;
@@ -253,19 +253,19 @@
         }
 
         /* Subtotal por línea */
-        .item-subtotal {
+        .articulo-subtotal {
             text-align: right;
             min-width: 90px;
         }
 
-        .subtotal-label {
+        .subtotal-etiqueta {
             font-size: 0.8rem;
             color: var(--agro-muted);
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
 
-        .subtotal-value {
+        .subtotal-valor {
             font-family: 'Playfair Display', serif;
             font-size: 1.4rem;
             font-weight: 700;
@@ -273,7 +273,7 @@
         }
 
         /* Panel resumen */
-        .cart-summary {
+        .carrito-resumen {
             background: #fff;
             border-radius: 16px;
             overflow: hidden;
@@ -283,23 +283,23 @@
             animation: fadeUp 0.5s 0.2s ease both;
         }
 
-        .summary-header {
+        .resumen-encabezado {
             background-color: var(--agro-primary);
             padding: 1.3rem 1.8rem;
         }
 
-        .summary-header h2 {
+        .resumen-encabezado h2 {
             font-family: 'Playfair Display', serif;
             font-size: 1.3rem;
             font-weight: 700;
             color: #fff;
         }
 
-        .summary-body {
+        .resumen-cuerpo {
             padding: 1.8rem;
         }
 
-        .summary-row {
+        .resumen-fila {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -309,9 +309,9 @@
             border-bottom: 1px solid #f0ece4;
         }
 
-        .summary-row:last-of-type { border-bottom: none; }
+        .resumen-fila:last-of-type { border-bottom: none; }
 
-        .summary-total {
+        .resumen-total {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -320,27 +320,27 @@
             border-top: 2px solid #e8e0d4;
         }
 
-        .total-label {
+        .total-etiqueta {
             font-family: 'Playfair Display', serif;
             font-size: 1.2rem;
             font-weight: 700;
             color: var(--agro-primary);
         }
 
-        .total-value {
+        .total-valor {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 900;
             color: var(--agro-primary);
         }
 
-        .total-value span {
+        .total-valor span {
             font-size: 1.1rem;
             font-weight: 600;
             color: var(--agro-accent);
         }
 
-        .btn-checkout {
+        .boton-confirmar-compra {
             display: block;
             width: 100%;
             font-family: 'Source Sans 3', sans-serif;
@@ -358,13 +358,13 @@
             margin-top: 1.2rem;
         }
 
-        .btn-checkout:hover {
+        .boton-confirmar-compra:hover {
             background-color: #c06820;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(217,123,42,0.3);
         }
 
-        .btn-empty {
+        .boton-vaciar {
             display: block;
             width: 100%;
             font-family: 'Source Sans 3', sans-serif;
@@ -382,25 +382,25 @@
             margin-top: 0.75rem;
         }
 
-        .btn-empty:hover {
+        .boton-vaciar:hover {
             border-color: #b91c1c;
             color: #b91c1c;
         }
 
         /* Carrito vacío */
-        .empty-cart {
+        .carrito-vacio {
             text-align: center;
             padding: 5rem 2rem;
             animation: fadeUp 0.5s ease both;
         }
 
-        .empty-icon {
+        .vacio-icono {
             font-size: 5rem;
             margin-bottom: 1.5rem;
             opacity: 0.4;
         }
 
-        .empty-cart h2 {
+        .carrito-vacio h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
             font-weight: 700;
@@ -408,13 +408,13 @@
             margin-bottom: 0.75rem;
         }
 
-        .empty-cart p {
+        .carrito-vacio p {
             color: var(--agro-muted);
             font-size: 1.1rem;
             margin-bottom: 2rem;
         }
 
-        .btn-go-shop {
+        .boton-ir-tienda {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
@@ -429,7 +429,7 @@
             transition: background 0.2s, transform 0.15s;
         }
 
-        .btn-go-shop:hover {
+        .boton-ir-tienda:hover {
             background-color: var(--agro-secondary);
             transform: translateY(-2px);
         }
@@ -442,7 +442,7 @@
             z-index: 1;
         }
 
-        .footer-inner {
+        .pie-interior {
             max-width: 1280px;
             margin: 0 auto;
             padding: 3rem 2rem;
@@ -451,23 +451,23 @@
             gap: 2rem;
         }
 
-        .footer-brand {
+        .pie-marca {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.4rem;
         }
 
-        .footer-brand span { color: var(--agro-accent); }
+        .pie-marca span { color: var(--agro-accent); }
 
-        .footer-col-title {
+        .pie-columna-titulo {
             font-weight: 600;
             color: var(--agro-accent);
             margin-bottom: 0.6rem;
             display: block;
         }
 
-        .footer-link {
+        .pie-enlace {
             display: block;
             color: rgba(255,255,255,0.65);
             text-decoration: none;
@@ -476,9 +476,9 @@
             transition: color 0.2s;
         }
 
-        .footer-link:hover { color: #fff; }
+        .pie-enlace:hover { color: #fff; }
 
-        .footer-bottom {
+        .pie-inferior {
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
             padding: 1.1rem;
@@ -492,121 +492,89 @@
         }
 
         @media (max-width: 768px) {
-            .cart-layout { grid-template-columns: 1fr; }
-            .cart-item { grid-template-columns: 1fr; gap: 1rem; }
-            .footer-inner { grid-template-columns: 1fr; }
-            .cart-summary { position: static; }
+            .carrito-distribucion { grid-template-columns: 1fr; }
+            .carrito-articulo { grid-template-columns: 1fr; gap: 1rem; }
+            .pie-interior { grid-template-columns: 1fr; }
+            .carrito-resumen { position: static; }
         }
     </style>
 </head>
-<body class="site-shell">
+<body class="sitio-contenedor">
 
     {{-- NAVBAR --}}
-    <header class="site-nav navbar">
-        <div class="nav-inner">
-            <a href="/" class="nav-brand">Agro<span>Ventas</span></a>
-
-            <nav style="display:flex; align-items:center; gap:2rem;">
-                <a href="/" class="nav-link">Inicio</a>
-                <a href="{{ route('todos.productos') }}" class="nav-link">Productos</a>
-                @auth
-                    <a href="{{ route('pedidos.usuario') }}" class="nav-link">Mis pedidos</a>
-                    @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
-                        <a href="{{ route('mis.productos') }}" class="nav-link">Mis productos</a>
-                        <a href="{{ route('pg.anadir.producto') }}" class="nav-link">Vender</a>
-                    @endif
-                    @if(auth()->user()->tipoCliente === 'admin')
-                        <a href="{{ route('users.index') }}" class="nav-link">Usuarios</a>
-                    @endif
-                @endauth
-            </nav>
-
-            <div style="display:flex; align-items:center; gap:1rem;">
-                <a href="{{ route('carrito.all') }}" class="nav-link">Carrito</a>
-                @auth
-                    <a href="{{ route('perfil.editar') }}" class="nav-link">Mi perfil</a>
-                    <form method="POST" action="{{ route('logout') }}" style="margin:0;">
-                        @csrf
-                        <button type="submit" class="btn-nav">Salir</button>
-                    </form>
-                @else
-                    <a href="/login" class="nav-link">Iniciar sesión</a>
-                    <a href="/register" class="btn-nav">Registrarse</a>
-                @endauth
-            </div>
-        </div>
-    </header>
+    @include('partials.cabecera-sitio')
 
     <main>
-        <div class="page-inner">
+        <div class="pagina-interior">
 
-            <div class="page-header">
-                <a href="{{ route('todos.productos') }}" class="back-link">← Seguir comprando</a>
+            <div class="pagina-encabezado">
+                <a href="{{ route('todos.productos') }}" class="enlace-volver">← Seguir comprando</a>
                 <h1>Tu <span>carrito</span></h1>
             </div>
 
             @if($carro)
                 @php $total = 0; @endphp
 
-                <div class="cart-layout">
+                <div class="carrito-distribucion">
 
                     {{-- Lista de productos --}}
-                    <div class="cart-items">
+                    <div class="carrito-articulos">
                         @foreach($carro as $obj)
-                            @php $subtotal = $obj['price'] * $obj['quantity']; $total += $subtotal; @endphp
+                            @php $subtotal = $obj['precio'] * $obj['cantidad']; $total += $subtotal; @endphp
 
-                            <div class="cart-item">
+                            <div class="carrito-articulo">
                                 <div>
-                                    <div class="item-name">{{ $obj['name'] }}</div>
-                                    <div class="item-price"><strong>{{ $obj['price'] }} €</strong> / kg</div>
+                                    <div class="articulo-nombre">{{ $obj['nombre'] }}</div>
+                                    <div class="articulo-precio"><strong>{{ $obj['precio'] }} €</strong> / kg</div>
                                 </div>
 
-                                <div class="quantity-control">
+                                <div class="control-cantidad">
                                     <form action="/carrito/borrar/{{ $obj['id'] }}" method="POST" style="margin:0;">
                                         @csrf
-                                        <button type="submit" class="qty-btn qty-btn-minus">−</button>
+                                        <button type="submit" class="boton-cantidad boton-cantidad-menos">−</button>
                                     </form>
-                                    <span class="qty-number">{{ $obj['quantity'] }}</span>
+                                    <span class="cantidad-numero">{{ $obj['cantidad'] }}</span>
                                     <form action="/carrito/agregar/{{ $obj['id'] }}" method="POST" style="margin:0;">
                                         @csrf
-                                        <button type="submit" class="qty-btn qty-btn-plus">+</button>
+                                        <input type="hidden" name="cantidad" value="1">
+                                        <button type="submit" class="boton-cantidad boton-cantidad-mas">+</button>
                                     </form>
                                 </div>
 
-                                <div class="item-subtotal">
-                                    <div class="subtotal-label">Subtotal</div>
-                                    <div class="subtotal-value">{{ number_format($subtotal, 2) }} €</div>
+                                <div class="articulo-subtotal">
+                                    <div class="subtotal-etiqueta">Subtotal</div>
+                                    <div class="subtotal-valor">{{ number_format($subtotal, 2) }} €</div>
                                 </div>
                             </div>
                         @endforeach
                     </div>
 
                     {{-- Panel resumen --}}
-                    <div class="cart-summary">
-                        <div class="summary-header">
+                    <div class="carrito-resumen">
+                        <div class="resumen-encabezado">
                             <h2>Resumen del pedido</h2>
                         </div>
-                        <div class="summary-body">
+                        <div class="resumen-cuerpo">
 
                             @foreach($carro as $obj)
-                                <div class="summary-row">
-                                    <span>{{ $obj['name'] }} × {{ $obj['quantity'] }}</span>
-                                    <span>{{ number_format($obj['price'] * $obj['quantity'], 2) }} €</span>
+                                <div class="resumen-fila">
+                                    <span>{{ $obj['nombre'] }} × {{ $obj['cantidad'] }}</span>
+                                    <span>{{ number_format($obj['precio'] * $obj['cantidad'], 2) }} €</span>
                                 </div>
                             @endforeach
 
-                            <div class="summary-total">
-                                <span class="total-label">Total</span>
-                                <span class="total-value">{{ number_format($total, 2) }} <span>€</span></span>
+                            <div class="resumen-total">
+                                <span class="total-etiqueta">Total</span>
+                                <span class="total-valor">{{ number_format($total, 2) }} <span>€</span></span>
                             </div>
 
                             <form action="{{ route('checkout') }}" method="GET" style="margin:0;">
-                                <button type="submit" class="btn-checkout">
+                                <button type="submit" class="boton-confirmar-compra">
                                     Confirmar y pagar
                                 </button>
                             </form>
 
-                            <a href="{{ route('carrito.all') }}?vaciar=1" class="btn-empty"
+                            <a href="{{ route('carrito.all') }}?vaciar=1" class="boton-vaciar"
                                onclick="return confirm('¿Vaciar todo el carrito?')">
                                 Vaciar carrito
                             </a>
@@ -619,11 +587,11 @@
             @else
 
                 {{-- Carrito vacío --}}
-                <div class="empty-cart">
-                    <div class="empty-icon">AV</div>
+                <div class="carrito-vacio">
+                    <div class="vacio-icono">AV</div>
                     <h2>Tu carrito está vacío</h2>
                     <p>Aún no has añadido ningún producto. ¡Explora nuestra tienda!</p>
-                    <a href="{{ route('todos.productos') }}" class="btn-go-shop">
+                    <a href="{{ route('todos.productos') }}" class="boton-ir-tienda">
                         Ver productos
                     </a>
                 </div>
@@ -634,25 +602,25 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer class="site-footer">
-        <div class="footer-inner">
+    <footer class="sitio-pie">
+        <div class="pie-interior">
             <div>
-                <div class="footer-brand">Agro<span>Ventas</span></div>
+                <div class="pie-marca">Agro<span>Ventas</span></div>
                 <p style="color:rgba(255,255,255,0.55); font-size:0.95rem;">Del huerto a casa.</p>
             </div>
             <div>
-                <span class="footer-col-title">Información</span>
-                <a href="mailto:contacto@agroventas.es" class="footer-link">contacto@agroventas.es</a>
-                <a href="/aviso-legal" class="footer-link">Aviso legal</a>
-                <a href="/privacidad" class="footer-link">Política de privacidad</a>
+                <span class="pie-columna-titulo">Información</span>
+                <a href="mailto:contacto@agroventas.es" class="pie-enlace">contacto@agroventas.es</a>
+                <a href="/aviso-legal" class="pie-enlace">Aviso legal</a>
+                <a href="/privacidad" class="pie-enlace">Política de privacidad</a>
             </div>
             <div>
-                <span class="footer-col-title">Síguenos</span>
-                <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
-                <a href="https://github.com" target="_blank" class="footer-link">GitHub</a>
+                <span class="pie-columna-titulo">Síguenos</span>
+                <a href="https://linkedin.com" target="_blank" class="pie-enlace">LinkedIn</a>
+                <a href="https://github.com" target="_blank" class="pie-enlace">GitHub</a>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="pie-inferior">
             © {{ date('Y') }} AgroVentas. Todos los derechos reservados.
         </div>
     </footer>

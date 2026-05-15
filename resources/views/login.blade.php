@@ -39,7 +39,7 @@
             opacity: 0.5;
         }
 
-        .navbar {
+        .barra-navegacion {
             background-color: var(--agro-primary);
             position: sticky;
             top: 0;
@@ -47,7 +47,7 @@
             box-shadow: 0 2px 20px rgba(0,0,0,0.15);
         }
 
-        .nav-inner {
+        .navegacion-interior {
             max-width: 1280px;
             margin: 0 auto;
             padding: 1rem 2rem;
@@ -56,7 +56,7 @@
             justify-content: space-between;
         }
 
-        .nav-brand {
+        .navegacion-marca {
             font-family: 'Playfair Display', serif;
             font-size: 1.6rem;
             font-weight: 700;
@@ -64,9 +64,9 @@
             text-decoration: none;
         }
 
-        .nav-brand span { color: var(--agro-accent); }
+        .navegacion-marca span { color: var(--agro-accent); }
 
-        .nav-link {
+        .navegacion-enlace {
             color: rgba(255,255,255,0.85);
             font-size: 1.05rem;
             font-weight: 600;
@@ -75,7 +75,7 @@
             transition: color 0.2s;
         }
 
-        .nav-link::after {
+        .navegacion-enlace::after {
             content: '';
             position: absolute;
             bottom: -3px; left: 0;
@@ -84,10 +84,10 @@
             transition: width 0.25s;
         }
 
-        .nav-link:hover { color: #fff; }
-        .nav-link:hover::after { width: 100%; }
+        .navegacion-enlace:hover { color: #fff; }
+        .navegacion-enlace:hover::after { width: 100%; }
 
-        .btn-nav {
+        .boton-navegacion {
             background-color: var(--agro-accent);
             color: #fff;
             font-family: 'Source Sans 3', sans-serif;
@@ -99,7 +99,7 @@
             transition: background 0.2s, transform 0.15s;
         }
 
-        .btn-nav:hover {
+        .boton-navegacion:hover {
             background-color: #c06820;
             transform: translateY(-1px);
         }
@@ -114,7 +114,7 @@
         }
 
         /* Panel izquierdo decorativo */
-        .login-deco {
+        .acceso-decoracion {
             background-color: var(--agro-primary);
             display: flex;
             flex-direction: column;
@@ -125,7 +125,7 @@
             overflow: hidden;
         }
 
-        .login-deco::before {
+        .acceso-decoracion::before {
             content: '';
             position: absolute;
             width: 400px; height: 400px;
@@ -134,7 +134,7 @@
             bottom: -100px; right: -100px;
         }
 
-        .login-deco::after {
+        .acceso-decoracion::after {
             content: '';
             position: absolute;
             width: 250px; height: 250px;
@@ -143,7 +143,7 @@
             bottom: -30px; right: -30px;
         }
 
-        .deco-tag {
+        .decoracion-etiqueta {
             display: inline-block;
             background: rgba(255,255,255,0.1);
             color: rgba(255,255,255,0.8);
@@ -157,7 +157,7 @@
             margin-bottom: 1.5rem;
         }
 
-        .deco-title {
+        .decoracion-titulo {
             font-family: 'Playfair Display', serif;
             font-size: 3rem;
             font-weight: 900;
@@ -167,12 +167,12 @@
             margin-bottom: 1rem;
         }
 
-        .deco-title span {
+        .decoracion-titulo span {
             color: var(--agro-accent);
             font-style: italic;
         }
 
-        .deco-text {
+        .decoracion-texto {
             color: rgba(255,255,255,0.65);
             font-size: 1.1rem;
             line-height: 1.65;
@@ -180,13 +180,13 @@
             margin-bottom: 2.5rem;
         }
 
-        .deco-features {
+        .decoracion-caracteristicas {
             display: flex;
             flex-direction: column;
             gap: 0.85rem;
         }
 
-        .deco-feature {
+        .decoracion-caracteristica {
             display: flex;
             align-items: center;
             gap: 0.75rem;
@@ -194,7 +194,7 @@
             font-size: 1rem;
         }
 
-        .deco-feature-dot {
+        .decoracion-caracteristica-punto {
             width: 8px; height: 8px;
             border-radius: 50%;
             background-color: var(--agro-accent);
@@ -202,7 +202,7 @@
         }
 
         /* Panel derecho: formulario */
-        .login-form-panel {
+        .acceso-panel-formulario {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -210,13 +210,13 @@
             background-color: var(--agro-bg);
         }
 
-        .login-card {
+        .acceso-tarjeta {
             width: 100%;
             max-width: 420px;
             animation: fadeUp 0.6s ease both;
         }
 
-        .login-card h1 {
+        .acceso-tarjeta h1 {
             font-family: 'Playfair Display', serif;
             font-size: 2.2rem;
             font-weight: 700;
@@ -224,26 +224,26 @@
             margin-bottom: 0.4rem;
         }
 
-        .login-card .subtitle {
+        .acceso-tarjeta .subtitulo {
             color: var(--agro-muted);
             font-size: 1.05rem;
             margin-bottom: 2.2rem;
         }
 
-        .form-group {
+        .grupo-formulario {
             display: flex;
             flex-direction: column;
             gap: 0.4rem;
             margin-bottom: 1.2rem;
         }
 
-        .form-label {
+        .etiqueta-formulario {
             font-weight: 600;
             font-size: 1rem;
             color: var(--agro-text);
         }
 
-        .form-input {
+        .campo-formulario {
             font-family: 'Source Sans 3', sans-serif;
             font-size: 1.05rem;
             padding: 0.85rem 1.1rem;
@@ -255,14 +255,14 @@
             outline: none;
         }
 
-        .form-input:focus {
+        .campo-formulario:focus {
             border-color: var(--agro-primary);
             box-shadow: 0 0 0 3px rgba(45,106,45,0.1);
         }
 
-        .form-input::placeholder { color: #aaa; }
+        .campo-formulario::placeholder { color: #aaa; }
 
-        .error-box {
+        .caja-error {
             background: #fff0f0;
             border: 1px solid #fca5a5;
             border-radius: 10px;
@@ -270,13 +270,13 @@
             margin-bottom: 1.5rem;
         }
 
-        .error-box li {
+        .caja-error li {
             color: #b91c1c;
             font-size: 0.95rem;
             margin-left: 1rem;
         }
 
-        .btn-submit {
+        .boton-enviar {
             width: 100%;
             font-family: 'Source Sans 3', sans-serif;
             font-size: 1.15rem;
@@ -291,25 +291,25 @@
             margin-top: 0.5rem;
         }
 
-        .btn-submit:hover {
+        .boton-enviar:hover {
             background-color: var(--agro-secondary);
             transform: translateY(-2px);
         }
 
-        .form-footer {
+        .pie-formulario {
             text-align: center;
             margin-top: 1.3rem;
             color: var(--agro-muted);
             font-size: 1rem;
         }
 
-        .form-footer a {
+        .pie-formulario a {
             color: var(--agro-primary);
             font-weight: 600;
             text-decoration: none;
         }
 
-        .form-footer a:hover { text-decoration: underline; }
+        .pie-formulario a:hover { text-decoration: underline; }
 
         /* Footer */
         footer {
@@ -319,7 +319,7 @@
             z-index: 1;
         }
 
-        .footer-inner {
+        .pie-interior {
             max-width: 1280px;
             margin: 0 auto;
             padding: 3rem 2rem;
@@ -328,23 +328,23 @@
             gap: 2rem;
         }
 
-        .footer-brand {
+        .pie-marca {
             font-family: 'Playfair Display', serif;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 0.4rem;
         }
 
-        .footer-brand span { color: var(--agro-accent); }
+        .pie-marca span { color: var(--agro-accent); }
 
-        .footer-col-title {
+        .pie-columna-titulo {
             font-weight: 600;
             color: var(--agro-accent);
             margin-bottom: 0.6rem;
             display: block;
         }
 
-        .footer-link {
+        .pie-enlace {
             display: block;
             color: rgba(255,255,255,0.65);
             text-decoration: none;
@@ -353,9 +353,9 @@
             transition: color 0.2s;
         }
 
-        .footer-link:hover { color: #fff; }
+        .pie-enlace:hover { color: #fff; }
 
-        .footer-bottom {
+        .pie-inferior {
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
             padding: 1.1rem;
@@ -370,64 +370,51 @@
 
         @media (max-width: 768px) {
             main { grid-template-columns: 1fr; }
-            .login-deco { display: none; }
-            .footer-inner { grid-template-columns: 1fr; }
+            .acceso-decoracion { display: none; }
+            .pie-interior { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body class="site-shell">
+<body class="sitio-contenedor">
 
     {{-- NAVBAR --}}
-    <header class="site-nav navbar">
-        <div class="nav-inner">
-            <a href="/" class="nav-brand">Agro<span>Ventas</span></a>
-            <nav style="display:flex; align-items:center; gap:2rem;">
-                <a href="/" class="nav-link">Inicio</a>
-                <a href="/products" class="nav-link">Productos</a>
-            </nav>
-            <div style="display:flex; align-items:center; gap:1rem;">
-                <a href="/carro" class="nav-link">Carrito</a>
-                <a href="/login" class="nav-link">Iniciar sesión</a>
-                <a href="/register" class="btn-nav">Registrarse</a>
-            </div>
-        </div>
-    </header>
+    @include('partials.cabecera-sitio')
 
     {{-- MAIN: dos columnas --}}
     <main>
 
         {{-- Panel izquierdo decorativo --}}
-        <div class="login-deco">
-            <div class="deco-tag">Bienvenido de nuevo</div>
-            <h2 class="deco-title">Tu campo,<br>tu <span>mercado</span></h2>
-            <p class="deco-text">
+        <div class="acceso-decoracion">
+            <div class="decoracion-etiqueta">Bienvenido de nuevo</div>
+            <h2 class="decoracion-titulo">Tu campo,<br>tu <span>mercado</span></h2>
+            <p class="decoracion-texto">
                 Accede a tu cuenta y gestiona tus compras y ventas de productos agrícolas directamente desde el campo.
             </p>
-            <div class="deco-features">
-                <div class="deco-feature">
-                    <div class="deco-feature-dot"></div>
+            <div class="decoracion-caracteristicas">
+                <div class="decoracion-caracteristica">
+                    <div class="decoracion-caracteristica-punto"></div>
                     Productos frescos de origen local
                 </div>
-                <div class="deco-feature">
-                    <div class="deco-feature-dot"></div>
+                <div class="decoracion-caracteristica">
+                    <div class="decoracion-caracteristica-punto"></div>
                     Trato directo con el agricultor
                 </div>
-                <div class="deco-feature">
-                    <div class="deco-feature-dot"></div>
+                <div class="decoracion-caracteristica">
+                    <div class="decoracion-caracteristica-punto"></div>
                     Gestión sencilla de pedidos
                 </div>
             </div>
         </div>
 
         {{-- Panel derecho: formulario --}}
-        <div class="login-form-panel">
-            <div class="login-card">
+        <div class="acceso-panel-formulario">
+            <div class="acceso-tarjeta">
 
                 <h1>Iniciar sesión</h1>
-                <p class="subtitle">Introduce tus datos para acceder</p>
+                <p class="subtitulo">Introduce tus datos para acceder</p>
 
                 @if ($errors->any())
-                    <div class="error-box">
+                    <div class="caja-error">
                         <ul>
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
@@ -439,21 +426,21 @@
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
 
-                    <div class="form-group">
-                        <label for="email" class="form-label">Correo electrónico</label>
-                        <input type="email" id="email" name="email" class="form-input"
+                    <div class="grupo-formulario">
+                        <label for="email" class="etiqueta-formulario">Correo electrónico</label>
+                        <input type="email" id="email" name="email" class="campo-formulario"
                                placeholder="ejemplo@correo.com" value="{{ old('email') }}" required>
                     </div>
 
-                    <div class="form-group">
-                        <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" id="password" name="password" class="form-input"
+                    <div class="grupo-formulario">
+                        <label for="password" class="etiqueta-formulario">Contraseña</label>
+                        <input type="password" id="password" name="password" class="campo-formulario"
                                placeholder="Tu contraseña" required>
                     </div>
 
-                    <button type="submit" class="btn-submit">Entrar</button>
+                    <button type="submit" class="boton-enviar">Entrar</button>
 
-                    <p class="form-footer">
+                    <p class="pie-formulario">
                         ¿No tienes cuenta? <a href="/register">Créala aquí</a>
                     </p>
                 </form>
@@ -464,25 +451,25 @@
     </main>
 
     {{-- FOOTER --}}
-    <footer class="site-footer">
-        <div class="footer-inner">
+    <footer class="sitio-pie">
+        <div class="pie-interior">
             <div>
-                <div class="footer-brand">Agro<span>Ventas</span></div>
+                <div class="pie-marca">Agro<span>Ventas</span></div>
                 <p style="color:rgba(255,255,255,0.55); font-size:0.95rem;">Del huerto a casa.</p>
             </div>
             <div>
-                <span class="footer-col-title">Información</span>
-                <a href="mailto:contacto@agroventas.es" class="footer-link">contacto@agroventas.es</a>
-                <a href="/aviso-legal" class="footer-link">Aviso legal</a>
-                <a href="/privacidad" class="footer-link">Política de privacidad</a>
+                <span class="pie-columna-titulo">Información</span>
+                <a href="mailto:contacto@agroventas.es" class="pie-enlace">contacto@agroventas.es</a>
+                <a href="/aviso-legal" class="pie-enlace">Aviso legal</a>
+                <a href="/privacidad" class="pie-enlace">Política de privacidad</a>
             </div>
             <div>
-                <span class="footer-col-title">Síguenos</span>
-                <a href="https://linkedin.com" target="_blank" class="footer-link">LinkedIn</a>
-                <a href="https://github.com" target="_blank" class="footer-link">GitHub</a>
+                <span class="pie-columna-titulo">Síguenos</span>
+                <a href="https://linkedin.com" target="_blank" class="pie-enlace">LinkedIn</a>
+                <a href="https://github.com" target="_blank" class="pie-enlace">GitHub</a>
             </div>
         </div>
-        <div class="footer-bottom">
+        <div class="pie-inferior">
             © {{ date('Y') }} AgroVentas. Todos los derechos reservados.
         </div>
     </footer>

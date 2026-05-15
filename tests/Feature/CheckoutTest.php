@@ -32,9 +32,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $product->id => [
                 'id' => $product->id,
-                'name' => $product->nombre,
-                'price' => 8.25,
-                'quantity' => 1,
+                'nombre' => $product->nombre,
+                'precio' => 8.25,
+                'cantidad' => 1,
             ],
         ]);
 
@@ -56,9 +56,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             9999 => [
                 'id' => 9999,
-                'name' => 'Producto eliminado',
-                'price' => 12.50,
-                'quantity' => 2,
+                'nombre' => 'Producto eliminado',
+                'precio' => 12.50,
+                'cantidad' => 2,
             ],
         ]);
 
@@ -100,9 +100,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $product->id => [
                 'id' => $product->id,
-                'name' => $product->nombre,
-                'price' => 4.50,
-                'quantity' => 3,
+                'nombre' => $product->nombre,
+                'precio' => 4.50,
+                'cantidad' => 3,
             ],
         ]);
 
@@ -149,9 +149,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $product->id => [
                 'id' => $product->id,
-                'name' => $product->nombre,
-                'price' => 6.00,
-                'quantity' => 1,
+                'nombre' => $product->nombre,
+                'precio' => 6.00,
+                'cantidad' => 1,
             ],
         ]);
 
@@ -186,9 +186,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $product->id => [
                 'id' => $product->id,
-                'name' => $product->nombre,
-                'price' => 7.00,
-                'quantity' => 2,
+                'nombre' => $product->nombre,
+                'precio' => 7.00,
+                'cantidad' => 2,
             ],
         ]);
 
@@ -237,9 +237,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $product->id => [
                 'id' => $product->id,
-                'name' => $product->nombre,
-                'price' => 3.25,
-                'quantity' => 2,
+                'nombre' => $product->nombre,
+                'precio' => 3.25,
+                'cantidad' => 2,
             ],
         ]);
 
@@ -279,9 +279,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $product->id => [
                 'id' => $product->id,
-                'name' => $product->nombre,
-                'price' => 5.25,
-                'quantity' => 2,
+                'nombre' => $product->nombre,
+                'precio' => 5.25,
+                'cantidad' => 2,
             ],
         ]);
 
@@ -316,9 +316,9 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $product->id => [
                 'id' => $product->id,
-                'name' => $product->nombre,
-                'price' => (float) $product->precio,
-                'quantity' => 1,
+                'nombre' => $product->nombre,
+                'precio' => (float) $product->precio,
+                'cantidad' => 1,
             ],
         ]);
 
@@ -374,15 +374,15 @@ class CheckoutTest extends TestCase
         session()->put('carrito', [
             $productOne->id => [
                 'id' => $productOne->id,
-                'name' => $productOne->nombre,
-                'price' => 2.50,
-                'quantity' => 2,
+                'nombre' => $productOne->nombre,
+                'precio' => 2.50,
+                'cantidad' => 2,
             ],
             $productTwo->id => [
                 'id' => $productTwo->id,
-                'name' => $productTwo->nombre,
-                'price' => 5.00,
-                'quantity' => 1,
+                'nombre' => $productTwo->nombre,
+                'precio' => 5.00,
+                'cantidad' => 1,
             ],
         ]);
 

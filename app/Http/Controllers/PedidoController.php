@@ -125,8 +125,9 @@ class PedidoController extends Controller
 
         foreach ($cart as $line) {
             $producto = $products->get($line['id']);
+            $cantidad = (int) ($line['cantidad'] ?? $line['quantity'] ?? 0);
 
-            if ($producto->stock < $line['quantity']) {
+            if ($producto->stock < $cantidad) {
                 return redirect()->back()->withInput()->with('error', 'No hay suficiente stock de: '.$producto->nombre);
             }
         }
@@ -157,7 +158,7 @@ class PedidoController extends Controller
                     $producto = $products->get($line['id']);
                     $porVendedor[$producto->user_id][] = [
                         'producto' => $producto,
-                        'cantidad' => (int) $line['quantity'],
+                        'cantidad' => (int) ($line['cantidad'] ?? $line['quantity'] ?? 0),
                     ];
                 }
 
@@ -260,7 +261,7 @@ class PedidoController extends Controller
             ->count();
 
         $orderTotal = round(collect($cart)->sum(function (array $line): float {
-            return (float) $line['price'] * (int) $line['quantity'];
+            return (float) ($line['precio'] ?? $line['price'] ?? 0) * (int) ($line['cantidad'] ?? $line['quantity'] ?? 0);
         }), 2);
 
         return view('checkout', [

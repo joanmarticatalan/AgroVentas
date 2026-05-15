@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
     @stack('styles')
 </head>
-<body class="site-shell @yield('body_class')">
-    @include('partials.site-header')
+<body class="sitio-contenedor @yield('body_class')">
+    @include('partials.cabecera-sitio')
 
     @hasSection('hero')
         @yield('hero')
@@ -19,7 +19,7 @@
 
     @yield('content')
 
-    @include('partials.site-footer')
+    @include('partials.pie-sitio')
 
     @stack('scripts')
 </body>
