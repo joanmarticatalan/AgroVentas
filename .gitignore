@@ -26,7 +26,5 @@ Homestead.json
 Homestead.yaml
 Thumbs.db
 .spec/
-.spec/2026-04-08-products-filter-design.md
-.spec/2026-04-08-checkout-bugfix-design.md
 docs/superpowers/specs/
 docs/superpowers/plans/
