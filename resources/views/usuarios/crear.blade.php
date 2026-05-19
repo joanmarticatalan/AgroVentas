@@ -1,26 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear usuario - AgroVentas</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-agro-bg text-agro-text min-h-screen flex flex-col">
-    <header class="bg-agro-primary shadow-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <a href="{{ route('inicio') }}" class="text-white text-2xl font-bold tracking-wide">AgroVentas</a>
-            <nav class="flex flex-wrap items-center gap-5 text-sm font-medium lg:text-base">
-                <a href="{{ route('users.index') }}" class="text-agro-accent">Gestión usuarios</a>
-                <a href="{{ route('todos.productos') }}" class="text-white hover:text-agro-accent transition-colors">Productos</a>
-            </nav>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="bg-agro-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-xl transition-colors">Salir</button>
-            </form>
-        </div>
-    </header>
+@extends('layouts.estructura-agro')
 
+@section('title', 'Crear usuario - AgroVentas')
+@section('body_class', 'flex flex-col text-agro-text')
+@section('content')
     <main class="flex-1">
         <section class="max-w-5xl mx-auto px-6 py-10 lg:py-12">
             <div class="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -95,5 +77,4 @@
             </div>
         </section>
     </main>
-</body>
-</html>
+@endsection

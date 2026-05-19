@@ -1,52 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar producto - AgroVentas</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-</head>
-<body class="bg-agro-bg text-agro-text min-h-screen flex flex-col">
-    <header class="bg-agro-primary shadow-md">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
-            <div class="flex items-center justify-between gap-4">
-                <a href="{{ route('inicio') }}" class="text-white text-2xl font-bold tracking-wide">AgroVentas</a>
-                <a href="{{ route('carrito.all') }}" class="lg:hidden text-white text-base font-medium hover:text-agro-accent transition-colors">
-                    Carrito
-                </a>
-            </div>
+@extends('layouts.estructura-agro')
 
-            <nav class="flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium lg:text-base">
-                <a href="{{ route('inicio') }}" class="text-white hover:text-agro-accent transition-colors">Inicio</a>
-                <a href="{{ route('todos.productos') }}" class="text-white hover:text-agro-accent transition-colors">Productos</a>
-                @auth
-                    <a href="{{ route('pedidos.usuario') }}" class="text-white hover:text-agro-accent transition-colors">Mis pedidos</a>
-                    @if(auth()->user()->tipoCliente === 'vendedor' || auth()->user()->tipoCliente === 'compraventa')
-                        <a href="{{ route('mis.productos') }}" class="text-white hover:text-agro-accent transition-colors">Mis productos</a>
-                        <a href="{{ route('pedidos.vendedor') }}" class="text-white hover:text-agro-accent transition-colors">Pedidos</a>
-                        <a href="{{ route('pg.anadir.producto') }}" class="text-white hover:text-agro-accent transition-colors">Añadir producto</a>
-                    @endif
-                    @if(auth()->user()->tipoCliente === 'admin')
-                        <a href="{{ route('users.index') }}" class="text-white hover:text-agro-accent transition-colors">Gestión usuarios</a>
-                    @endif
-                @endauth
-            </nav>
-
-            <div class="flex flex-wrap items-center gap-3">
-                <a href="{{ route('carrito.all') }}" class="hidden lg:inline-flex text-white hover:text-agro-accent transition-colors">Carrito</a>
-                @auth
-                    <a href="{{ route('perfil.editar') }}" class="text-white hover:text-agro-accent transition-colors">Mi perfil</a>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <button type="submit" class="bg-agro-accent hover:bg-orange-600 text-white font-semibold px-4 py-2 rounded-xl transition-colors">
-                            Salir
-                        </button>
-                    </form>
-                @endauth
-            </div>
-        </div>
-    </header>
-
+@section('title', 'Editar producto - AgroVentas')
+@section('body_class', 'flex flex-col text-agro-text')
+@section('content')
     <main class="flex-1">
         <section class="max-w-7xl mx-auto px-6 py-10 lg:py-12">
             <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
@@ -283,30 +239,4 @@
             </div>
         </section>
     </main>
-
-    <footer class="bg-agro-primary text-white mt-auto">
-        <div class="max-w-7xl mx-auto px-6 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="flex flex-col gap-3">
-                <span class="text-2xl font-bold">AgroVentas</span>
-                <p class="text-green-200 text-base">Del huerto a casa.</p>
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <span class="text-lg font-semibold text-agro-accent">Información</span>
-                <a href="mailto:contacto@agroventas.es" class="text-green-200 hover:text-white transition-colors">contacto@agroventas.es</a>
-                <a href="/aviso-legal" class="text-green-200 hover:text-white transition-colors">Aviso legal</a>
-                <a href="/privacidad" class="text-green-200 hover:text-white transition-colors">Política de privacidad</a>
-            </div>
-
-            <div class="flex flex-col gap-2">
-                <span class="text-lg font-semibold text-agro-accent">Síguenos</span>
-                <a href="https://linkedin.com" target="_blank" class="text-green-200 hover:text-white transition-colors">LinkedIn</a>
-                <a href="https://github.com" target="_blank" class="text-green-200 hover:text-white transition-colors">GitHub</a>
-            </div>
-        </div>
-        <div class="border-t border-green-700 text-center py-4 text-green-300 text-sm">
-            © {{ date('Y') }} AgroVentas. Todos los derechos reservados.
-        </div>
-    </footer>
-</body>
-</html>
+@endsection

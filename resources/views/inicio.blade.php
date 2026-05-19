@@ -352,19 +352,16 @@
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;">
 
                     <div class="caracteristica-tarjeta">
-                        <div class="caracteristica-icono">Fresco</div>
                         <div class="caracteristica-titulo">Producto fresco</div>
                         <p class="caracteristica-texto">Conectamos directamente al agricultor con el comprador. El producto llega en su mejor momento.</p>
                     </div>
 
                     <div class="caracteristica-tarjeta">
-                        <div class="caracteristica-icono">Directo</div>
                         <div class="caracteristica-titulo">Trato directo</div>
                         <p class="caracteristica-texto">Sin complicaciones. Habla directamente con quien cultiva y elige lo que necesitas.</p>
                     </div>
 
                     <div class="caracteristica-tarjeta">
-                        <div class="caracteristica-icono">Local</div>
                         <div class="caracteristica-titulo">De tu zona</div>
                         <p class="caracteristica-texto">Apoya a los agricultores de tu comarca. Consume local y contribuye a la economía de tu región.</p>
                     </div>
@@ -390,7 +387,7 @@
     </main>
 
     {{-- FOOTER --}}
-    <pie-pagina class="sitio-pie pie-pagina">
+    <footer class="sitio-pie pie-pagina">
         <div style="max-width: 1280px; margin: 0 auto; padding: 3.5rem 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;">
 
             <div>
@@ -401,23 +398,28 @@
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-                <span style="font-weight: 600; color: var(--agro-accent); margin-bottom: 0.3rem;">Información</span>
-                <a href="mailto:contacto@agroventas.es" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">contacto@agroventas.es</a>
-                <a href="/aviso-legal" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Aviso legal</a>
-                <a href="/privacidad" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Política de privacidad</a>
+                <span style="font-weight: 600; color: var(--agro-accent); margin-bottom: 0.3rem;">Accesos</span>
+                <a href="{{ route('todos.productos') }}" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Explorar productos</a>
+                <a href="{{ route('carrito.all') }}" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Ver carrito</a>
+                @auth
+                    <a href="{{ route('perfil.editar') }}" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Mi perfil</a>
+                @else
+                    <a href="{{ route('register') }}" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Crear cuenta</a>
+                @endauth
             </div>
 
             <div style="display: flex; flex-direction: column; gap: 0.6rem;">
-                <span style="font-weight: 600; color: var(--agro-accent); margin-bottom: 0.3rem;">Síguenos</span>
-                <a href="https://linkedin.com" target="_blank" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">LinkedIn</a>
-                <a href="https://github.com" target="_blank" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">GitHub</a>
+                <span style="font-weight: 600; color: var(--agro-accent); margin-bottom: 0.3rem;">Contacto</span>
+                <a href="mailto:contacto@agroventas.es" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">contacto@agroventas.es</a>
+                <a href="/aviso-legal" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Aviso legal</a>
+                <a href="/privacidad" style="color: rgba(255,255,255,0.7); text-decoration: none; transition: color 0.2s;" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(255,255,255,0.7)'">Política de privacidad</a>
             </div>
 
         </div>
         <div style="border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.25rem; color: rgba(255,255,255,0.45); font-size: 0.9rem;">
             © {{ date('Y') }} AgroVentas. Todos los derechos reservados.
         </div>
-    </pie-pagina>
+    </footer>
 
 </body>
 </html>

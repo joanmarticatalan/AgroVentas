@@ -46,6 +46,36 @@ class EstructuraCompartidaTest extends TestCase
         }
     }
 
+    public function test_login_and_register_use_the_shared_footer_content(): void
+    {
+        foreach ([
+            route('login'),
+            route('register'),
+        ] as $url) {
+            $response = $this->get($url);
+
+            $response->assertOk();
+            $response->assertSee('Del huerto a casa.');
+            $response->assertSee('Accesos');
+            $response->assertDontSee('Síguenos');
+        }
+    }
+
+    public function test_login_and_register_styles_do_not_target_global_layout_selectors(): void
+    {
+        foreach ([
+            route('login'),
+            route('register'),
+        ] as $url) {
+            $response = $this->get($url);
+
+            $response->assertOk();
+            $response->assertDontSee('body::before', false);
+            $response->assertDontSee("\n        main {", false);
+        }
+    }
+
+
     public function test_seller_navigation_uses_add_product_label_in_shared_header(): void
     {
         $location = Localizacion::factory()->create();

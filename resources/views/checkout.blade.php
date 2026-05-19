@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Confirmar pedido — AgroVentas</title>
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+@extends('layouts.estructura-agro')
+
+@section('title', 'Confirmar pedido - AgroVentas')
+@section('body_class', 'pagina-checkout')
+
+@push('styles')
     <style>
         :root {
             --agro-primary: #2D6A2D;
@@ -18,90 +15,18 @@
             --agro-muted: #555555;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Source Sans 3', sans-serif;
-            background-color: var(--agro-bg);
-            color: var(--agro-text);
-            min-height: 100vh;
+        .pagina-checkout {
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
         }
 
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.5;
+        .pagina-checkout .compra-progreso,
+        .pagina-checkout .compra-progreso *,
+        .pagina-checkout main,
+        .pagina-checkout main * {
+            box-sizing: border-box;
         }
-
-        .barra-navegacion {
-            background-color: var(--agro-primary);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 20px rgba(0,0,0,0.15);
-        }
-
-        .navegacion-interior {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 1rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .navegacion-marca {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            font-weight: 700;
-            color: #fff;
-            text-decoration: none;
-        }
-
-        .navegacion-marca span { color: var(--agro-accent); }
-
-        .navegacion-enlace {
-            color: rgba(255,255,255,0.85);
-            font-size: 1.05rem;
-            font-weight: 600;
-            text-decoration: none;
-            position: relative;
-            transition: color 0.2s;
-        }
-
-        .navegacion-enlace::after {
-            content: '';
-            position: absolute;
-            bottom: -3px; left: 0;
-            width: 0; height: 2px;
-            background: var(--agro-accent);
-            transition: width 0.25s;
-        }
-
-        .navegacion-enlace:hover { color: #fff; }
-        .navegacion-enlace:hover::after { width: 100%; }
-
-        .boton-navegacion {
-            background-color: var(--agro-accent);
-            color: #fff;
-            font-family: 'Source Sans 3', sans-serif;
-            font-weight: 600;
-            font-size: 1rem;
-            padding: 0.55rem 1.3rem;
-            border-radius: 8px;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: background 0.2s, transform 0.15s;
-        }
-
-        .boton-navegacion:hover { background-color: #c06820; transform: translateY(-1px); }
 
         .compra-progreso {
             background: #fff;
@@ -153,7 +78,7 @@
             margin: 0 0.5rem;
         }
 
-        main {
+        .pagina-checkout main {
             flex: 1;
             position: relative;
             z-index: 1;
@@ -461,29 +386,6 @@
             font-weight: 600;
         }
 
-        footer {
-            background-color: var(--agro-primary);
-            color: #fff;
-            position: relative;
-            z-index: 1;
-        }
-
-        .pie-interior {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .pie-marca { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.4rem; }
-        .pie-marca span { color: var(--agro-accent); }
-        .pie-columna-titulo { font-weight: 600; color: var(--agro-accent); margin-bottom: 0.6rem; display: block; }
-        .pie-enlace { display: block; color: rgba(255,255,255,0.65); text-decoration: none; font-size: 0.95rem; margin-bottom: 0.4rem; transition: color 0.2s; }
-        .pie-enlace:hover { color: #fff; }
-        .pie-inferior { border-top: 1px solid rgba(255,255,255,0.1); text-align: center; padding: 1.1rem; color: rgba(255,255,255,0.4); font-size: 0.85rem; }
-
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(20px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -495,17 +397,12 @@
             .opciones-envio { grid-template-columns: 1fr; }
             .rejilla-formulario { grid-template-columns: 1fr; }
             .grupo-formulario.ocupa-dos { grid-column: span 1; }
-            .pie-interior { grid-template-columns: 1fr; }
             .paso-etiqueta { font-size: 0.75rem; }
         }
     </style>
-</head>
-<body class="sitio-contenedor">
+@endpush
 
-    {{-- NAVBAR --}}
-    @include('partials.cabecera-sitio')
-
-    {{-- BARRA DE PROGRESO --}}
+@section('content')
     <div class="compra-progreso">
         <div class="progreso-interior">
             <div class="progreso-paso paso-hecho">
@@ -750,30 +647,4 @@
         </form>
 
     </main>
-
-    {{-- FOOTER --}}
-    <footer class="sitio-pie">
-        <div class="pie-interior">
-            <div>
-                <div class="pie-marca">Agro<span>Ventas</span></div>
-                <p style="color:rgba(255,255,255,0.55); font-size:0.95rem;">Del huerto a casa.</p>
-            </div>
-            <div>
-                <span class="pie-columna-titulo">Información</span>
-                <a href="mailto:contacto@agroventas.es" class="pie-enlace">contacto@agroventas.es</a>
-                <a href="/aviso-legal" class="pie-enlace">Aviso legal</a>
-                <a href="/privacidad" class="pie-enlace">Política de privacidad</a>
-            </div>
-            <div>
-                <span class="pie-columna-titulo">Síguenos</span>
-                <a href="https://linkedin.com" target="_blank" class="pie-enlace">LinkedIn</a>
-                <a href="https://github.com" target="_blank" class="pie-enlace">GitHub</a>
-            </div>
-        </div>
-        <div class="pie-inferior">
-            © {{ date('Y') }} AgroVentas. Todos los derechos reservados.
-        </div>
-    </footer>
-
-</body>
-</html>
+@endsection

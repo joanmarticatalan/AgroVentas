@@ -2,7 +2,7 @@
     <div class="mx-auto grid max-w-7xl gap-8 px-6 py-10 md:grid-cols-3">
         <div class="flex flex-col gap-3">
             <span class="sitio-marca text-3xl font-bold">Agro<span class="sitio-marca-acento">Ventas</span></span>
-            <p class="max-w-sm text-base text-green-100/80">Diseño coherente para comprar, vender y gestionar productos agrícolas desde una sola experiencia visual.</p>
+            <p class="max-w-sm text-base text-green-100/80">Del huerto a casa.</p>
         </div>
 
         <div class="flex flex-col gap-2">
