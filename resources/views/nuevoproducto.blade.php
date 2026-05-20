@@ -6,63 +6,7 @@
 
     <main class="flex-1">
         <section class="max-w-7xl mx-auto px-6 py-10 lg:py-12">
-            <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-                <div class="space-y-6">
-                    <div class="space-y-4">
-                        <span class="inline-flex rounded-full bg-white/80 px-4 py-1 text-sm font-semibold uppercase tracking-[0.2em] text-agro-brown shadow-sm ring-1 ring-agro-primary/10">
-                            Panel vendedor
-                        </span>
-                        <div class="space-y-3">
-                            <h1 class="text-4xl font-black tracking-tight text-agro-primary sm:text-5xl">
-                                Publica un producto con una ficha clara y lista para vender
-                            </h1>
-                            <p class="max-w-2xl text-lg leading-8 text-slate-600">
-                                Completa los datos clave de cultivo, precio y localización para que tu producto entre en el catálogo con el mismo acabado que el resto de AgroVentas.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="grid gap-4 sm:grid-cols-3">
-                        <article class="rounded-[1.75rem] bg-white p-5 shadow-lg shadow-agro-primary/5 ring-1 ring-agro-primary/10">
-                            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-agro-brown">Paso 1</p>
-                            <h2 class="mt-3 text-xl font-bold text-agro-primary">Describe</h2>
-                            <p class="mt-2 text-sm leading-6 text-slate-600">Nombre y variedad para que el comprador identifique rápido lo que vendes.</p>
-                        </article>
-                        <article class="rounded-[1.75rem] bg-white p-5 shadow-lg shadow-agro-primary/5 ring-1 ring-agro-primary/10">
-                            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-agro-brown">Paso 2</p>
-                            <h2 class="mt-3 text-xl font-bold text-agro-primary">Ajusta</h2>
-                            <p class="mt-2 text-sm leading-6 text-slate-600">Define stock, fecha y precio por kilo para mostrar disponibilidad real.</p>
-                        </article>
-                        <article class="rounded-[1.75rem] bg-white p-5 shadow-lg shadow-agro-primary/5 ring-1 ring-agro-primary/10">
-                            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-agro-brown">Paso 3</p>
-                            <h2 class="mt-3 text-xl font-bold text-agro-primary">Presenta</h2>
-                            <p class="mt-2 text-sm leading-6 text-slate-600">Sube una imagen y vincula la ubicación para dar confianza desde la ficha.</p>
-                        </article>
-                    </div>
-
-                    <div class="rounded-[2rem] bg-gradient-to-br from-agro-primary via-agro-secondary to-agro-primary p-7 text-white shadow-xl shadow-agro-primary/20">
-                        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                            <div>
-                                <p class="text-sm font-semibold uppercase tracking-[0.22em] text-green-100">Consejo</p>
-                                <h2 class="mt-2 text-2xl font-bold">Las fichas completas convierten mejor</h2>
-                            </div>
-                            <a href="{{ route('mis.productos') }}" class="inline-flex items-center justify-center rounded-2xl border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-                                Ver mis productos
-                            </a>
-                        </div>
-                        <div class="mt-5 grid gap-3 sm:grid-cols-2">
-                            <div class="rounded-2xl bg-white/10 px-4 py-4 backdrop-blur-sm">
-                                <p class="text-sm font-semibold text-green-100">Imagen recomendada</p>
-                                <p class="mt-1 text-sm leading-6 text-white/85">Usa una foto nítida del producto, con buena luz y fondo limpio.</p>
-                            </div>
-                            <div class="rounded-2xl bg-white/10 px-4 py-4 backdrop-blur-sm">
-                                <p class="text-sm font-semibold text-green-100">Precio y stock</p>
-                                <p class="mt-1 text-sm leading-6 text-white/85">Mantén estos datos actualizados para evitar pedidos sobre producto agotado.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="mx-auto max-w-4xl">
                 <div class="rounded-[2rem] bg-white p-6 shadow-xl shadow-agro-primary/10 ring-1 ring-agro-primary/10 sm:p-8">
                     <div class="flex flex-col gap-2 border-b border-slate-200 pb-6">
                         <p class="text-sm font-semibold uppercase tracking-[0.22em] text-agro-brown">Formulario</p>

@@ -18,37 +18,39 @@
     <main class="pb-16">
         <section class="relative overflow-hidden border-b border-agro-primary/10 bg-gradient-to-br from-agro-primary via-agro-primary to-agro-secondary text-white">
             <div class="absolute inset-y-0 right-0 hidden w-1/3 bg-[radial-gradient(circle_at_center,_rgba(217,123,42,0.22),_transparent_58%)] lg:block"></div>
-            <div class="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.4fr_1fr] lg:items-end lg:py-16">
-                <div class="space-y-5">
-                    <span class="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1 text-sm font-semibold uppercase tracking-[0.25em] text-white/80">
-                        Panel de vendedor
-                    </span>
-                    <div class="space-y-4">
-                        <h1 class="max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">
-                            Pedidos recibidos
-                        </h1>
-                        <p class="max-w-2xl text-lg leading-8 text-white/80">
-                            Gestiona la preparación, el envío y la recogida desde una vista pensada para revisar rápido qué pedidos requieren tu siguiente acción.
-                        </p>
+            <div class="mx-auto max-w-7xl px-6 py-12 lg:py-16">
+                <div class="space-y-10">
+                    <div class="space-y-5">
+                        <span class="inline-flex rounded-full border border-white/15 bg-white/10 px-4 py-1 text-sm font-semibold uppercase tracking-[0.25em] text-white/80">
+                            Panel de vendedor
+                        </span>
+                        <div class="space-y-4">
+                            <h1 class="max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">
+                                Pedidos recibidos
+                            </h1>
+                            <p class="max-w-2xl text-lg leading-8 text-white/80">
+                                Gestiona la preparación, el envío y la recogida desde una vista pensada para revisar rápido qué pedidos requieren tu siguiente acción.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                    <article class="rounded-[1.75rem] bg-white/10 px-6 py-5 shadow-lg shadow-black/10 ring-1 ring-white/10 backdrop-blur">
-                        <p class="text-sm uppercase tracking-[0.2em] text-white/70">Pedidos recibidos</p>
-                        <p class="mt-3 text-3xl font-black">{{ $totalPedidos }}</p>
-                        <p class="mt-2 text-sm text-white/75">{{ $totalPedidos === 1 ? 'pedido con productos tuyos' : 'pedidos con productos tuyos' }}</p>
-                    </article>
-                    <article class="rounded-[1.75rem] bg-white px-6 py-5 text-slate-900 shadow-sm">
-                        <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Pendientes de gestionar</p>
-                        <p class="mt-3 text-3xl font-black text-agro-primary">{{ $pendientes }}</p>
-                        <p class="mt-2 text-sm text-slate-500">Pedidos todavía en curso.</p>
-                    </article>
-                    <article class="rounded-[1.75rem] bg-white px-6 py-5 text-slate-900 shadow-sm">
-                        <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Volumen total</p>
-                        <p class="mt-3 text-3xl font-black text-agro-primary">{{ number_format((float) $volumenTotal, 2, ',', '.') }} €</p>
-                        <p class="mt-2 text-sm text-slate-500">Importe agregado de los pedidos listados.</p>
-                    </article>
+                    <div class="grid gap-4 md:grid-cols-3">
+                        <article class="rounded-[1.75rem] bg-white/10 px-6 py-5 shadow-lg shadow-black/10 ring-1 ring-white/10 backdrop-blur">
+                            <p class="text-sm uppercase tracking-[0.2em] text-white/70">Pedidos recibidos</p>
+                            <p class="mt-3 text-3xl font-black">{{ $totalPedidos }}</p>
+                            <p class="mt-2 text-sm text-white/75">{{ $totalPedidos === 1 ? 'pedido con productos tuyos' : 'pedidos con productos tuyos' }}</p>
+                        </article>
+                        <article class="rounded-[1.75rem] bg-white px-6 py-5 text-slate-900 shadow-sm">
+                            <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Pendientes de gestionar</p>
+                            <p class="mt-3 text-3xl font-black text-agro-primary">{{ $pendientes }}</p>
+                            <p class="mt-2 text-sm text-slate-500">Pedidos todavía en curso.</p>
+                        </article>
+                        <article class="rounded-[1.75rem] bg-white px-6 py-5 text-slate-900 shadow-sm">
+                            <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Volumen total</p>
+                            <p class="mt-3 text-3xl font-black text-agro-primary">{{ number_format((float) $volumenTotal, 2, ',', '.') }} €</p>
+                            <p class="mt-2 text-sm text-slate-500">Importe agregado de los pedidos listados.</p>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>

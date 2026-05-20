@@ -50,7 +50,7 @@
                             <td class="px-5 py-4 text-agro-muted">{{ $producto->fechaProduccion }}</td>
 
                             <td class="px-5 py-4 text-center font-bold">
-                                {{ $producto->stock }} uds.
+                                {{ $producto->stock }} Kg
                             </td>
 
                             <td class="px-5 py-4 text-center">

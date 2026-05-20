@@ -22,37 +22,39 @@
     <main class="pb-16">
         <section class="relative overflow-hidden border-b border-agro-primary/10 bg-gradient-to-br from-white via-[#f4efe4] to-[#e7f0df]">
             <div class="absolute inset-y-0 right-0 hidden w-1/3 bg-[radial-gradient(circle_at_top,_rgba(217,123,42,0.18),_transparent_60%)] lg:block"></div>
-            <div class="mx-auto grid max-w-7xl gap-10 px-6 py-12 lg:grid-cols-[1.5fr_1fr] lg:items-end lg:py-16">
-                <div class="space-y-5">
-                    <span class="inline-flex rounded-full border border-agro-primary/15 bg-white/80 px-4 py-1 text-sm font-semibold uppercase tracking-[0.25em] text-agro-brown">
-                        Historial de compras
-                    </span>
-                    <div class="space-y-4">
-                        <h1 class="max-w-3xl text-4xl font-black tracking-tight text-agro-primary sm:text-5xl">
-                            Mis pedidos
-                        </h1>
-                        <p class="max-w-2xl text-lg leading-8 text-slate-600">
-                            Consulta en un solo vistazo el estado de cada compra, los productos incluidos y el importe total acumulado de tus pedidos en AgroVentas.
-                        </p>
+            <div class="mx-auto max-w-7xl px-6 py-12 lg:py-16">
+                <div class="space-y-10">
+                    <div class="space-y-5">
+                        <span class="inline-flex rounded-full border border-agro-primary/15 bg-white/80 px-4 py-1 text-sm font-semibold uppercase tracking-[0.25em] text-agro-brown">
+                            Historial de compras
+                        </span>
+                        <div class="space-y-4">
+                            <h1 class="max-w-3xl text-4xl font-black tracking-tight text-agro-primary sm:text-5xl">
+                                Mis pedidos
+                            </h1>
+                            <p class="max-w-2xl text-lg leading-8 text-slate-600">
+                                Consulta en un solo vistazo el estado de cada compra, los productos incluidos y el importe total acumulado de tus pedidos en AgroVentas.
+                            </p>
+                        </div>
                     </div>
-                </div>
 
-                <div class="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
-                    <article class="rounded-[1.75rem] bg-agro-primary px-6 py-5 text-white shadow-lg shadow-agro-primary/15">
-                        <p class="text-sm uppercase tracking-[0.2em] text-white/70">Resumen de compras</p>
-                        <p class="mt-3 text-3xl font-black">{{ $totalPedidos }}</p>
-                        <p class="mt-2 text-sm text-white/80">{{ $totalPedidos === 1 ? 'pedido registrado' : 'pedidos registrados' }}</p>
-                    </article>
-                    <article class="rounded-[1.75rem] border border-agro-primary/10 bg-white px-6 py-5 shadow-sm">
-                        <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Pedidos activos</p>
-                        <p class="mt-3 text-3xl font-black text-agro-primary">{{ $pedidosActivos }}</p>
-                        <p class="mt-2 text-sm text-slate-500">Pedidos que siguen en preparación, envío o recogida.</p>
-                    </article>
-                    <article class="rounded-[1.75rem] border border-agro-primary/10 bg-white px-6 py-5 shadow-sm">
-                        <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Importe acumulado</p>
-                        <p class="mt-3 text-3xl font-black text-agro-primary">{{ number_format((float) $importeAcumulado, 2, ',', '.') }} €</p>
-                        <p class="mt-2 text-sm text-slate-500">Suma total de tus compras confirmadas.</p>
-                    </article>
+                    <div class="grid gap-4 md:grid-cols-3">
+                        <article class="rounded-[1.75rem] bg-agro-primary px-6 py-5 text-white shadow-lg shadow-agro-primary/15">
+                            <p class="text-sm uppercase tracking-[0.2em] text-white/70">Resumen de compras</p>
+                            <p class="mt-3 text-3xl font-black">{{ $totalPedidos }}</p>
+                            <p class="mt-2 text-sm text-white/80">{{ $totalPedidos === 1 ? 'pedido registrado' : 'pedidos registrados' }}</p>
+                        </article>
+                        <article class="rounded-[1.75rem] border border-agro-primary/10 bg-white px-6 py-5 shadow-sm">
+                            <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Pedidos activos</p>
+                            <p class="mt-3 text-3xl font-black text-agro-primary">{{ $pedidosActivos }}</p>
+                            <p class="mt-2 text-sm text-slate-500">Pedidos que siguen en preparación, envío o recogida.</p>
+                        </article>
+                        <article class="rounded-[1.75rem] border border-agro-primary/10 bg-white px-6 py-5 shadow-sm">
+                            <p class="text-sm uppercase tracking-[0.2em] text-agro-brown">Importe acumulado</p>
+                            <p class="mt-3 text-3xl font-black text-agro-primary">{{ number_format((float) $importeAcumulado, 2, ',', '.') }} €</p>
+                            <p class="mt-2 text-sm text-slate-500">Suma total de tus compras confirmadas.</p>
+                        </article>
+                    </div>
                 </div>
             </div>
         </section>

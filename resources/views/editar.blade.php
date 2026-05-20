@@ -5,73 +5,7 @@
 @section('content')
     <main class="flex-1">
         <section class="max-w-7xl mx-auto px-6 py-10 lg:py-12">
-            <div class="grid gap-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-start">
-                <div class="space-y-6">
-                    <div class="space-y-4">
-                        <span class="inline-flex rounded-full bg-white/80 px-4 py-1 text-sm font-semibold uppercase tracking-[0.2em] text-agro-brown shadow-sm ring-1 ring-agro-primary/10">
-                            Gestión de producto
-                        </span>
-                        <div class="space-y-3">
-                            <h1 class="text-4xl font-black tracking-tight text-agro-primary sm:text-5xl">
-                                Actualiza tu ficha sin perder el estilo del catálogo
-                            </h1>
-                            <p class="max-w-2xl text-lg leading-8 text-slate-600">
-                                Revisa los datos del producto, ajusta disponibilidad o precio y cambia la imagen solo si realmente necesitas renovar la ficha.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="grid gap-4 sm:grid-cols-3">
-                        <article class="rounded-[1.75rem] bg-white p-5 shadow-lg shadow-agro-primary/5 ring-1 ring-agro-primary/10">
-                            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-agro-brown">Estado</p>
-                            <h2 class="mt-3 text-xl font-bold text-agro-primary">
-                                @if($producto->stock <= 0)
-                                    Agotado
-                                @elseif($producto->stock <= 10)
-                                    Stock ajustado
-                                @else
-                                    Disponible
-                                @endif
-                            </h2>
-                            <p class="mt-2 text-sm leading-6 text-slate-600">El estado visible dependerá del stock que guardes en esta edición.</p>
-                        </article>
-                        <article class="rounded-[1.75rem] bg-white p-5 shadow-lg shadow-agro-primary/5 ring-1 ring-agro-primary/10">
-                            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-agro-brown">Publicado</p>
-                            <h2 class="mt-3 text-xl font-bold text-agro-primary">{{ optional($producto->created_at)->format('d/m/Y') ?? 'Sin fecha' }}</h2>
-                            <p class="mt-2 text-sm leading-6 text-slate-600">Mantén los datos consistentes para evitar fricción en pedidos y consultas.</p>
-                        </article>
-                        <article class="rounded-[1.75rem] bg-white p-5 shadow-lg shadow-agro-primary/5 ring-1 ring-agro-primary/10">
-                            <p class="text-sm font-semibold uppercase tracking-[0.18em] text-agro-brown">Precio actual</p>
-                            <h2 class="mt-3 text-xl font-bold text-agro-primary">{{ number_format($producto->precio, 2, ',', '.') }} €/kg</h2>
-                            <p class="mt-2 text-sm leading-6 text-slate-600">Una actualización clara de precio mejora la lectura de la ficha en catálogo.</p>
-                        </article>
-                    </div>
-
-                    <div class="rounded-[2rem] bg-gradient-to-br from-agro-primary via-agro-secondary to-agro-primary p-7 text-white shadow-xl shadow-agro-primary/20">
-                        <div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-                            <div>
-                                <p class="text-sm font-semibold uppercase tracking-[0.22em] text-green-100">Ficha actual</p>
-                                <h2 class="mt-2 text-2xl font-bold">{{ $producto->nombre }}</h2>
-                                <p class="mt-2 text-sm text-white/85">{{ $producto->variedad ?: 'Sin variedad especificada' }}</p>
-                            </div>
-                            <a href="{{ route('mis.productos') }}" class="inline-flex items-center justify-center rounded-2xl border border-white/30 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
-                                Volver a mis productos
-                            </a>
-                        </div>
-
-                        <div class="mt-5 grid gap-3 sm:grid-cols-2">
-                            <div class="rounded-2xl bg-white/10 px-4 py-4 backdrop-blur-sm">
-                                <p class="text-sm font-semibold text-green-100">Stock registrado</p>
-                                <p class="mt-1 text-sm leading-6 text-white/85">{{ $producto->stock }} kg disponibles actualmente.</p>
-                            </div>
-                            <div class="rounded-2xl bg-white/10 px-4 py-4 backdrop-blur-sm">
-                                <p class="text-sm font-semibold text-green-100">Producción</p>
-                                <p class="mt-1 text-sm leading-6 text-white/85">{{ \Illuminate\Support\Carbon::parse($producto->fechaProduccion)->format('d/m/Y') }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="mx-auto max-w-4xl">
                 <div class="rounded-[2rem] bg-white p-6 shadow-xl shadow-agro-primary/10 ring-1 ring-agro-primary/10 sm:p-8">
                     <div class="flex flex-col gap-2 border-b border-slate-200 pb-6">
                         <p class="text-sm font-semibold uppercase tracking-[0.22em] text-agro-brown">Formulario</p>
