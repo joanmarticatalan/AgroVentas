@@ -312,12 +312,6 @@
             animation: fadeUp 0.5s ease both;
         }
 
-        .vacio-icono {
-            font-size: 5rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.4;
-        }
-
         .carrito-vacio h2 {
             font-family: 'Playfair Display', serif;
             font-size: 2rem;
@@ -450,7 +444,6 @@
 
                 {{-- Carrito vacío --}}
                 <div class="carrito-vacio">
-                    <div class="vacio-icono">AV</div>
                     <h2>Tu carrito está vacío</h2>
                     <p>Aún no has añadido ningún producto. ¡Explora nuestra tienda!</p>
                     <a href="{{ route('todos.productos') }}" class="boton-ir-tienda">
