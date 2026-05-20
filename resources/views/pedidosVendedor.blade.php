@@ -142,7 +142,7 @@
                                                 </div>
                                                 <div class="flex flex-wrap gap-2 text-sm font-semibold">
                                                     <span class="rounded-full bg-white px-3 py-1 text-slate-700 ring-1 ring-slate-200">
-                                                        {{ $producto->pivot->cantidad }} {{ $producto->pivot->cantidad === 1 ? 'unidad' : 'unidades' }}
+                                                        {{ $producto->pivot->cantidad }} {{ $producto->pivot->cantidad === 1 ? 'kg' : 'kgs' }}
                                                     </span>
                                                     <span class="rounded-full bg-white px-3 py-1 text-slate-700 ring-1 ring-slate-200">
                                                         {{ number_format((float) $producto->pivot->precio_unitario, 2, ',', '.') }} € / ud.

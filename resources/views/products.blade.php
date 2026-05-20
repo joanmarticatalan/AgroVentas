@@ -266,7 +266,7 @@
                                         </div>
                                         <div class="rounded-2xl bg-slate-50 px-4 py-3">
                                             <dt class="font-semibold text-slate-500">Stock</dt>
-                                            <dd class="mt-1 font-semibold text-slate-900">{{ $prod->stock }} uds.</dd>
+                                            <dd class="mt-1 font-semibold text-slate-900">{{ $prod->stock }} kgs.</dd>
                                         </div>
                                         <div class="rounded-2xl bg-slate-50 px-4 py-3">
                                             <dt class="font-semibold text-slate-500">Producción</dt>

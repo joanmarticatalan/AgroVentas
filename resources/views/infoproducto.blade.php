@@ -404,7 +404,7 @@
                     @csrf
                     <div style="display:grid; gap:0.45rem; max-width: 180px;">
                         <label for="cantidad" style="font-size:0.92rem; font-weight:700; color:#274c2f; letter-spacing:0.04em; text-transform:uppercase;">
-                            Cantidad
+                            Cantidad en Kg
                         </label>
                         <input
                             id="cantidad"
